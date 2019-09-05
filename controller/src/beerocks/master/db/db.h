@@ -237,6 +237,15 @@ public:
     void disconnected_slave_mac_queue_push(std::string node_mac);
     std::string node_to_string(std::string mac);
 
+    /**
+     * @brief Get the link metric data of a specific agent
+     *
+     * @param[in] mac The mac address of the db node that is used to save link metric data.
+     * @return reference to the map that holds link metric data of all agents.
+     */
+    std::unordered_map<sMacAddr, std::unordered_map<sMacAddr, son::node::link_metrics_data>> &
+    get_link_metric_data_map(const std::string &mac);
+
     //
     // DB node functions (get only)
     //
