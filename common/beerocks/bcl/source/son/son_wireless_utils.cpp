@@ -33,7 +33,8 @@ wireless_utils::estimate_ul_params(int ul_rssi, uint16_t sta_phy_tx_rate_100kb,
     int estimated_ul_rssi_lut;
     int estimated_ul_rssi_lut_delta;
     int estimated_ul_rssi_lut_delta_min = 120 * 10;
-    sPhyUlParams estimation             = {0, beerocks::RSSI_INVALID};
+    uint16_t gi_long_rate = 0, gi_short_rate = 0;
+    sPhyUlParams estimation = {0, beerocks::RSSI_INVALID};
 
     if (ul_rssi == beerocks::RSSI_INVALID) {
         LOG(DEBUG) << "estimate_sta_ul_params: RSSI_INVALID";
@@ -55,29 +56,62 @@ wireless_utils::estimate_ul_params(int ul_rssi, uint16_t sta_phy_tx_rate_100kb,
 
     max_bw = (max_bw > beerocks::BANDWIDTH_160 ? beerocks::BANDWIDTH_160 : max_bw);
 
-    for (int ant_mode = max_ant_mode; ant_mode > -1; ant_mode--) { // filter by ant_num
-        for (int bw = max_bw; bw > -1; bw--) {                     // filter by mac_bw
-            for (int mcs = max_mcs; mcs > -1; mcs--) {             // filter by mcs
+    if (sta_phy_tx_rate_100kb >= phy_rate_table[0][0].bw_values[0].gi_long_rate) {
+        for (int ant_mode = max_ant_mode; ant_mode > -1; ant_mode--) { // filter by ant_num
+            for (int bw = max_bw; bw > -1; bw--) {                     // filter by mac_bw
+                for (int mcs = max_mcs; mcs > -1; mcs--) {             // filter by mcs
 
-                estimated_ul_rssi_lut = phy_rate_table[ant_mode][mcs].bw_values[bw].rssi;
-                estimated_ul_rssi_lut_delta =
-                    (int)std::abs((float)(ul_rssi_lut - estimated_ul_rssi_lut));
+                    estimated_ul_rssi_lut = phy_rate_table[ant_mode][mcs].bw_values[bw].rssi;
+                    estimated_ul_rssi_lut_delta =
+                        (int)std::abs((float)(ul_rssi_lut - estimated_ul_rssi_lut));
 
-                // same rate && min rssi_delta
-                if ((sta_phy_tx_rate_100kb ==
-                     phy_rate_table[ant_mode][mcs].bw_values[bw].gi_long_rate) ||
-                    (sta_phy_tx_rate_100kb ==
-                     phy_rate_table[ant_mode][mcs].bw_values[bw].gi_short_rate)) {
-                    if (estimated_ul_rssi_lut_delta <= estimated_ul_rssi_lut_delta_min) {
-                        estimated_ul_rssi_lut_delta_min = estimated_ul_rssi_lut_delta;
-                        estimation.tx_power = is_5ghz ? phy_rate_table[ant_mode][mcs].tx_power_5
+                    gi_long_rate  = phy_rate_table[ant_mode][mcs].bw_values[bw].gi_long_rate;
+                    gi_short_rate = phy_rate_table[ant_mode][mcs].bw_values[bw].gi_short_rate;
+
+                    if ((sta_phy_tx_rate_100kb >= gi_long_rate) &&
+                        (sta_phy_tx_rate_100kb <= gi_short_rate)) {
+                        if (estimated_ul_rssi_lut_delta <= estimated_ul_rssi_lut_delta_min) {
+                            estimated_ul_rssi_lut_delta_min = estimated_ul_rssi_lut_delta;
+                            estimation.tx_power             = is_5ghz
+                                                      ? phy_rate_table[ant_mode][mcs].tx_power_5
                                                       : phy_rate_table[ant_mode][mcs].tx_power_2_4;
-                        estimation.rssi =
-                            int(float(estimated_ul_rssi_lut) / 10.0 + 0.5); //round value
+                            estimation.rssi =
+                                int(float(estimated_ul_rssi_lut) / 10.0 + 0.5); //round value
+                        }
+                    }
+                    //check if phyrate is not in range then use average rssi delta
+                    else if ((mcs != 0) &&
+                             (gi_long_rate !=
+                              phy_rate_table[ant_mode][mcs - 1].bw_values[bw].gi_short_rate)) {
+                        if ((sta_phy_tx_rate_100kb <= gi_long_rate) &&
+                            (sta_phy_tx_rate_100kb >=
+                             phy_rate_table[ant_mode][mcs - 1].bw_values[bw].gi_short_rate)) {
+                            //update rssi estimation and delta
+                            estimated_ul_rssi_lut =
+                                (phy_rate_table[ant_mode][mcs].bw_values[bw].rssi +
+                                 phy_rate_table[ant_mode][mcs].bw_values[bw].rssi) /
+                                2;
+                            estimated_ul_rssi_lut_delta =
+                                (int)std::abs((float)(ul_rssi_lut - estimated_ul_rssi_lut));
+                            if (estimated_ul_rssi_lut_delta <= estimated_ul_rssi_lut_delta_min) {
+                                estimated_ul_rssi_lut_delta_min = estimated_ul_rssi_lut_delta;
+                                estimation.tx_power =
+                                    is_5ghz ? phy_rate_table[ant_mode][mcs].tx_power_5
+                                            : phy_rate_table[ant_mode][mcs].tx_power_2_4;
+                                estimation.rssi =
+                                    int(float(estimated_ul_rssi_lut) / 10.0 + 0.5); //round value
+                            }
+                        }
                     }
                 }
             }
         }
+    } else {
+        // phyrate value lower mode than table supports
+        estimation.tx_power =
+            is_5ghz ? phy_rate_table[0][0].tx_power_5 : phy_rate_table[0][0].tx_power_2_4;
+        estimation.rssi =
+            int(float(phy_rate_table[0][0].bw_values[0].rssi) / 10.0 + 0.5); //round value
     }
 
     float rssi_delta = float(estimated_ul_rssi_lut_delta_min) / 10.0;
@@ -100,7 +134,7 @@ int wireless_utils::estimate_dl_rssi(int ul_rssi, int tx_power, const sPhyApPara
     int eirp_ap  = ap_params.ant_gain + ap_params.conducted_power;
     int ant_factor;
 
-    int noise_figure = NOISE_FIGURE;
+    int noise_figure = (ap_params.is_5ghz) ? NOISE_FIGURE : 0; //5g extra loss
     float pathloss;
     int dl_rssi;
 
@@ -114,8 +148,14 @@ int wireless_utils::estimate_dl_rssi(int ul_rssi, int tx_power, const sPhyApPara
     }
 
     //pathloss
-    pathloss = eirp_sta - ul_rssi + noise_figure - ant_factor - ap_params.ant_gain;
+    pathloss = eirp_sta - (ul_rssi - ant_factor - ap_params.ant_gain) + noise_figure;
     dl_rssi  = eirp_ap - pathloss;
+
+    LOG(DEBUG) << "estimate_dl_params:"
+               << " eirp_sta= " << int(eirp_sta) << " ul_rssi= " << int(ul_rssi)
+               << " noise_figure= " << int(noise_figure) << " ant_factor= " << int(ant_factor)
+               << " ap_params.ant_gain= " << int(ap_params.ant_gain) << " eirp_ap= " << int(eirp_ap)
+               << " pathloss= " << int(pathloss) << " dl_rssi= " << int(dl_rssi) << std::endl;
     return dl_rssi;
 }
 

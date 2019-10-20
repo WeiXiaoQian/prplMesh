@@ -1515,17 +1515,17 @@ bool master_thread::handle_intel_slave_join(
         local_slave_mac = radio_mac;
         LOG(DEBUG) << "local_slave_mac = " << local_slave_mac;
 #ifdef BEEROCKS_RDKB
-        database.settings_rdkb_extensions(
-            notification->platform_settings().rdkb_extensions_enabled);
-        if (database.settings_rdkb_extensions()) {
-            int prev_task_id = database.get_rdkb_wlan_task_id();
-            if (!tasks.is_task_running(prev_task_id)) {
-                LOG(DEBUG) << "starting RDKB task";
-                auto new_rdkb_wlan_task =
-                    std::make_shared<rdkb_wlan_task>(database, cmdu_tx, tasks);
-                tasks.add_task(new_rdkb_wlan_task);
-            }
-        }
+        // database.settings_rdkb_extensions(
+        //     notification->platform_settings().rdkb_extensions_enabled);
+        // if (database.settings_rdkb_extensions()) {
+        //     int prev_task_id = database.get_rdkb_wlan_task_id();
+        //     if (!tasks.is_task_running(prev_task_id)) {
+        //         LOG(DEBUG) << "starting RDKB task";
+        //         auto new_rdkb_wlan_task =
+        //             std::make_shared<rdkb_wlan_task>(database, cmdu_tx, tasks);
+        //         tasks.add_task(new_rdkb_wlan_task);
+        //     }
+        // }
 #endif
         database.settings_client_band_steering(
             notification->platform_settings().client_band_steering_enabled);

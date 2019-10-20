@@ -127,7 +127,7 @@ public:
         bool rdkb_extensions = false;
 
         // Params
-        bool client_optimal_path_roaming_prefer_signal_strength = false;
+        bool client_optimal_path_roaming_prefer_signal_strength = true;
     } sDbMasterSettings;
 
     db(sDbMasterConfig &config_, beerocks::logging &logger_) : config(config_), logger(logger_)

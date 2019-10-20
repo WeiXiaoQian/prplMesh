@@ -11,7 +11,7 @@ set(CMAKE_CROSS_COMPILING ON)
 
 # Platform specific
 set(TARGET_PLATFORM             "rdkb" CACHE STRING "Target Platform")
-set(PLATFORM_BASE_DIR           /local/vitaly/rdkb/atom_rdkbos/build/tmp/sysroots CACHE STRING "Platform Base Directory")
+set(PLATFORM_BASE_DIR           /local/akanterx/dev/rdkb/atom_rdkbos/build/tmp/sysroots CACHE STRING "Platform Base Directory")
 set(PLATFORM_BUILD_NAME         puma7-atom CACHE STRING "Platform Build Name")
 set(PLATFORM_TOOLCHAIN_PREFIX   i686-rdk-linux- CACHE STRING "Platform Toolchain Prefix")
 set(PLATFORM_BUILD_DIR          ${PLATFORM_BASE_DIR} CACHE STRING "Platform Build Directory")

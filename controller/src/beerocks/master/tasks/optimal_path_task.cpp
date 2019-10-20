@@ -128,9 +128,10 @@ void optimal_path_task::work()
         auto gw_br_node = database.get_nodes(beerocks::TYPE_GW);
         auto gw_slaves  = database.get_node_children(*gw_br_node.begin(), beerocks::TYPE_SLAVE);
 
-        sta_support_11k = database.settings_client_11k_roaming() &&
-                          (database.get_node_beacon_measurement_support_level(sta_mac) !=
-                           BEACON_MEAS_UNSUPPORTED);
+        // sta_support_11k = database.settings_client_11k_roaming() &&
+        //                   (database.get_node_beacon_measurement_support_level(sta_mac) !=
+        //                    BEACON_MEAS_UNSUPPORTED);
+        sta_support_11k = database.settings_client_11k_roaming();
 
         //// only for debug ////
         TASK_LOG(DEBUG) << "sta_support_11k=" << int(sta_support_11k);
@@ -182,20 +183,20 @@ void optimal_path_task::work()
         for (const auto &ire : ires_outside_subtree) {
             auto ire_hostaps = database.get_node_children(ire, beerocks::TYPE_SLAVE);
             for (const auto &hostap : ire_hostaps) {
-                int8_t rx_rssi, dummy;
-                bool sta_is_5ghz = database.is_node_5ghz(sta_mac);
-                database.get_node_cross_rx_rssi(sta_mac, current_hostap, rx_rssi, dummy);
-                if ((!database.is_hostap_active(hostap)) ||
-                    (!check_if_sta_can_steer_to_ap(hostap)) ||
-                    (database.settings_client_optimal_path_roaming_prefer_signal_strength() &&
-                     sta_is_5ghz && database.is_ap_out_of_band(hostap, sta_mac) &&
-                     rx_rssi > database.config.roaming_rssi_cutoff_db)) {
-                    continue;
-                }
-                if (!is_hostap_on_cs_process(hostap)) {
+                // int8_t rx_rssi, dummy;
+                // bool sta_is_5ghz = database.is_node_5ghz(sta_mac);
+                // database.get_node_cross_rx_rssi(sta_mac, current_hostap, rx_rssi, dummy);
+                // if ((!database.is_hostap_active(hostap)) ||
+                //     (!check_if_sta_can_steer_to_ap(hostap)) ||
+                //     (database.settings_client_optimal_path_roaming_prefer_signal_strength() &&
+                //      sta_is_5ghz && database.is_ap_out_of_band(hostap, sta_mac) &&
+                //      rx_rssi > database.config.roaming_rssi_cutoff_db)) {
+                //     continue;
+                // }
+                //if (!is_hostap_on_cs_process(hostap)) {
                     TASK_LOG(DEBUG) << sta_mac << " inserting new hostap to list: " << hostap;
                     potential_11k_aps.insert({hostap, false});
-                }
+                //}
             }
         }
 
@@ -596,7 +597,9 @@ void optimal_path_task::work()
 
         if (chosen_hostap.empty() || (chosen_hostap == current_hostap)) {
             LOG_CLI(DEBUG, "optimal_path_task:"
-                               << " could not find a better path for sta " << sta_mac << std::endl);
+                            << " could not find a better path for sta " << sta_mac
+                            << "best_dl_rssi_5g  = " << best_dl_rssi_5g
+                            << "best_dl_rssi_2g  = " << best_dl_rssi_2g << std::endl);
             finish();
         } else {
             chosen_hostap = database.get_hostap_vap_with_ssid(chosen_hostap, current_hostap_ssid);

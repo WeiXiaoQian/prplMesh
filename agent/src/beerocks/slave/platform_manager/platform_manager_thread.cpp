@@ -220,7 +220,7 @@ static bool fill_platform_settings(
     msg->platform_settings().client_optimal_path_roaming_enabled =
         uint8_t(platform_common_conf.client_roaming);
     msg->platform_settings().client_optimal_path_roaming_prefer_signal_strength_enabled =
-        0; // TODO add platform DB flag
+        1; // TODO add platform DB flag
     msg->platform_settings().client_11k_roaming_enabled =
         uint8_t(platform_common_conf.client_roaming || platform_common_conf.band_steering);
     msg->platform_settings().wired_backhaul    = uint8_t(platform_common_conf.wired_backhaul);

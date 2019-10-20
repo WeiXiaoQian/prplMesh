@@ -143,6 +143,7 @@ void client_steering_task::steer_sta()
     auto hostaps                   = database.get_active_hostaps();
     std::string original_radio_mac = database.get_node_parent_radio(original_hostap_mac);
     hostaps.erase(radio_mac); // remove chosen hostap from the general list
+    hostaps.erase(original_radio_mac); //Workaround - skip current one from deny list
     for (auto &hostap : hostaps) {
         /*
         * send disallow to all others
