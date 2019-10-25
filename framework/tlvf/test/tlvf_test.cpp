@@ -216,13 +216,15 @@ bool add_encrypted_settings(std::shared_ptr<tlvWscM2> m2, uint8_t *keywrapkey, u
     config_data.set_ssid("test_ssid");
     config_data.authentication_type_attr().data = WSC::eWscAuth::WSC_AUTH_WPA2; //DUMMY
     config_data.encryption_type_attr().data     = WSC::eWscEncr::WSC_ENCR_AES;
-    const char *key                             = "test1234";
-    std::copy(key, key + sizeof(key), config_data.network_key_attr().data);
+    config_data.set_network_key("test1234");
 
     LOG(DEBUG) << "WSC config_data:" << std::endl
                << "     ssid: " << config_data.ssid() << std::endl
                << "     authentication_type: " << int(config_data.authentication_type_attr().data)
                << std::endl
+               << "     network_key: " << std::string(config_data.network_key(), config_data.network_key_length())
+               << std::endl
+               << "     network_key length: " << int(config_data.network_key_length()) << std::endl
                << "     encryption_type: " << int(config_data.encryption_type_attr().data)
                << std::endl;
     config_data.class_swap();
@@ -273,23 +275,23 @@ bool parse_encrypted_settings(std::shared_ptr<tlvWscM2> m2, uint8_t *keywrapkey,
                 encrypted_settings->encrypted_settings_length(), buf);
     WSC::cConfigData config_data(buf, sizeof(buf), true, true);
 
-    std::string network_key = std::string(config_data.network_key_attr().data,
-                                          config_data.network_key_attr().data_length);
     LOG(DEBUG) << "WSC config_data:" << std::endl
                << "     ssid: " << config_data.ssid() << std::endl
                << "     authentication_type: " << int(config_data.authentication_type_attr().data)
                << std::endl
                << "     encryption_type: " << int(config_data.encryption_type_attr().data)
                << std::endl
-               << "     network key: " << network_key << std::endl;
+               << "     network_key: " << std::string(config_data.network_key(), config_data.network_key_length())
+               << std::endl
+               << "     network_key length: " << int(config_data.network_key_length()) << std::endl;
 
     LOG(DEBUG) << "authenticator type:" << m2->authenticator().attribute_type;
     LOG(DEBUG) << "authenticator length:" << m2->authenticator().data_length;
     LOG(DEBUG) << "authenticator buffer: " << std::endl
                << dump_buffer((uint8_t *)m2->authenticator().data, m2->authenticator().data_length);
 
-    if (network_key != std::string("test1234")) {
-        LOG(ERROR) << "Network key validation failed";
+    if (config_data.network_key_str().compare("test1234")) {
+        LOG(ERROR) << "Network key validation failed ";
         return false;
     }
 
