@@ -12,6 +12,7 @@
 #include "db/db.h"
 #include "tasks/optimal_path_task.h"
 #include "tasks/task_pool.h"
+#include "controller_ucc_listener.h"
 
 #include <beerocks/bcl/beerocks_defines.h>
 #include <beerocks/bcl/beerocks_logging.h>
@@ -96,6 +97,7 @@ private:
 
     db &database;
     task_pool tasks;
+    std::unique_ptr<beerocks::controller_ucc_listener> m_controller_ucc_listener;
 };
 
 } // namespace son
