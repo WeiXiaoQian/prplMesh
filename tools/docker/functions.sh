@@ -55,3 +55,8 @@ report() {
         error=$((error+1))
     fi
 }
+
+container_ip() {
+    # get the container IP based on the container name
+    docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' "$1"
+}
