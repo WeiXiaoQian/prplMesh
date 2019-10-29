@@ -42,7 +42,7 @@ generate_container_random_ip() {
 }
 
 gateway_netid_length() {
-    echo $(docker network inspect prplMesh-net | jq -r '.[0].IPAM.Config'[0].Subnet | sed -rn 's/^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}(\/[0-9]{2})$/\1/p')
+    echo $(docker network inspect prplMesh-net | jq -r '.[0].IPAM.Config'[0].Subnet | sed -rn 's/^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\/([0-9]{2})$/\1/p')
 }
 
 main() {
@@ -86,7 +86,8 @@ main() {
         IPADDR=$(generate_container_random_ip $NETWORK)
     }
 
-    IPADDR="${IPADDR}$(gateway_netid_length)"
+    IPADDR="${IPADDR}"
+    IP_NETID_LEN="$(gateway_netid_length)"
 
     dbg "VERBOSE=${VERBOSE}"
     dbg "DETACH=${DETACH}"
@@ -105,7 +106,8 @@ main() {
                 --expose ${PORT}
                 -v ${installdir}:${installdir}
                 -v ${sourcesdir}:${sourcesdir}
-                --name ${NAME}"
+                --name ${NAME}
+		--ip=$IPADDR"
 
     [ -n "$ENTRYPOINT" ] && DOCKEROPTS="$DOCKEROPTS --entrypoint $ENTRYPOINT"
     if [ "$DETACH" = "false" ]; then
@@ -122,7 +124,7 @@ main() {
         fi
     fi
     
-    run docker container run ${DOCKEROPTS} prplmesh-runner$TAG $IPADDR "$BASE_MAC" "$@"
+    run docker container run ${DOCKEROPTS} prplmesh-runner$TAG ${IPADDR}/${IP_NETID_LEN} "$BASE_MAC" "$@"
 }
 
 VERBOSE=false
