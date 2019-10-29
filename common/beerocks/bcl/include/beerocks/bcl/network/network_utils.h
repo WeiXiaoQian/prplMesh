@@ -84,6 +84,7 @@ public:
     static sMacAddr mac_from_string(const std::string &mac);
     static void mac_from_string(uint8_t *buf, const std::string &mac);
 
+    static bool mac_compare(const sMacAddr &mac1, const sMacAddr &mac2);
     static bool is_valid_mac(std::string mac);
 
     static std::string ipv4_to_string(const net::sIpv4Addr &ip);

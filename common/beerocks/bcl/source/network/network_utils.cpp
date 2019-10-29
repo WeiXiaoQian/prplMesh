@@ -137,6 +137,16 @@ void network_utils::mac_from_string(uint8_t *buf, const std::string &mac)
     }
 }
 
+bool network_utils::mac_compare(const sMacAddr &mac1, const sMacAddr &mac2)
+{
+    bool is_same_mac = true;
+    for (int i = 0; i < MAC_ADDR_LEN; i++) {
+        if(mac1.oct[i] != mac2.oct[i])
+            is_same_mac = false;
+    }
+    return is_same_mac;
+}
+
 bool network_utils::is_valid_mac(std::string mac)
 {
     if (mac.size() != MAC_ADDR_CHAR_SIZE) {
