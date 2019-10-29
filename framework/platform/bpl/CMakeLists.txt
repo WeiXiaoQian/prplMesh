@@ -56,6 +56,9 @@ elseif (TARGET_PLATFORM STREQUAL "linux")
 
     file(GLOB_RECURSE bpl_platform_sources ${MODULE_PATH}/linux/*.c*)
 
+    set(DHCP_EVENT_PATH "/tmp/$ENV{USER}/beerocks/dhcp")
+    add_definitions(-DDHCP_EVENT_PATH="${DHCP_EVENT_PATH}")
+
     set(PLATFORM_DB_PATH ${CMAKE_INSTALL_PREFIX}/share)
     set(PLATFORM_DB_PATH_TEMP /tmp)
     add_definitions(-DPLATFORM_DB_PATH="${PLATFORM_DB_PATH}/prplmesh_platform_db")
