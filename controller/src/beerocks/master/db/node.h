@@ -193,21 +193,20 @@ public:
         link_metrics_data(){};
         ~link_metrics_data(){};
         
-        sMacAddr al_mac_of_the_device_that_is_reported;
-        // std::list<ieee1905_1::tlvTransmitterLinkMetric::sInterfacePairInfo> transmitterLinkMetrics;
-        // std::list<ieee1905_1::tlvReceiverLinkMetric::sInterfacePairInfo> receiverLinkMetrics;
         std::vector<ieee1905_1::tlvTransmitterLinkMetric::sInterfacePairInfo> transmitterLinkMetrics;
         std::vector<ieee1905_1::tlvReceiverLinkMetric::sInterfacePairInfo> receiverLinkMetrics;
 
         bool add_transmitter_link_metric(std::shared_ptr<ieee1905_1::tlvTransmitterLinkMetric> TxLinkMetricData);
         bool add_receiver_link_metric(std::shared_ptr<ieee1905_1::tlvReceiverLinkMetric> RxLinkMetricData);
     };
+    
     /*
-    * This map holds link metric data per Agent.
-    * Created empty in all nodes
-    * Used only in GW node (retreave from DB method get_metric_data_map)
+    * This map holds link metric "data struct" per reporting Agent sMacAddr .
+    * "data struct" holds map of the acctual link_metrics_data vector (tx/rx) per reported Agent sMacAddr.
+    * Map is Used only in GW node (reference retreaved from DB via method get_link_metric_data_map)
+    * Map created empty in all other nodes.
     */
-    std::map<std::string, son::node::link_metrics_data> mOfMetricData;
+    std::map<sMacAddr, std::map<sMacAddr, son::node::link_metrics_data>> mLinkMetricData;
 
     beerocks::eBandType band_type   = beerocks::eBandType::INVALID_BAND;
     beerocks::eIfaceType iface_type = beerocks::IFACE_TYPE_ETHERNET;

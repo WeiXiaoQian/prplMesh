@@ -622,15 +622,16 @@ int db::get_node_last_ping_avg_ms(std::string mac)
     return n->last_ping_avg_ms;
 }
 
-std::map<std::string, son::node::link_metrics_data> &db::get_metric_data_map(const std::string& mac)
+std::map<sMacAddr, std::map<sMacAddr, son::node::link_metrics_data>> &db::get_link_metric_data_map(const std::string& mac)
 {
     auto n = get_node(mac);
     if (!n) {
         LOG(WARNING) << __FUNCTION__ << " - node " << mac << " does not exist!";
     //const std::map<std::string, son::node::link_metrics_data> mDummy;
+    //todo kantera handle dead node
     // return (&mDummy);
     }
-    return n->mOfMetricData;
+    return n->mLinkMetricData;
 }
 
 bool db::set_hostap_active(std::string mac, bool active)
