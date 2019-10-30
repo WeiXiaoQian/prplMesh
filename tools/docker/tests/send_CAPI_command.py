@@ -35,7 +35,7 @@ class UCCSocket:
         """
         self.host = host
         self.port = port
-        self.conn: Union[None, socket] = None
+        self.conn: socket.socket
 
     def __enter__(self):
         self.conn = socket.create_connection((self.host, self.port))
