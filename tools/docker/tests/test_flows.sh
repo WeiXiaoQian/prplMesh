@@ -9,7 +9,7 @@
 ALL_TESTS="topology initial_ap_config ap_config_renew ap_config_bss_tear_down channel_selection
            ap_capability_query client_capability_query combined_infra_metrics
            client_steering_mandate client_steering_dummy client_association_dummy client_steering_policy client_association
-           higher_layer_data_payload_trigger higher_layer_data_payload"
+           higher_layer_data_payload_trigger higher_layer_data_payload optimal_path_dummy"
 
 scriptdir="$(cd "${0%/*}"; pwd)"
 topdir="${scriptdir%/*/*/*/*}"
@@ -250,6 +250,151 @@ test_client_association_dummy(){
     return $check_error
 }
 
+wait_for_message() {
+    found=0
+    timeout=$1
+    container=$2
+    file=$3
+    msg=$4
+    command="docker exec -it $container sh -c 'grep -i -q \"$msg\" /tmp/\$USER/beerocks/logs/$file'"
+    for wait in $(seq 1 $timeout); do
+        sleep 1
+        if eval $command; then
+            dbg "OK after $wait $command"
+            found=1
+            break
+        fi
+    done
+    if [ $found = 0 ]; then
+        err "FAIL after $wait $command"
+        return 1
+    fi
+}
+
+test_optimal_path_dummy() {
+    status "test optimal path dummy"
+    check_error=0
+
+    dbg "Connect dummy STA to wlan0"
+    check docker exec -it repeater1 sh -c \
+        'echo "EVENT AP-STA-CONNECTED 11:22:33:44:55:66" > /tmp/$USER/beerocks/wlan0/EVENT'
+
+    dbg "Pre-prepare RRM Beacon Response for association handling task"
+    check docker exec -it repeater1 sh -c \
+        'echo "DATA RRM-BEACON-REP-RECEIVED 11:22:33:44:55:66 channel=1 dialog_token=0 measurement_rep_mode=0 op_class=0 duration=50 rcpi=-40 rsni=40 bssid=aa:bb:cc:00:00:10" > /tmp/$USER/beerocks/wlan0/EVENT'
+
+    dbg "DHCP event"
+    check docker exec -it gateway sh -c \
+        'echo "add,11:22:33:44:55:66,192.168.1.10,test" > /tmp/$USER/beerocks/dhcp/EVENT'
+
+    dbg "Confirming 11k request is done by association handling task"
+    wait_for_message 2 repeater1 "beerocks_monitor_wlan0.log" "Beacon 11k request to sta 11:22:33:44:55:66 on bssid aa:bb:cc:00:00:10 channel 1"
+
+    dbg "Update Stats"
+    check docker exec -it repeater1 sh -c \
+        'echo "DATA STA-UPDATE-STATS 11:22:33:44:55:66 rssi=-38,-39,-40,-41 snr=38,39,40,41 uplink=1000 downlink=800" > /tmp/$USER/beerocks/wlan0/EVENT'
+
+    dbg "Pre-prepare RRM Beacon Responses for optimal path task"
+    #Response for IRE1, BSSID of wlan0.0
+    check docker exec -it repeater1 sh -c \
+        'echo "DATA RRM-BEACON-REP-RECEIVED 11:22:33:44:55:66 channel=1 dialog_token=0 measurement_rep_mode=0 op_class=0 duration=50 rcpi=-80 rsni=10 bssid=aa:bb:cc:11:00:10" > /tmp/$USER/beerocks/wlan0/EVENT'
+
+    #Response for IRE1, BSSID of wlan2.0
+    check docker exec -it repeater1 sh -c \
+        'echo "DATA RRM-BEACON-REP-RECEIVED 11:22:33:44:55:66 channel=149 dialog_token=0 measurement_rep_mode=0 op_class=0 duration=50 rcpi=-80 rsni=10 bssid=aa:bb:cc:11:00:20" > /tmp/$USER/beerocks/wlan0/EVENT'
+
+    #Response for IRE2, BSSID of wlan0.0
+    check docker exec -it repeater1 sh -c \
+        'echo "DATA RRM-BEACON-REP-RECEIVED 11:22:33:44:55:66 channel=1 dialog_token=0 measurement_rep_mode=0 op_class=0 duration=50 rcpi=-40 rsni=40 bssid=aa:bb:cc:00:00:10" > /tmp/$USER/beerocks/wlan0/EVENT'
+
+    #Response for IRE2, BSSID of wlan2.0
+    check docker exec -it repeater1 sh -c \
+        'echo "DATA RRM-BEACON-REP-RECEIVED 11:22:33:44:55:66 channel=149 dialog_token=0 measurement_rep_mode=0 op_class=0 duration=50 rcpi=-80 rsni=10 bssid=aa:bb:cc:00:00:20" > /tmp/$USER/beerocks/wlan0/EVENT'
+
+    #Response for GW, BSSID of wlan0.0
+    check docker exec -it repeater1 sh -c \
+        'echo "DATA RRM-BEACON-REP-RECEIVED 11:22:33:44:55:66 channel=1 dialog_token=0 measurement_rep_mode=0 op_class=0 duration=50 rcpi=-80 rsni=10 bssid=00:11:22:33:00:10" > /tmp/$USER/beerocks/wlan0/EVENT'
+
+    #Response for GW, BSSID of wlan2.0
+    check docker exec -it repeater1 sh -c \
+        'echo "DATA RRM-BEACON-REP-RECEIVED 11:22:33:44:55:66 channel=149 dialog_token=0 measurement_rep_mode=0 op_class=0 duration=50 rcpi=-80 rsni=10 bssid=00:11:22:33:00:20" > /tmp/$USER/beerocks/wlan0/EVENT'
+
+    dbg "Confirming 11k request is done by optimal path task"
+    wait_for_message 20 repeater1 "beerocks_monitor_wlan0.log" "Beacon 11k request to sta 11:22:33:44:55:66 on bssid aa:bb:cc:11:00:20 channel 149"
+
+    dbg "Confirming 11k request is done by optimal path task"
+    wait_for_message 20 repeater1 "beerocks_monitor_wlan0.log" "Beacon 11k request to sta 11:22:33:44:55:66 on bssid aa:bb:cc:00:00:20 channel 149"
+
+    dbg "Confirming 11k request is done by optimal path task"
+    wait_for_message 20 repeater1 "beerocks_monitor_wlan0.log" "Beacon 11k request to sta 11:22:33:44:55:66 on bssid aa:bb:cc:11:00:10 channel 1"
+
+    dbg "Confirming 11k request is done by optimal path task"
+    wait_for_message 20 repeater1 "beerocks_monitor_wlan0.log" "Beacon 11k request to sta 11:22:33:44:55:66 on bssid 00:11:22:33:00:20 channel 149"
+
+    dbg "Confirming 11k request is done by optimal path task"
+    wait_for_message 20 repeater1 "beerocks_monitor_wlan0.log" "Beacon 11k request to sta 11:22:33:44:55:66 on bssid 00:11:22:33:00:10 channel 1"
+
+    dbg "Confirming no steer is done"
+    wait_for_message 20 gateway "beerocks_controller.log" "could not find a better path for sta 11:22:33:44:55:66"
+
+    # Steer scenario
+    dbg "Update Stats"
+    check docker exec -it repeater1 sh -c \
+        'echo "DATA STA-UPDATE-STATS 11:22:33:44:55:66 rssi=-58,-59,-60,-61 snr=18,19,20,21 uplink=100 downlink=80" > /tmp/$USER/beerocks/wlan0/EVENT'
+
+    dbg "Pre-prepare RRM Beacon Responses for optimal path task"
+    #Response for IRE1, BSSID of wlan0.0
+    check docker exec -it repeater1 sh -c \
+        'echo "DATA RRM-BEACON-REP-RECEIVED 11:22:33:44:55:66 channel=1 dialog_token=0 measurement_rep_mode=0 op_class=0 duration=50 rcpi=-30 rsni=50 bssid=aa:bb:cc:11:00:10" > /tmp/$USER/beerocks/wlan0/EVENT'
+
+    #Response for IRE1, BSSID of wlan2.0
+    check docker exec -it repeater1 sh -c \
+        'echo "DATA RRM-BEACON-REP-RECEIVED 11:22:33:44:55:66 channel=149 dialog_token=0 measurement_rep_mode=0 op_class=0 duration=50 rcpi=-30 rsni=50 bssid=aa:bb:cc:11:00:20" > /tmp/$USER/beerocks/wlan0/EVENT'
+
+    #Response for IRE2, BSSID of wlan0.0
+    check docker exec -it repeater1 sh -c \
+        'echo "DATA RRM-BEACON-REP-RECEIVED 11:22:33:44:55:66 channel=1 dialog_token=0 measurement_rep_mode=0 op_class=0 duration=50 rcpi=-60 rsni=20 bssid=aa:bb:cc:00:00:10" > /tmp/$USER/beerocks/wlan0/EVENT'
+
+    #Response for IRE2, BSSID of wlan2.0
+    check docker exec -it repeater1 sh -c \
+        'echo "DATA RRM-BEACON-REP-RECEIVED 11:22:33:44:55:66 channel=149 dialog_token=0 measurement_rep_mode=0 op_class=0 duration=50 rcpi=-30 rsni=50 bssid=aa:bb:cc:00:00:20" > /tmp/$USER/beerocks/wlan0/EVENT'
+
+    #Response for GW, BSSID of wlan0.0
+    check docker exec -it repeater1 sh -c \
+        'echo "DATA RRM-BEACON-REP-RECEIVED 11:22:33:44:55:66 channel=1 dialog_token=0 measurement_rep_mode=0 op_class=0 duration=50 rcpi=-30 rsni=50 bssid=00:11:22:33:00:10" > /tmp/$USER/beerocks/wlan0/EVENT'
+
+    #Response for GW, BSSID of wlan2.0
+    check docker exec -it repeater1 sh -c \
+        'echo "DATA RRM-BEACON-REP-RECEIVED 11:22:33:44:55:66 channel=149 dialog_token=0 measurement_rep_mode=0 op_class=0 duration=50 rcpi=-30 rsni=50 bssid=00:11:22:33:00:20" > /tmp/$USER/beerocks/wlan0/EVENT'
+
+    dbg "Confirming steering is requested by optimal path task"
+    wait_for_message 20 gateway "beerocks_controller.log" "optimal_path_task: steering"
+
+    # Error scenario, sta doesn't support 11k
+    dbg "Connect dummy STA to wlan0"
+    check docker exec -it repeater1 sh -c \
+       'echo "EVENT AP-STA-CONNECTED 11:22:33:44:55:77" > /tmp/$USER/beerocks/wlan0/EVENT'
+
+    dbg "Pre-prepare RRM Beacon Response with error for association handling task"
+    check docker exec -it repeater1 sh -c \
+        'echo "DATA RRM-BEACON-REP-RECEIVED 11:22:33:44:55:77 channel=0 dialog_token=0 measurement_rep_mode=4 op_class=0 duration=0 rcpi=0 rsni=0 bssid=aa:bb:cc:00:00:10" > /tmp/$USER/beerocks/wlan0/EVENT'
+
+    dbg "DHCP event"
+    check docker exec -it gateway sh -c \
+        'echo "add,11:22:33:44:55:77,192.168.1.20,test" > /tmp/$USER/beerocks/dhcp/EVENT'
+
+    dbg "Confirming 11k request is done by association handling task"
+    wait_for_message 20 repeater1 "beerocks_monitor_wlan0.log" "Beacon 11k request to sta 11:22:33:44:55:77 on bssid aa:bb:cc:00:00:10 channel 1"
+
+    dbg "Confirming STA doesn't support beacon measurement"
+    wait_for_message 20 gateway "beerocks_controller.log" "setting sta 11:22:33:44:55:77 as beacon measurement unsupported"
+
+    dbg "Confirming optimal path falls back to RSSI measurements"
+    wait_for_message 20 gateway "beerocks_controller.log" "requesting rssi measurements for 11:22:33:44:55:77"
+
+    return $check_error
+}
+
 test_client_steering_dummy() {
     status "test client steering dummy"
     check_error=0
@@ -451,6 +596,7 @@ usage() {
     echo "      channel_selection - Channel Selection test"
     echo "      client_steering_mandate - Client Steering for Steering Mandate and Steering Opportunity test"
     echo "      client_steering_dummy - Client Steering using dummy bwl"
+    echo "      optimal_path_dummy - Optimal Path using dummy bwl"
     echo "      client_association_dummy - Client Association Control Message using dummy bwl"
     echo "      client_steering_policy - Setting Client Steering Policy test"
     echo "      client_association - Client Association Control Message test"
