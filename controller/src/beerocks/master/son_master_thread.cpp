@@ -255,41 +255,41 @@ bool master_thread::handle_cmdu_1905_autoconfiguration_search(Socket *sd,
 
     LOG(DEBUG) << "Received AP_AUTOCONFIGURATION_SEARCH_MESSAGE";
 
-    std::shared_ptr<ieee1905_1::tlvAlMacAddressType> tlvAlMacAddressType     = nullptr;
-    std::shared_ptr<ieee1905_1::tlvSearchedRole> tlvSearchedRole             = nullptr;
-    std::shared_ptr<ieee1905_1::tlvAutoconfigFreqBand> tlvAutoconfigFreqBand = nullptr;
-    std::shared_ptr<wfa_map::tlvSupportedService> tlvSupportedServiceIn      = nullptr;
-    std::shared_ptr<wfa_map::tlvSearchedService> tlvSearchedService          = nullptr;
-    int type = cmdu_rx.getNextTlvType();
+    auto tlvAlMacAddressType   = cmdu_rx.getClass<ieee1905_1::tlvAlMacAddressType>();
+    auto tlvSearchedRole       = cmdu_rx.getClass<ieee1905_1::tlvSearchedRole>();
+    auto tlvAutoconfigFreqBand = cmdu_rx.getClass<ieee1905_1::tlvAutoconfigFreqBand>();
+    auto tlvSupportedServiceIn = cmdu_rx.getClass<wfa_map::tlvSupportedService>();
+    auto tlvSearchedService    = cmdu_rx.getClass<wfa_map::tlvSearchedService>();
+    //int type = cmdu_rx.getNextTlvType();
 
-    while ((type = cmdu_rx.getNextTlvType()) != int(ieee1905_1::eTlvType::TLV_END_OF_MESSAGE)) {
-        switch (type) {
-        case int(wfa_map::eTlvTypeMap::TLV_SUPPORTED_SERVICE):
-            LOG(DEBUG) << "Found TLV_SUPPORTED_SERVICE TLV";
-            tlvSupportedServiceIn = cmdu_rx.addClass<wfa_map::tlvSupportedService>();
-            break;
-        case int(ieee1905_1::eTlvType::TLV_AL_MAC_ADDRESS_TYPE):
-            LOG(DEBUG) << "Found TLV_AL_MAC_ADDRESS_TYPE TLV";
-            tlvAlMacAddressType = cmdu_rx.addClass<ieee1905_1::tlvAlMacAddressType>();
-            break;
-        case int(ieee1905_1::eTlvType::TLV_SEARCHED_ROLE):
-            LOG(DEBUG) << "Found TLV_SEARCHED_ROLE TLV";
-            tlvSearchedRole = cmdu_rx.addClass<ieee1905_1::tlvSearchedRole>();
-            break;
-        case int(ieee1905_1::eTlvType::TLV_AUTOCONFIG_FREQ_BAND):
-            LOG(DEBUG) << "Found TLV_AUTOCONFIG_FREQ_BAND TLV";
-            tlvAutoconfigFreqBand = cmdu_rx.addClass<ieee1905_1::tlvAutoconfigFreqBand>();
-            break;
-        case int(wfa_map::eTlvTypeMap::TLV_SEARCHED_SERVICE):
-            LOG(DEBUG) << "Found TLV_SEARCHED_SERVICE TLV";
-            tlvSearchedService = cmdu_rx.addClass<wfa_map::tlvSearchedService>();
-            break;
-        default:
-            LOG(ERROR) << "Unknown TLV, type " << std::hex << type << ", dropping...";
-            return false;
-            break;
-        }
-    }
+    // while ((type = cmdu_rx.getNextTlvType()) != int(ieee1905_1::eTlvType::TLV_END_OF_MESSAGE)) {
+    //     switch (type) {
+    //     case int(wfa_map::eTlvTypeMap::TLV_SUPPORTED_SERVICE):
+    //         LOG(DEBUG) << "Found TLV_SUPPORTED_SERVICE TLV";
+    //         tlvSupportedServiceIn = cmdu_rx.addClass<wfa_map::tlvSupportedService>();
+    //         break;
+    //     case int(ieee1905_1::eTlvType::TLV_AL_MAC_ADDRESS_TYPE):
+    //         LOG(DEBUG) << "Found TLV_AL_MAC_ADDRESS_TYPE TLV";
+    //         tlvAlMacAddressType = cmdu_rx.addClass<ieee1905_1::tlvAlMacAddressType>();
+    //         break;
+    //     case int(ieee1905_1::eTlvType::TLV_SEARCHED_ROLE):
+    //         LOG(DEBUG) << "Found TLV_SEARCHED_ROLE TLV";
+    //         tlvSearchedRole = cmdu_rx.addClass<ieee1905_1::tlvSearchedRole>();
+    //         break;
+    //     case int(ieee1905_1::eTlvType::TLV_AUTOCONFIG_FREQ_BAND):
+    //         LOG(DEBUG) << "Found TLV_AUTOCONFIG_FREQ_BAND TLV";
+    //         tlvAutoconfigFreqBand = cmdu_rx.addClass<ieee1905_1::tlvAutoconfigFreqBand>();
+    //         break;
+    //     case int(wfa_map::eTlvTypeMap::TLV_SEARCHED_SERVICE):
+    //         LOG(DEBUG) << "Found TLV_SEARCHED_SERVICE TLV";
+    //         tlvSearchedService = cmdu_rx.addClass<wfa_map::tlvSearchedService>();
+    //         break;
+    //     default:
+    //         LOG(ERROR) << "Unknown TLV, type " << std::hex << type << ", dropping...";
+    //         return false;
+    //         break;
+    //     }
+    // }
 
     if (tlvAlMacAddressType) {
         al_mac =
@@ -764,10 +764,10 @@ bool master_thread::handle_cmdu_1905_autoconfiguration_WSC(Socket *sd,
 
     for (const auto &bss_info_conf : bss_info_confs) {
         // Check if the radio supports it
-        if (!son_actions::has_matching_operating_class(*radio_basic_caps, bss_info_conf)) {
-            LOG(INFO) << "Skipping " << bss_info_conf.ssid << " due to operclass mismatch";
-            continue;
-        }
+        // if (!son_actions::has_matching_operating_class(*radio_basic_caps, bss_info_conf)) {
+        //     LOG(INFO) << "Skipping " << bss_info_conf.ssid << " due to operclass mismatch";
+        //     continue;
+        // }
         if (!(tlvwscM1->authentication_type_flags_attr().data &
               uint16_t(bss_info_conf.authentication_type))) {
             LOG(INFO) << std::hex << "Auth mismatch for " << bss_info_conf.ssid << ": get 0x"
