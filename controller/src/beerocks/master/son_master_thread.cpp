@@ -42,6 +42,7 @@
 #include <tlvf/ieee_1905_1/tlvSearchedRole.h>
 #include <tlvf/ieee_1905_1/tlvSupportedFreqBand.h>
 #include <tlvf/ieee_1905_1/tlvSupportedRole.h>
+#include <tlvf/wfa_map/tlvApMetric.h>
 #include <tlvf/wfa_map/tlvApRadioIdentifier.h>
 #include <tlvf/wfa_map/tlvChannelPreference.h>
 #include <tlvf/wfa_map/tlvChannelSelectionResponse.h>
@@ -251,6 +252,8 @@ bool master_thread::handle_cmdu_1905_1_message(Socket *sd, ieee1905_1::CmduMessa
         return handle_cmdu_1905_topology_notification(sd, cmdu_rx);
     case ieee1905_1::eMessageType::LINK_METRIC_RESPONSE_MESSAGE:
         return handle_cmdu_1905_link_metric_response(sd, cmdu_rx);
+    case ieee1905_1::eMessageType::AP_METRICS_RESPONSE_MESSAGE:
+        return handle_cmdu_1905_ap_metric_response(sd, cmdu_rx);
     default:
         break;
     }
@@ -1169,6 +1172,37 @@ static void print_link_metric_map(
     }
 }
 
+static void
+print_ap_metric_map(std::unordered_map<sMacAddr, son::node::ap_metrics_data> &ap_metric_data)
+{
+    LOG(DEBUG) << "Print Ap Metrics data map";
+    for (auto const &pair_agent : ap_metric_data) {
+        LOG(DEBUG) << std::endl
+                   << "Ap Metrics from agent with bssid= "
+                   << network_utils::mac_to_string(pair_agent.first) << std::endl
+                   << " channel_utilization =" << int(pair_agent.second.channel_utilization)
+                   << std::endl
+                   << " number_of_stas_currently_associated="
+                   << int(pair_agent.second.number_of_stas_currently_associated) << std::endl
+                   << " estimated_service_info_field_ac_be = 0x" << std::hex
+                   << int(pair_agent.second.estimated_service_info_field_ac_be[0]) << std::hex
+                   << int(pair_agent.second.estimated_service_info_field_ac_be[1]) << std::hex
+                   << int(pair_agent.second.estimated_service_info_field_ac_be[2]) << std::endl
+                   << " estimated_service_info_field_ac_bk = 0x" << std::hex
+                   << int(pair_agent.second.estimated_service_info_field_ac_bk[0]) << std::hex
+                   << int(pair_agent.second.estimated_service_info_field_ac_bk[1]) << std::hex
+                   << int(pair_agent.second.estimated_service_info_field_ac_bk[2]) << std::endl
+                   << " estimated_service_info_field_ac_vo = 0x" << std::hex
+                   << int(pair_agent.second.estimated_service_info_field_ac_vo[0]) << std::hex
+                   << int(pair_agent.second.estimated_service_info_field_ac_vo[1]) << std::hex
+                   << int(pair_agent.second.estimated_service_info_field_ac_vo[2]) << std::endl
+                   << " estimated_service_info_field_ac_vi = 0x" << std::hex
+                   << int(pair_agent.second.estimated_service_info_field_ac_vi[0]) << std::hex
+                   << int(pair_agent.second.estimated_service_info_field_ac_vi[1]) << std::hex
+                   << int(pair_agent.second.estimated_service_info_field_ac_vi[2]);
+    }
+}
+
 bool master_thread::handle_cmdu_1905_link_metric_response(Socket *sd,
                                                           ieee1905_1::CmduMessageRx &cmdu_rx)
 {
@@ -1282,6 +1316,76 @@ bool master_thread::handle_cmdu_1905_link_metric_response(Socket *sd,
                << std::endl;
 
     print_link_metric_map(link_metric_data);
+
+    return true;
+}
+
+bool master_thread::handle_cmdu_1905_ap_metric_response(Socket *sd,
+                                                        ieee1905_1::CmduMessageRx &cmdu_rx)
+{
+
+    auto mid = cmdu_rx.getMessageId();
+    LOG(INFO) << "Received AP_METRIC_RESPONSE_MESSAGE, mid=" << std::dec << int(mid);
+
+    //getting reference for ap metric data storage from db
+    auto &ap_metric_data = database.get_ap_metric_data_map(database.get_gw_mac());
+
+    //will hold new ap metric data from Reporting Agent
+    son::node::ap_metrics_data new_ap_metric_data;
+
+    int tlvType;
+    // holds mac address of the reporting agent, used as ap_metric_data key
+    sMacAddr reporting_agent_bssid;
+
+    // parse all tlvs in cmdu and save ap metric data to database
+    while ((tlvType = cmdu_rx.getNextTlvType()) != int(ieee1905_1::eTlvType::TLV_END_OF_MESSAGE)) {
+
+        if (tlvType < 0) {
+            LOG(ERROR) << "getNextTlvType has failed";
+            return false;
+        }
+
+        if (tlvType == int(wfa_map::eTlvTypeMap::TLV_AP_METRIC)) {
+            //parse tx_ap_metric_data
+            auto apMetricData = cmdu_rx.addClass<wfa_map::tlvApMetric>();
+            if (!apMetricData) {
+                LOG(ERROR) << "addClass ieee1905_1::apMetricData has failed";
+                return false;
+            }
+
+            reporting_agent_bssid = apMetricData->bssid();
+
+            LOG(DEBUG) << "recieved  tlvApMetric from BSSID ="
+                       << network_utils::mac_to_string(reporting_agent_bssid);
+
+            //fill tx data from TLV
+            if (!new_ap_metric_data.add_ap_metric_data(apMetricData)) {
+                LOG(ERROR) << "adding apMetricData from tlv has failed";
+                return false;
+            }
+
+            //save agent ap metric data to database or modify already existing.
+
+            std::string reporter_status_s = "new";
+            auto reporting_map_it         = ap_metric_data.find(reporting_agent_bssid);
+
+            if (reporting_map_it != ap_metric_data.end()) {
+                reporter_status_s = "existing";
+            }
+
+            ap_metric_data[reporting_agent_bssid] = new_ap_metric_data;
+
+            LOG(DEBUG) << " Added ap metric data from " << reporter_status_s
+                       << " agent with bssid = "
+                       << network_utils::mac_to_string(reporting_agent_bssid) << std::endl;
+
+        } else {
+            LOG(ERROR) << " unexpected tlv is recieved ";
+            return false;
+        }
+    }
+
+    print_ap_metric_map(ap_metric_data);
 
     return true;
 }
