@@ -654,6 +654,18 @@ db::get_link_metric_data_map(const std::string &mac)
     return n->m_link_metric_data;
 }
 
+std::unordered_map<sMacAddr, son::node::ap_metrics_data> &
+db::get_ap_metric_data_map(const std::string &mac)
+{
+    auto n = get_node(mac);
+    if (!n) {
+        LOG(WARNING) << __FUNCTION__ << " - node " << mac << " does not exist!";
+        static std::unordered_map<sMacAddr, son::node::ap_metrics_data> dummy;
+        return dummy;
+    }
+    return n->m_ap_metric_data;
+}
+
 bool db::set_hostap_active(std::string mac, bool active)
 {
     auto n = get_node(mac);

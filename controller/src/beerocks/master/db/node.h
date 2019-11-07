@@ -13,6 +13,7 @@
 #include <tlvf/common/sMacAddr.h>
 #include <tlvf/ieee_1905_1/tlvReceiverLinkMetric.h>
 #include <tlvf/ieee_1905_1/tlvTransmitterLinkMetric.h>
+#include <tlvf/wfa_map/tlvApMetric.h>
 
 #include <list>
 #include <map>
@@ -210,6 +211,29 @@ public:
     */
     std::unordered_map<sMacAddr, std::unordered_map<sMacAddr, link_metrics_data>>
         m_link_metric_data;
+
+    class ap_metrics_data {
+    public:
+        ap_metrics_data(){};
+        ~ap_metrics_data(){};
+
+        sMacAddr bssid;
+        uint8_t channel_utilization;
+        uint16_t number_of_stas_currently_associated;
+        uint8_t estimated_service_info_field_ac_be[3];
+        uint8_t estimated_service_info_field_ac_bk[3];
+        uint8_t estimated_service_info_field_ac_vo[3];
+        uint8_t estimated_service_info_field_ac_vi[3];
+
+        bool add_ap_metric_data(std::shared_ptr<wfa_map::tlvApMetric> ApMetricData);
+    };
+
+    /*
+    * This map holds ap metric data per reporting Agent sMacAddr .
+    * Map is Used in TYPE_GW/TYPE_IRE nodes.
+    * Map created empty in all other nodes.
+    */
+    std::unordered_map<sMacAddr, ap_metrics_data> m_ap_metric_data;
 
     beerocks::eBandType band_type   = beerocks::eBandType::INVALID_BAND;
     beerocks::eIfaceType iface_type = beerocks::IFACE_TYPE_ETHERNET;

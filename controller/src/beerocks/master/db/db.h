@@ -246,6 +246,15 @@ public:
     std::unordered_map<sMacAddr, std::unordered_map<sMacAddr, son::node::link_metrics_data>> &
     get_link_metric_data_map(const std::string &mac);
 
+    /**
+     * @brief Get the ap metric data of a specific agent
+     *
+     * @param[in] mac The mac address of the db node that is used to save ap metric data.
+     * @return reference to the map that holds ap metric data of all agents.
+     */
+    std::unordered_map<sMacAddr, son::node::ap_metrics_data> &
+    get_ap_metric_data_map(const std::string &mac);
+
     //
     // DB node functions (get only)
     //
