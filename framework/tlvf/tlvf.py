@@ -336,7 +336,7 @@ class TlvF:
         self.CODE_CLASS_PUBLIC_FUNC_INSERT          = "//~class_public_func_insert"
         self.CODE_CLASS_PRIVATE_FUNC_INSERT         = "//~class_private_func_insert"
         self.CODE_CLASS_INIT_FUNC_INSERT            = "//~class_init_func_insert"
-        self.CODE_CLASS_INIT_FUNC_SWAP_INSERT            = "//~class_init_func_swap_insert"
+        self.CODE_CLASS_INIT_FUNC_SWAP_INSERT       = "//~class_init_func_swap_insert"
         self.CODE_CLASS_SWAP_FUNC_INSERT            = "//~class_swap_func_insert"
         self.CODE_CLASS_SIZE_FUNC_INSERT            = "//~class_size_func_insert"
         self.CODE_ENUM_INSERT                       = "//~enum_insert"
@@ -1358,6 +1358,7 @@ class TlvF:
 
         self.addClassConstructor(insert_name, insert_marker, name)
         self.addClassPublicMembers(insert_name, insert_marker, name)
+        self.addClassCastMethod(insert_name,insert_marker,name)
         self.addClassSwapMethod(insert_name, insert_marker, name)
         self.addClassSizeMethod(insert_name, insert_marker, name)
 
@@ -1454,6 +1455,17 @@ class TlvF:
         self.insertLineCpp(insert_name, insert_marker, "%sreturn true;" % (self.getIndentation(1)))
         self.insertLineCpp(insert_name, insert_marker, "}")
         self.insertLineCpp(insert_name, insert_marker, "")
+    def addClassCastMethod(self, insert_name, insert_marker, name):
+        self.insertLineH(insert_name, insert_marker, "%sstatic std::shared_ptr<%s> castFrom(std::shared_ptr<BaseClass> source);" % (self.getIndentation(2),name))
+
+        self.insertLineCpp(insert_name, insert_marker, "%sstd::shared_ptr<%s> %s::castFrom(std::shared_ptr<BaseClass> source) {" % (self.getIndentation(0),name,name))
+        self.insertLineCpp(insert_name, insert_marker, "%sreturn std::make_shared<%s>(source->getStartBuffPtr(),source->getLen()+source->getBuffRemainingBytes(),true);" % (self.getIndentation(1),name))
+        self.insertLineCpp(insert_name, insert_marker, "%s}" % self.getIndentation(0))
+
+
+
+
+
 
     def addClassSwapMethod(self, insert_name, insert_marker, name):
         self.insertLineH(insert_name, insert_marker, "%svoid class_swap();" % self.getIndentation(2))
