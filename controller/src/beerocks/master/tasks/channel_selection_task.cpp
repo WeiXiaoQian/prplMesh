@@ -352,8 +352,7 @@ void channel_selection_task::work()
         auto channel_ext_above_secondary = (freq < vht_center_frequency) ? true : false;
         if (!database.set_node_channel_bw(
                 hostap_mac, slave_joined_event->channel,
-                (beerocks::eWiFiBandwidth)slave_joined_event->supported_channels[0]
-                    .channel_bandwidth,
+                (beerocks::eWiFiBandwidth)slave_joined_event->cs_params.bandwidth,
                 bool(channel_ext_above_secondary), channel_ext_above_primary,
                 vht_center_frequency)) {
             TASK_LOG(ERROR) << "set node hostap bw failed, mac=" << hostap_mac;
@@ -849,8 +848,8 @@ void channel_selection_task::work()
             // CAC completed will not arrive in passive mode, so set the indication to 'completed'
             database.set_hostap_cac_completed(hostap_mac, true);
         } else if (wireless_utils::is_dfs_channel(hostap_params.channel)) {
-                wait_for_cac_completed(hostap_params.channel, hostap_params.bandwidth);
-            }
+            wait_for_cac_completed(hostap_params.channel, hostap_params.bandwidth);
+        }
         FSM_MOVE_STATE(GOTO_IDLE);
         break;
     }
