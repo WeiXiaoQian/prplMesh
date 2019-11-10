@@ -207,8 +207,11 @@ std::shared_ptr<BaseClass> CmduTlvParser::parseNextTlv()
     }
 }
 
+#include <tlvf/tlvflogging.h>
 bool CmduTlvParser::parse()
 {
+    if (cmdu_.getMessageType() == ieee1905_1::eMessageType::VENDOR_SPECIFIC_MESSAGE)
+        return true;
     while (auto tlv = parseNextTlv()) {
         if (std::dynamic_pointer_cast<tlvEndOfMessage>(tlv)) {
             return true;

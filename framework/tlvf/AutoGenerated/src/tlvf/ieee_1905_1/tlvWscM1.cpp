@@ -469,6 +469,9 @@ WSC::sWscAttrVersion2& tlvWscM1::version2_attr() {
     return (WSC::sWscAttrVersion2&)(*m_version2_attr);
 }
 
+std::shared_ptr<tlvWscM1> tlvWscM1::castFrom(std::shared_ptr<BaseClass> source) {
+    return std::make_shared<tlvWscM1>(source->getStartBuffPtr(),source->getLen()+source->getBuffRemainingBytes(),true);
+}
 void tlvWscM1::class_swap()
 {
     tlvf_swap(16, reinterpret_cast<uint8_t*>(m_length));

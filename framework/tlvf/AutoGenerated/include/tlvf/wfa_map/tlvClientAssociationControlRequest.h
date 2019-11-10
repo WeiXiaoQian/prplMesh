@@ -46,6 +46,7 @@ class tlvClientAssociationControlRequest : public BaseClass
         uint8_t& sta_list_length();
         std::tuple<bool, sMacAddr&> sta_list(size_t idx);
         bool alloc_sta_list(size_t count = 1);
+        static std::shared_ptr<tlvClientAssociationControlRequest> castFrom(std::shared_ptr<BaseClass> source);
         void class_swap();
         static size_t get_initial_size();
 

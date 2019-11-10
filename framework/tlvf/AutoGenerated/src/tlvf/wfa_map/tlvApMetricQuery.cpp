@@ -77,6 +77,9 @@ bool tlvApMetricQuery::alloc_bssid_list(size_t count) {
     return true;
 }
 
+std::shared_ptr<tlvApMetricQuery> tlvApMetricQuery::castFrom(std::shared_ptr<BaseClass> source) {
+    return std::make_shared<tlvApMetricQuery>(source->getStartBuffPtr(),source->getLen()+source->getBuffRemainingBytes(),true);
+}
 void tlvApMetricQuery::class_swap()
 {
     tlvf_swap(16, reinterpret_cast<uint8_t*>(m_length));

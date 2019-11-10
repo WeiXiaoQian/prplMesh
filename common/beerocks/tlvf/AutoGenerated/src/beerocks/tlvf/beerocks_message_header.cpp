@@ -61,6 +61,14 @@ uint16_t& cACTION_HEADER::length() {
     return (uint16_t&)(*m_length);
 }
 
+std::shared_ptr<cACTION_HEADER> cACTION_HEADER::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_HEADER>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_HEADER::class_swap()
 {
     tlvf_swap(32, reinterpret_cast<uint8_t*>(m_magic));

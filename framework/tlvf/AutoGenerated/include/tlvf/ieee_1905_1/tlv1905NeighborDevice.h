@@ -55,6 +55,7 @@ class tlv1905NeighborDevice : public BaseClass
         size_t mac_al_1905_device_length() { return m_mac_al_1905_device_idx__ * sizeof(tlv1905NeighborDevice::sMacAl1905Device); }
         std::tuple<bool, sMacAl1905Device&> mac_al_1905_device(size_t idx);
         bool alloc_mac_al_1905_device(size_t count = 1);
+        static std::shared_ptr<tlv1905NeighborDevice> castFrom(std::shared_ptr<BaseClass> source);
         void class_swap();
         static size_t get_initial_size();
 

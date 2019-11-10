@@ -72,6 +72,9 @@ bool tlvHigherLayerData::alloc_payload(size_t count) {
     return true;
 }
 
+std::shared_ptr<tlvHigherLayerData> tlvHigherLayerData::castFrom(std::shared_ptr<BaseClass> source) {
+    return std::make_shared<tlvHigherLayerData>(source->getStartBuffPtr(),source->getLen()+source->getBuffRemainingBytes(),true);
+}
 void tlvHigherLayerData::class_swap()
 {
     tlvf_swap(16, reinterpret_cast<uint8_t*>(m_length));

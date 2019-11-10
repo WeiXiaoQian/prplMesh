@@ -86,6 +86,9 @@ int8_t& tlvOperatingChannelReport::current_transmit_power() {
     return (int8_t&)(*m_current_transmit_power);
 }
 
+std::shared_ptr<tlvOperatingChannelReport> tlvOperatingChannelReport::castFrom(std::shared_ptr<BaseClass> source) {
+    return std::make_shared<tlvOperatingChannelReport>(source->getStartBuffPtr(),source->getLen()+source->getBuffRemainingBytes(),true);
+}
 void tlvOperatingChannelReport::class_swap()
 {
     tlvf_swap(16, reinterpret_cast<uint8_t*>(m_length));

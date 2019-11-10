@@ -105,6 +105,9 @@ bool tlvChannelPreference::add_operating_classes_list(std::shared_ptr<cPreferenc
     return true;
 }
 
+std::shared_ptr<tlvChannelPreference> tlvChannelPreference::castFrom(std::shared_ptr<BaseClass> source) {
+    return std::make_shared<tlvChannelPreference>(source->getStartBuffPtr(),source->getLen()+source->getBuffRemainingBytes(),true);
+}
 void tlvChannelPreference::class_swap()
 {
     tlvf_swap(16, reinterpret_cast<uint8_t*>(m_length));
@@ -228,6 +231,9 @@ cPreferenceOperatingClasses::sFlags& cPreferenceOperatingClasses::flags() {
     return (sFlags&)(*m_flags);
 }
 
+std::shared_ptr<cPreferenceOperatingClasses> cPreferenceOperatingClasses::castFrom(std::shared_ptr<BaseClass> source) {
+    return std::make_shared<cPreferenceOperatingClasses>(source->getStartBuffPtr(),source->getLen()+source->getBuffRemainingBytes(),true);
+}
 void cPreferenceOperatingClasses::class_swap()
 {
     m_flags->struct_swap();

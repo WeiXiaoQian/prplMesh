@@ -482,6 +482,7 @@ class cConfigData : public BaseClass
         bool alloc_network_key(size_t count = 1);
         sWscAttrBssid& bssid_attr();
         sWscAttrVendorExtMultiAp& multiap_attr();
+        static std::shared_ptr<cConfigData> castFrom(std::shared_ptr<BaseClass> source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -521,6 +522,7 @@ class cWscAttrEncryptedSettings : public BaseClass
         bool set_encrypted_settings(const std::string& str);
         bool set_encrypted_settings(const char buffer[], size_t size);
         bool alloc_encrypted_settings(size_t count = 1);
+        static std::shared_ptr<cWscAttrEncryptedSettings> castFrom(std::shared_ptr<BaseClass> source);
         void class_swap();
         static size_t get_initial_size();
 

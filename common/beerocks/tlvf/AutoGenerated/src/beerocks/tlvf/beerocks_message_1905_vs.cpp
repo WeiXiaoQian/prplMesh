@@ -53,6 +53,14 @@ uint8_t& tlvVsClientAssociationEvent::disconnect_type() {
     return (uint8_t&)(*m_disconnect_type);
 }
 
+std::shared_ptr<tlvVsClientAssociationEvent> tlvVsClientAssociationEvent::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<tlvVsClientAssociationEvent>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void tlvVsClientAssociationEvent::class_swap()
 {
     m_mac->struct_swap();
@@ -114,6 +122,14 @@ beerocks::net::sIpv4Addr& tlvVsClientAssociationControlRequest::ipv4() {
     return (beerocks::net::sIpv4Addr&)(*m_ipv4);
 }
 
+std::shared_ptr<tlvVsClientAssociationControlRequest> tlvVsClientAssociationControlRequest::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<tlvVsClientAssociationControlRequest>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void tlvVsClientAssociationControlRequest::class_swap()
 {
     m_ipv4->struct_swap();

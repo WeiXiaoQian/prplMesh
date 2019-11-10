@@ -38,6 +38,7 @@ class tlvSteeringBTMReport : public BaseClass
         sMacAddr& sta_mac();
         uint8_t& btm_status_code();
         sMacAddr& target_bssid();
+        static std::shared_ptr<tlvSteeringBTMReport> castFrom(std::shared_ptr<BaseClass> source);
         void class_swap();
         static size_t get_initial_size();
 

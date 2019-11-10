@@ -37,6 +37,9 @@ sMacAddr& tlvMacAddress::mac() {
     return (sMacAddr&)(*m_mac);
 }
 
+std::shared_ptr<tlvMacAddress> tlvMacAddress::castFrom(std::shared_ptr<BaseClass> source) {
+    return std::make_shared<tlvMacAddress>(source->getStartBuffPtr(),source->getLen()+source->getBuffRemainingBytes(),true);
+}
 void tlvMacAddress::class_swap()
 {
     tlvf_swap(16, reinterpret_cast<uint8_t*>(m_length));

@@ -89,6 +89,7 @@ class tlvWscM1 : public BaseClass
         WSC::sWscAttrConfigurationError& configuration_error_attr();
         WSC::sWscAttrOsVersion& os_version_attr();
         WSC::sWscAttrVersion2& version2_attr();
+        static std::shared_ptr<tlvWscM1> castFrom(std::shared_ptr<BaseClass> source);
         void class_swap();
         static size_t get_initial_size();
 

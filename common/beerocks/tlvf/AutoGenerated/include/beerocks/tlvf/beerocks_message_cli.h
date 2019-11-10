@@ -38,6 +38,7 @@ class cACTION_CLI_ENABLE_DIAGNOSTICS_MEASUREMENTS : public BaseClass
             return (eActionOp_CLI)(ACTION_CLI_ENABLE_DIAGNOSTICS_MEASUREMENTS);
         }
         int8_t& isEnable();
+        static std::shared_ptr<cACTION_CLI_ENABLE_DIAGNOSTICS_MEASUREMENTS> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -58,6 +59,7 @@ class cACTION_CLI_ENABLE_LOAD_BALANCER : public BaseClass
             return (eActionOp_CLI)(ACTION_CLI_ENABLE_LOAD_BALANCER);
         }
         int8_t& isEnable();
+        static std::shared_ptr<cACTION_CLI_ENABLE_LOAD_BALANCER> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -78,6 +80,7 @@ class cACTION_CLI_ENABLE_DEBUG : public BaseClass
             return (eActionOp_CLI)(ACTION_CLI_ENABLE_DEBUG);
         }
         int8_t& isEnable();
+        static std::shared_ptr<cACTION_CLI_ENABLE_DEBUG> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -98,6 +101,7 @@ class cACTION_CLI_SET_SLAVES_STOP_ON_FAILURE_ATTEMPTS : public BaseClass
             return (eActionOp_CLI)(ACTION_CLI_SET_SLAVES_STOP_ON_FAILURE_ATTEMPTS);
         }
         int32_t& attempts();
+        static std::shared_ptr<cACTION_CLI_SET_SLAVES_STOP_ON_FAILURE_ATTEMPTS> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -119,6 +123,7 @@ class cACTION_CLI_RESPONSE_INT : public BaseClass
         }
         uint8_t& isOK();
         int8_t& currentValue();
+        static std::shared_ptr<cACTION_CLI_RESPONSE_INT> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -145,6 +150,7 @@ class cACTION_CLI_RESPONSE_STR : public BaseClass
         bool set_buffer(const std::string& str);
         bool set_buffer(const char buffer[], size_t size);
         bool alloc_buffer(size_t count = 1);
+        static std::shared_ptr<cACTION_CLI_RESPONSE_STR> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -170,6 +176,7 @@ class cACTION_CLI_CROSS_RX_RSSI_MEASUREMENT : public BaseClass
         sMacAddr& client_mac();
         sMacAddr& hostap_mac();
         uint16_t& center_frequency();
+        static std::shared_ptr<cACTION_CLI_CROSS_RX_RSSI_MEASUREMENT> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -192,6 +199,7 @@ class cACTION_CLI_OPTIMAL_PATH_TASK : public BaseClass
             return (eActionOp_CLI)(ACTION_CLI_OPTIMAL_PATH_TASK);
         }
         sMacAddr& client_mac();
+        static std::shared_ptr<cACTION_CLI_OPTIMAL_PATH_TASK> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -212,6 +220,7 @@ class cACTION_CLI_LOAD_BALANCER_TASK : public BaseClass
             return (eActionOp_CLI)(ACTION_CLI_LOAD_BALANCER_TASK);
         }
         sMacAddr& ap_mac();
+        static std::shared_ptr<cACTION_CLI_LOAD_BALANCER_TASK> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -231,6 +240,7 @@ class cACTION_CLI_IRE_NETWORK_OPTIMIZATION_TASK : public BaseClass
         static eActionOp_CLI get_action_op(){
             return (eActionOp_CLI)(ACTION_CLI_IRE_NETWORK_OPTIMIZATION_TASK);
         }
+        static std::shared_ptr<cACTION_CLI_IRE_NETWORK_OPTIMIZATION_TASK> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -250,6 +260,7 @@ class cACTION_CLI_DUMP_NODE_INFO : public BaseClass
             return (eActionOp_CLI)(ACTION_CLI_DUMP_NODE_INFO);
         }
         sMacAddr& mac();
+        static std::shared_ptr<cACTION_CLI_DUMP_NODE_INFO> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -272,6 +283,7 @@ class cACTION_CLI_PING_SLAVE_REQUEST : public BaseClass
         sMacAddr& mac();
         uint16_t& num_of_req();
         uint16_t& size();
+        static std::shared_ptr<cACTION_CLI_PING_SLAVE_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -295,6 +307,7 @@ class cACTION_CLI_PING_ALL_SLAVES_REQUEST : public BaseClass
         }
         uint16_t& num_of_req();
         uint16_t& size();
+        static std::shared_ptr<cACTION_CLI_PING_ALL_SLAVES_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -316,6 +329,7 @@ class cACTION_CLI_BACKHAUL_SCAN_RESULTS : public BaseClass
             return (eActionOp_CLI)(ACTION_CLI_BACKHAUL_SCAN_RESULTS);
         }
         sMacAddr& mac();
+        static std::shared_ptr<cACTION_CLI_BACKHAUL_SCAN_RESULTS> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -337,6 +351,7 @@ class cACTION_CLI_BACKHAUL_ROAM_REQUEST : public BaseClass
         }
         sMacAddr& slave_mac();
         sMacAddr& bssid();
+        static std::shared_ptr<cACTION_CLI_BACKHAUL_ROAM_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -359,6 +374,7 @@ class cACTION_CLI_CLIENT_ALLOW_REQUEST : public BaseClass
         }
         sMacAddr& client_mac();
         sMacAddr& hostap_mac();
+        static std::shared_ptr<cACTION_CLI_CLIENT_ALLOW_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -381,6 +397,7 @@ class cACTION_CLI_CLIENT_DISALLOW_REQUEST : public BaseClass
         }
         sMacAddr& client_mac();
         sMacAddr& hostap_mac();
+        static std::shared_ptr<cACTION_CLI_CLIENT_DISALLOW_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -404,6 +421,7 @@ class cACTION_CLI_CLIENT_DISCONNECT_REQUEST : public BaseClass
         sMacAddr& client_mac();
         uint32_t& type();
         uint32_t& reason();
+        static std::shared_ptr<cACTION_CLI_CLIENT_DISCONNECT_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -428,6 +446,7 @@ class cACTION_CLI_CLIENT_BSS_STEER_REQUEST : public BaseClass
         sMacAddr& client_mac();
         sMacAddr& bssid();
         uint32_t& disassoc_timer_ms();
+        static std::shared_ptr<cACTION_CLI_CLIENT_BSS_STEER_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -451,6 +470,7 @@ class cACTION_CLI_CLIENT_LINK_MEASUREMENT_11K_REQUEST : public BaseClass
         }
         sMacAddr& hostap_mac();
         sMacAddr& client_mac();
+        static std::shared_ptr<cACTION_CLI_CLIENT_LINK_MEASUREMENT_11K_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -474,6 +494,7 @@ class cACTION_CLI_CLIENT_CHANNEL_LOAD_11K_REQUEST : public BaseClass
         sMacAddr& hostap_mac();
         sMacAddr& client_mac();
         uint8_t& channel();
+        static std::shared_ptr<cACTION_CLI_CLIENT_CHANNEL_LOAD_11K_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -505,6 +526,7 @@ class cACTION_CLI_CLIENT_BEACON_11K_REQUEST : public BaseClass
         uint16_t& rand_ival();
         uint16_t& repeats();
         int16_t& op_class();
+        static std::shared_ptr<cACTION_CLI_CLIENT_BEACON_11K_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -539,6 +561,7 @@ class cACTION_CLI_CLIENT_STATISTICS_11K_REQUEST : public BaseClass
         sMacAddr& client_mac();
         sMacAddr& peer_mac();
         uint8_t& group_identity();
+        static std::shared_ptr<cACTION_CLI_CLIENT_STATISTICS_11K_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -563,6 +586,7 @@ class cACTION_CLI_HOSTAP_CHANNEL_SWITCH_REQUEST : public BaseClass
         }
         sMacAddr& mac();
         sApChannelSwitch& cs_params();
+        static std::shared_ptr<cACTION_CLI_HOSTAP_CHANNEL_SWITCH_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -584,6 +608,7 @@ class cACTION_CLI_HOSTAP_TX_ON_REQUEST : public BaseClass
             return (eActionOp_CLI)(ACTION_CLI_HOSTAP_TX_ON_REQUEST);
         }
         sMacAddr& ap_mac();
+        static std::shared_ptr<cACTION_CLI_HOSTAP_TX_ON_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -604,6 +629,7 @@ class cACTION_CLI_HOSTAP_TX_OFF_REQUEST : public BaseClass
             return (eActionOp_CLI)(ACTION_CLI_HOSTAP_TX_OFF_REQUEST);
         }
         sMacAddr& ap_mac();
+        static std::shared_ptr<cACTION_CLI_HOSTAP_TX_OFF_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -627,6 +653,7 @@ class cACTION_CLI_HOSTAP_SET_NEIGHBOR_11K_REQUEST : public BaseClass
         sMacAddr& bssid();
         uint8_t& channel();
         int8_t& vap_id();
+        static std::shared_ptr<cACTION_CLI_HOSTAP_SET_NEIGHBOR_11K_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -652,6 +679,7 @@ class cACTION_CLI_HOSTAP_REMOVE_NEIGHBOR_11K_REQUEST : public BaseClass
         sMacAddr& ap_mac();
         sMacAddr& bssid();
         int8_t& vap_id();
+        static std::shared_ptr<cACTION_CLI_HOSTAP_REMOVE_NEIGHBOR_11K_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -674,6 +702,7 @@ class cACTION_CLI_HOSTAP_STATS_MEASUREMENT : public BaseClass
             return (eActionOp_CLI)(ACTION_CLI_HOSTAP_STATS_MEASUREMENT);
         }
         sMacAddr& ap_mac();
+        static std::shared_ptr<cACTION_CLI_HOSTAP_STATS_MEASUREMENT> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 

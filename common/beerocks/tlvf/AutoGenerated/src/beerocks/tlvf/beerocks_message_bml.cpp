@@ -25,6 +25,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
 }
 cACTION_BML_PING_REQUEST::~cACTION_BML_PING_REQUEST() {
 }
+std::shared_ptr<cACTION_BML_PING_REQUEST> cACTION_BML_PING_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_PING_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_PING_REQUEST::class_swap()
 {
 }
@@ -55,6 +63,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
 }
 cACTION_BML_PING_RESPONSE::~cACTION_BML_PING_RESPONSE() {
 }
+std::shared_ptr<cACTION_BML_PING_RESPONSE> cACTION_BML_PING_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_PING_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_PING_RESPONSE::class_swap()
 {
 }
@@ -84,6 +100,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
     m_init_succeeded = init();
 }
 cACTION_BML_NW_MAP_REQUEST::~cACTION_BML_NW_MAP_REQUEST() {
+}
+std::shared_ptr<cACTION_BML_NW_MAP_REQUEST> cACTION_BML_NW_MAP_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_NW_MAP_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
 }
 void cACTION_BML_NW_MAP_REQUEST::class_swap()
 {
@@ -174,6 +198,14 @@ bool cACTION_BML_NW_MAP_RESPONSE::alloc_buffer(size_t count) {
     return true;
 }
 
+std::shared_ptr<cACTION_BML_NW_MAP_RESPONSE> cACTION_BML_NW_MAP_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_NW_MAP_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_NW_MAP_RESPONSE::class_swap()
 {
     tlvf_swap(32, reinterpret_cast<uint8_t*>(m_node_num));
@@ -277,6 +309,14 @@ bool cACTION_BML_NW_MAP_UPDATE::alloc_buffer(size_t count) {
     return true;
 }
 
+std::shared_ptr<cACTION_BML_NW_MAP_UPDATE> cACTION_BML_NW_MAP_UPDATE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_NW_MAP_UPDATE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_NW_MAP_UPDATE::class_swap()
 {
     tlvf_swap(32, reinterpret_cast<uint8_t*>(m_node_num));
@@ -380,6 +420,14 @@ bool cACTION_BML_STATS_UPDATE::alloc_buffer(size_t count) {
     return true;
 }
 
+std::shared_ptr<cACTION_BML_STATS_UPDATE> cACTION_BML_STATS_UPDATE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_STATS_UPDATE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_STATS_UPDATE::class_swap()
 {
     tlvf_swap(32, reinterpret_cast<uint8_t*>(m_num_of_stats_bulks));
@@ -479,6 +527,14 @@ bool cACTION_BML_EVENTS_UPDATE::alloc_buffer(size_t count) {
     return true;
 }
 
+std::shared_ptr<cACTION_BML_EVENTS_UPDATE> cACTION_BML_EVENTS_UPDATE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_EVENTS_UPDATE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_EVENTS_UPDATE::class_swap()
 {
     tlvf_swap(32, reinterpret_cast<uint8_t*>(m_buffer_size));
@@ -519,6 +575,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
 }
 cACTION_BML_REGISTER_TO_NW_MAP_UPDATES_REQUEST::~cACTION_BML_REGISTER_TO_NW_MAP_UPDATES_REQUEST() {
 }
+std::shared_ptr<cACTION_BML_REGISTER_TO_NW_MAP_UPDATES_REQUEST> cACTION_BML_REGISTER_TO_NW_MAP_UPDATES_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_REGISTER_TO_NW_MAP_UPDATES_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_REGISTER_TO_NW_MAP_UPDATES_REQUEST::class_swap()
 {
 }
@@ -548,6 +612,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
     m_init_succeeded = init();
 }
 cACTION_BML_REGISTER_TO_NW_MAP_UPDATES_RESPONSE::~cACTION_BML_REGISTER_TO_NW_MAP_UPDATES_RESPONSE() {
+}
+std::shared_ptr<cACTION_BML_REGISTER_TO_NW_MAP_UPDATES_RESPONSE> cACTION_BML_REGISTER_TO_NW_MAP_UPDATES_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_REGISTER_TO_NW_MAP_UPDATES_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
 }
 void cACTION_BML_REGISTER_TO_NW_MAP_UPDATES_RESPONSE::class_swap()
 {
@@ -579,6 +651,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
 }
 cACTION_BML_UNREGISTER_FROM_NW_MAP_UPDATES_REQUEST::~cACTION_BML_UNREGISTER_FROM_NW_MAP_UPDATES_REQUEST() {
 }
+std::shared_ptr<cACTION_BML_UNREGISTER_FROM_NW_MAP_UPDATES_REQUEST> cACTION_BML_UNREGISTER_FROM_NW_MAP_UPDATES_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_UNREGISTER_FROM_NW_MAP_UPDATES_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_UNREGISTER_FROM_NW_MAP_UPDATES_REQUEST::class_swap()
 {
 }
@@ -608,6 +688,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
     m_init_succeeded = init();
 }
 cACTION_BML_UNREGISTER_FROM_NW_MAP_UPDATES_RESPONSE::~cACTION_BML_UNREGISTER_FROM_NW_MAP_UPDATES_RESPONSE() {
+}
+std::shared_ptr<cACTION_BML_UNREGISTER_FROM_NW_MAP_UPDATES_RESPONSE> cACTION_BML_UNREGISTER_FROM_NW_MAP_UPDATES_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_UNREGISTER_FROM_NW_MAP_UPDATES_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
 }
 void cACTION_BML_UNREGISTER_FROM_NW_MAP_UPDATES_RESPONSE::class_swap()
 {
@@ -639,6 +727,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
 }
 cACTION_BML_SET_LEGACY_CLIENT_ROAMING_RESPONSE::~cACTION_BML_SET_LEGACY_CLIENT_ROAMING_RESPONSE() {
 }
+std::shared_ptr<cACTION_BML_SET_LEGACY_CLIENT_ROAMING_RESPONSE> cACTION_BML_SET_LEGACY_CLIENT_ROAMING_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_SET_LEGACY_CLIENT_ROAMING_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_SET_LEGACY_CLIENT_ROAMING_RESPONSE::class_swap()
 {
 }
@@ -668,6 +764,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
     m_init_succeeded = init();
 }
 cACTION_BML_GET_LEGACY_CLIENT_ROAMING_REQUEST::~cACTION_BML_GET_LEGACY_CLIENT_ROAMING_REQUEST() {
+}
+std::shared_ptr<cACTION_BML_GET_LEGACY_CLIENT_ROAMING_REQUEST> cACTION_BML_GET_LEGACY_CLIENT_ROAMING_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_GET_LEGACY_CLIENT_ROAMING_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
 }
 void cACTION_BML_GET_LEGACY_CLIENT_ROAMING_REQUEST::class_swap()
 {
@@ -699,6 +803,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
 }
 cACTION_BML_REGISTER_TO_EVENTS_UPDATES_REQUEST::~cACTION_BML_REGISTER_TO_EVENTS_UPDATES_REQUEST() {
 }
+std::shared_ptr<cACTION_BML_REGISTER_TO_EVENTS_UPDATES_REQUEST> cACTION_BML_REGISTER_TO_EVENTS_UPDATES_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_REGISTER_TO_EVENTS_UPDATES_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_REGISTER_TO_EVENTS_UPDATES_REQUEST::class_swap()
 {
 }
@@ -728,6 +840,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
     m_init_succeeded = init();
 }
 cACTION_BML_REGISTER_TO_EVENTS_UPDATES_RESPONSE::~cACTION_BML_REGISTER_TO_EVENTS_UPDATES_RESPONSE() {
+}
+std::shared_ptr<cACTION_BML_REGISTER_TO_EVENTS_UPDATES_RESPONSE> cACTION_BML_REGISTER_TO_EVENTS_UPDATES_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_REGISTER_TO_EVENTS_UPDATES_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
 }
 void cACTION_BML_REGISTER_TO_EVENTS_UPDATES_RESPONSE::class_swap()
 {
@@ -759,6 +879,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
 }
 cACTION_BML_UNREGISTER_FROM_EVENTS_UPDATES_REQUEST::~cACTION_BML_UNREGISTER_FROM_EVENTS_UPDATES_REQUEST() {
 }
+std::shared_ptr<cACTION_BML_UNREGISTER_FROM_EVENTS_UPDATES_REQUEST> cACTION_BML_UNREGISTER_FROM_EVENTS_UPDATES_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_UNREGISTER_FROM_EVENTS_UPDATES_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_UNREGISTER_FROM_EVENTS_UPDATES_REQUEST::class_swap()
 {
 }
@@ -788,6 +916,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
     m_init_succeeded = init();
 }
 cACTION_BML_UNREGISTER_FROM_EVENTS_UPDATES_RESPONSE::~cACTION_BML_UNREGISTER_FROM_EVENTS_UPDATES_RESPONSE() {
+}
+std::shared_ptr<cACTION_BML_UNREGISTER_FROM_EVENTS_UPDATES_RESPONSE> cACTION_BML_UNREGISTER_FROM_EVENTS_UPDATES_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_UNREGISTER_FROM_EVENTS_UPDATES_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
 }
 void cACTION_BML_UNREGISTER_FROM_EVENTS_UPDATES_RESPONSE::class_swap()
 {
@@ -819,6 +955,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
 }
 cACTION_BML_REGISTER_TO_STATS_UPDATES_REQUEST::~cACTION_BML_REGISTER_TO_STATS_UPDATES_REQUEST() {
 }
+std::shared_ptr<cACTION_BML_REGISTER_TO_STATS_UPDATES_REQUEST> cACTION_BML_REGISTER_TO_STATS_UPDATES_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_REGISTER_TO_STATS_UPDATES_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_REGISTER_TO_STATS_UPDATES_REQUEST::class_swap()
 {
 }
@@ -848,6 +992,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
     m_init_succeeded = init();
 }
 cACTION_BML_REGISTER_TO_STATS_UPDATES_RESPONSE::~cACTION_BML_REGISTER_TO_STATS_UPDATES_RESPONSE() {
+}
+std::shared_ptr<cACTION_BML_REGISTER_TO_STATS_UPDATES_RESPONSE> cACTION_BML_REGISTER_TO_STATS_UPDATES_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_REGISTER_TO_STATS_UPDATES_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
 }
 void cACTION_BML_REGISTER_TO_STATS_UPDATES_RESPONSE::class_swap()
 {
@@ -879,6 +1031,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
 }
 cACTION_BML_UNREGISTER_FROM_STATS_UPDATES_REQUEST::~cACTION_BML_UNREGISTER_FROM_STATS_UPDATES_REQUEST() {
 }
+std::shared_ptr<cACTION_BML_UNREGISTER_FROM_STATS_UPDATES_REQUEST> cACTION_BML_UNREGISTER_FROM_STATS_UPDATES_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_UNREGISTER_FROM_STATS_UPDATES_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_UNREGISTER_FROM_STATS_UPDATES_REQUEST::class_swap()
 {
 }
@@ -908,6 +1068,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
     m_init_succeeded = init();
 }
 cACTION_BML_UNREGISTER_FROM_STATS_UPDATES_RESPONSE::~cACTION_BML_UNREGISTER_FROM_STATS_UPDATES_RESPONSE() {
+}
+std::shared_ptr<cACTION_BML_UNREGISTER_FROM_STATS_UPDATES_RESPONSE> cACTION_BML_UNREGISTER_FROM_STATS_UPDATES_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_UNREGISTER_FROM_STATS_UPDATES_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
 }
 void cACTION_BML_UNREGISTER_FROM_STATS_UPDATES_RESPONSE::class_swap()
 {
@@ -943,6 +1111,14 @@ uint8_t& cACTION_BML_SET_LEGACY_CLIENT_ROAMING_REQUEST::isEnable() {
     return (uint8_t&)(*m_isEnable);
 }
 
+std::shared_ptr<cACTION_BML_SET_LEGACY_CLIENT_ROAMING_REQUEST> cACTION_BML_SET_LEGACY_CLIENT_ROAMING_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_SET_LEGACY_CLIENT_ROAMING_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_SET_LEGACY_CLIENT_ROAMING_REQUEST::class_swap()
 {
 }
@@ -980,6 +1156,14 @@ uint8_t& cACTION_BML_GET_LEGACY_CLIENT_ROAMING_RESPONSE::isEnable() {
     return (uint8_t&)(*m_isEnable);
 }
 
+std::shared_ptr<cACTION_BML_GET_LEGACY_CLIENT_ROAMING_RESPONSE> cACTION_BML_GET_LEGACY_CLIENT_ROAMING_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_GET_LEGACY_CLIENT_ROAMING_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_GET_LEGACY_CLIENT_ROAMING_RESPONSE::class_swap()
 {
 }
@@ -1017,6 +1201,14 @@ uint8_t& cACTION_BML_SET_CLIENT_ROAMING_REQUEST::isEnable() {
     return (uint8_t&)(*m_isEnable);
 }
 
+std::shared_ptr<cACTION_BML_SET_CLIENT_ROAMING_REQUEST> cACTION_BML_SET_CLIENT_ROAMING_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_SET_CLIENT_ROAMING_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_SET_CLIENT_ROAMING_REQUEST::class_swap()
 {
 }
@@ -1050,6 +1242,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
 }
 cACTION_BML_SET_CLIENT_ROAMING_RESPONSE::~cACTION_BML_SET_CLIENT_ROAMING_RESPONSE() {
 }
+std::shared_ptr<cACTION_BML_SET_CLIENT_ROAMING_RESPONSE> cACTION_BML_SET_CLIENT_ROAMING_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_SET_CLIENT_ROAMING_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_SET_CLIENT_ROAMING_RESPONSE::class_swap()
 {
 }
@@ -1079,6 +1279,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
     m_init_succeeded = init();
 }
 cACTION_BML_GET_CLIENT_ROAMING_REQUEST::~cACTION_BML_GET_CLIENT_ROAMING_REQUEST() {
+}
+std::shared_ptr<cACTION_BML_GET_CLIENT_ROAMING_REQUEST> cACTION_BML_GET_CLIENT_ROAMING_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_GET_CLIENT_ROAMING_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
 }
 void cACTION_BML_GET_CLIENT_ROAMING_REQUEST::class_swap()
 {
@@ -1114,6 +1322,14 @@ uint8_t& cACTION_BML_GET_CLIENT_ROAMING_RESPONSE::isEnable() {
     return (uint8_t&)(*m_isEnable);
 }
 
+std::shared_ptr<cACTION_BML_GET_CLIENT_ROAMING_RESPONSE> cACTION_BML_GET_CLIENT_ROAMING_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_GET_CLIENT_ROAMING_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_GET_CLIENT_ROAMING_RESPONSE::class_swap()
 {
 }
@@ -1151,6 +1367,14 @@ uint8_t& cACTION_BML_SET_DFS_REENTRY_REQUEST::isEnable() {
     return (uint8_t&)(*m_isEnable);
 }
 
+std::shared_ptr<cACTION_BML_SET_DFS_REENTRY_REQUEST> cACTION_BML_SET_DFS_REENTRY_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_SET_DFS_REENTRY_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_SET_DFS_REENTRY_REQUEST::class_swap()
 {
 }
@@ -1184,6 +1408,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
 }
 cACTION_BML_SET_DFS_REENTRY_RESPONSE::~cACTION_BML_SET_DFS_REENTRY_RESPONSE() {
 }
+std::shared_ptr<cACTION_BML_SET_DFS_REENTRY_RESPONSE> cACTION_BML_SET_DFS_REENTRY_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_SET_DFS_REENTRY_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_SET_DFS_REENTRY_RESPONSE::class_swap()
 {
 }
@@ -1213,6 +1445,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
     m_init_succeeded = init();
 }
 cACTION_BML_GET_DFS_REENTRY_REQUEST::~cACTION_BML_GET_DFS_REENTRY_REQUEST() {
+}
+std::shared_ptr<cACTION_BML_GET_DFS_REENTRY_REQUEST> cACTION_BML_GET_DFS_REENTRY_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_GET_DFS_REENTRY_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
 }
 void cACTION_BML_GET_DFS_REENTRY_REQUEST::class_swap()
 {
@@ -1248,6 +1488,14 @@ uint8_t& cACTION_BML_GET_DFS_REENTRY_RESPONSE::isEnable() {
     return (uint8_t&)(*m_isEnable);
 }
 
+std::shared_ptr<cACTION_BML_GET_DFS_REENTRY_RESPONSE> cACTION_BML_GET_DFS_REENTRY_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_GET_DFS_REENTRY_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_GET_DFS_REENTRY_RESPONSE::class_swap()
 {
 }
@@ -1285,6 +1533,14 @@ uint8_t& cACTION_BML_SET_CLIENT_ROAMING_PREFER_SIGNAL_STRENGTH_REQUEST::isEnable
     return (uint8_t&)(*m_isEnable);
 }
 
+std::shared_ptr<cACTION_BML_SET_CLIENT_ROAMING_PREFER_SIGNAL_STRENGTH_REQUEST> cACTION_BML_SET_CLIENT_ROAMING_PREFER_SIGNAL_STRENGTH_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_SET_CLIENT_ROAMING_PREFER_SIGNAL_STRENGTH_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_SET_CLIENT_ROAMING_PREFER_SIGNAL_STRENGTH_REQUEST::class_swap()
 {
 }
@@ -1318,6 +1574,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
 }
 cACTION_BML_SET_CLIENT_ROAMING_PREFER_SIGNAL_STRENGTH_RESPONSE::~cACTION_BML_SET_CLIENT_ROAMING_PREFER_SIGNAL_STRENGTH_RESPONSE() {
 }
+std::shared_ptr<cACTION_BML_SET_CLIENT_ROAMING_PREFER_SIGNAL_STRENGTH_RESPONSE> cACTION_BML_SET_CLIENT_ROAMING_PREFER_SIGNAL_STRENGTH_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_SET_CLIENT_ROAMING_PREFER_SIGNAL_STRENGTH_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_SET_CLIENT_ROAMING_PREFER_SIGNAL_STRENGTH_RESPONSE::class_swap()
 {
 }
@@ -1347,6 +1611,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
     m_init_succeeded = init();
 }
 cACTION_BML_GET_CLIENT_ROAMING_PREFER_SIGNAL_STRENGTH_REQUEST::~cACTION_BML_GET_CLIENT_ROAMING_PREFER_SIGNAL_STRENGTH_REQUEST() {
+}
+std::shared_ptr<cACTION_BML_GET_CLIENT_ROAMING_PREFER_SIGNAL_STRENGTH_REQUEST> cACTION_BML_GET_CLIENT_ROAMING_PREFER_SIGNAL_STRENGTH_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_GET_CLIENT_ROAMING_PREFER_SIGNAL_STRENGTH_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
 }
 void cACTION_BML_GET_CLIENT_ROAMING_PREFER_SIGNAL_STRENGTH_REQUEST::class_swap()
 {
@@ -1382,6 +1654,14 @@ uint8_t& cACTION_BML_GET_CLIENT_ROAMING_PREFER_SIGNAL_STRENGTH_RESPONSE::isEnabl
     return (uint8_t&)(*m_isEnable);
 }
 
+std::shared_ptr<cACTION_BML_GET_CLIENT_ROAMING_PREFER_SIGNAL_STRENGTH_RESPONSE> cACTION_BML_GET_CLIENT_ROAMING_PREFER_SIGNAL_STRENGTH_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_GET_CLIENT_ROAMING_PREFER_SIGNAL_STRENGTH_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_GET_CLIENT_ROAMING_PREFER_SIGNAL_STRENGTH_RESPONSE::class_swap()
 {
 }
@@ -1419,6 +1699,14 @@ uint8_t& cACTION_BML_SET_CLIENT_BAND_STEERING_REQUEST::isEnable() {
     return (uint8_t&)(*m_isEnable);
 }
 
+std::shared_ptr<cACTION_BML_SET_CLIENT_BAND_STEERING_REQUEST> cACTION_BML_SET_CLIENT_BAND_STEERING_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_SET_CLIENT_BAND_STEERING_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_SET_CLIENT_BAND_STEERING_REQUEST::class_swap()
 {
 }
@@ -1452,6 +1740,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
 }
 cACTION_BML_SET_CLIENT_BAND_STEERING_RESPONSE::~cACTION_BML_SET_CLIENT_BAND_STEERING_RESPONSE() {
 }
+std::shared_ptr<cACTION_BML_SET_CLIENT_BAND_STEERING_RESPONSE> cACTION_BML_SET_CLIENT_BAND_STEERING_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_SET_CLIENT_BAND_STEERING_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_SET_CLIENT_BAND_STEERING_RESPONSE::class_swap()
 {
 }
@@ -1481,6 +1777,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
     m_init_succeeded = init();
 }
 cACTION_BML_GET_CLIENT_BAND_STEERING_REQUEST::~cACTION_BML_GET_CLIENT_BAND_STEERING_REQUEST() {
+}
+std::shared_ptr<cACTION_BML_GET_CLIENT_BAND_STEERING_REQUEST> cACTION_BML_GET_CLIENT_BAND_STEERING_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_GET_CLIENT_BAND_STEERING_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
 }
 void cACTION_BML_GET_CLIENT_BAND_STEERING_REQUEST::class_swap()
 {
@@ -1516,6 +1820,14 @@ uint8_t& cACTION_BML_GET_CLIENT_BAND_STEERING_RESPONSE::isEnable() {
     return (uint8_t&)(*m_isEnable);
 }
 
+std::shared_ptr<cACTION_BML_GET_CLIENT_BAND_STEERING_RESPONSE> cACTION_BML_GET_CLIENT_BAND_STEERING_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_GET_CLIENT_BAND_STEERING_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_GET_CLIENT_BAND_STEERING_RESPONSE::class_swap()
 {
 }
@@ -1553,6 +1865,14 @@ uint8_t& cACTION_BML_SET_IRE_ROAMING_REQUEST::isEnable() {
     return (uint8_t&)(*m_isEnable);
 }
 
+std::shared_ptr<cACTION_BML_SET_IRE_ROAMING_REQUEST> cACTION_BML_SET_IRE_ROAMING_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_SET_IRE_ROAMING_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_SET_IRE_ROAMING_REQUEST::class_swap()
 {
 }
@@ -1586,6 +1906,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
 }
 cACTION_BML_SET_IRE_ROAMING_RESPONSE::~cACTION_BML_SET_IRE_ROAMING_RESPONSE() {
 }
+std::shared_ptr<cACTION_BML_SET_IRE_ROAMING_RESPONSE> cACTION_BML_SET_IRE_ROAMING_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_SET_IRE_ROAMING_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_SET_IRE_ROAMING_RESPONSE::class_swap()
 {
 }
@@ -1615,6 +1943,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
     m_init_succeeded = init();
 }
 cACTION_BML_GET_IRE_ROAMING_REQUEST::~cACTION_BML_GET_IRE_ROAMING_REQUEST() {
+}
+std::shared_ptr<cACTION_BML_GET_IRE_ROAMING_REQUEST> cACTION_BML_GET_IRE_ROAMING_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_GET_IRE_ROAMING_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
 }
 void cACTION_BML_GET_IRE_ROAMING_REQUEST::class_swap()
 {
@@ -1650,6 +1986,14 @@ uint8_t& cACTION_BML_GET_IRE_ROAMING_RESPONSE::isEnable() {
     return (uint8_t&)(*m_isEnable);
 }
 
+std::shared_ptr<cACTION_BML_GET_IRE_ROAMING_RESPONSE> cACTION_BML_GET_IRE_ROAMING_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_GET_IRE_ROAMING_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_GET_IRE_ROAMING_RESPONSE::class_swap()
 {
 }
@@ -1687,6 +2031,14 @@ uint8_t& cACTION_BML_SET_LOAD_BALANCER_REQUEST::isEnable() {
     return (uint8_t&)(*m_isEnable);
 }
 
+std::shared_ptr<cACTION_BML_SET_LOAD_BALANCER_REQUEST> cACTION_BML_SET_LOAD_BALANCER_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_SET_LOAD_BALANCER_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_SET_LOAD_BALANCER_REQUEST::class_swap()
 {
 }
@@ -1720,6 +2072,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
 }
 cACTION_BML_SET_LOAD_BALANCER_RESPONSE::~cACTION_BML_SET_LOAD_BALANCER_RESPONSE() {
 }
+std::shared_ptr<cACTION_BML_SET_LOAD_BALANCER_RESPONSE> cACTION_BML_SET_LOAD_BALANCER_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_SET_LOAD_BALANCER_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_SET_LOAD_BALANCER_RESPONSE::class_swap()
 {
 }
@@ -1749,6 +2109,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
     m_init_succeeded = init();
 }
 cACTION_BML_GET_LOAD_BALANCER_REQUEST::~cACTION_BML_GET_LOAD_BALANCER_REQUEST() {
+}
+std::shared_ptr<cACTION_BML_GET_LOAD_BALANCER_REQUEST> cACTION_BML_GET_LOAD_BALANCER_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_GET_LOAD_BALANCER_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
 }
 void cACTION_BML_GET_LOAD_BALANCER_REQUEST::class_swap()
 {
@@ -1784,6 +2152,14 @@ uint8_t& cACTION_BML_GET_LOAD_BALANCER_RESPONSE::isEnable() {
     return (uint8_t&)(*m_isEnable);
 }
 
+std::shared_ptr<cACTION_BML_GET_LOAD_BALANCER_RESPONSE> cACTION_BML_GET_LOAD_BALANCER_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_GET_LOAD_BALANCER_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_GET_LOAD_BALANCER_RESPONSE::class_swap()
 {
 }
@@ -1821,6 +2197,14 @@ uint8_t& cACTION_BML_SET_SERVICE_FAIRNESS_REQUEST::isEnable() {
     return (uint8_t&)(*m_isEnable);
 }
 
+std::shared_ptr<cACTION_BML_SET_SERVICE_FAIRNESS_REQUEST> cACTION_BML_SET_SERVICE_FAIRNESS_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_SET_SERVICE_FAIRNESS_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_SET_SERVICE_FAIRNESS_REQUEST::class_swap()
 {
 }
@@ -1854,6 +2238,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
 }
 cACTION_BML_SET_SERVICE_FAIRNESS_RESPONSE::~cACTION_BML_SET_SERVICE_FAIRNESS_RESPONSE() {
 }
+std::shared_ptr<cACTION_BML_SET_SERVICE_FAIRNESS_RESPONSE> cACTION_BML_SET_SERVICE_FAIRNESS_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_SET_SERVICE_FAIRNESS_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_SET_SERVICE_FAIRNESS_RESPONSE::class_swap()
 {
 }
@@ -1883,6 +2275,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
     m_init_succeeded = init();
 }
 cACTION_BML_GET_SERVICE_FAIRNESS_REQUEST::~cACTION_BML_GET_SERVICE_FAIRNESS_REQUEST() {
+}
+std::shared_ptr<cACTION_BML_GET_SERVICE_FAIRNESS_REQUEST> cACTION_BML_GET_SERVICE_FAIRNESS_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_GET_SERVICE_FAIRNESS_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
 }
 void cACTION_BML_GET_SERVICE_FAIRNESS_REQUEST::class_swap()
 {
@@ -1918,6 +2318,14 @@ uint8_t& cACTION_BML_GET_SERVICE_FAIRNESS_RESPONSE::isEnable() {
     return (uint8_t&)(*m_isEnable);
 }
 
+std::shared_ptr<cACTION_BML_GET_SERVICE_FAIRNESS_RESPONSE> cACTION_BML_GET_SERVICE_FAIRNESS_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_GET_SERVICE_FAIRNESS_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_GET_SERVICE_FAIRNESS_RESPONSE::class_swap()
 {
 }
@@ -1955,6 +2363,14 @@ sLoggingLevelChange& cACTION_BML_CHANGE_MODULE_LOGGING_LEVEL_REQUEST::params() {
     return (sLoggingLevelChange&)(*m_params);
 }
 
+std::shared_ptr<cACTION_BML_CHANGE_MODULE_LOGGING_LEVEL_REQUEST> cACTION_BML_CHANGE_MODULE_LOGGING_LEVEL_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_CHANGE_MODULE_LOGGING_LEVEL_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_CHANGE_MODULE_LOGGING_LEVEL_REQUEST::class_swap()
 {
     m_params->struct_swap();
@@ -1990,6 +2406,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
 }
 cACTION_BML_CHANGE_MODULE_LOGGING_LEVEL_RESPONSE::~cACTION_BML_CHANGE_MODULE_LOGGING_LEVEL_RESPONSE() {
 }
+std::shared_ptr<cACTION_BML_CHANGE_MODULE_LOGGING_LEVEL_RESPONSE> cACTION_BML_CHANGE_MODULE_LOGGING_LEVEL_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_CHANGE_MODULE_LOGGING_LEVEL_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_CHANGE_MODULE_LOGGING_LEVEL_RESPONSE::class_swap()
 {
 }
@@ -2024,6 +2448,14 @@ sWifiCredentials& cACTION_BML_WIFI_CREDENTIALS_UPDATE_REQUEST::params() {
     return (sWifiCredentials&)(*m_params);
 }
 
+std::shared_ptr<cACTION_BML_WIFI_CREDENTIALS_UPDATE_REQUEST> cACTION_BML_WIFI_CREDENTIALS_UPDATE_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_WIFI_CREDENTIALS_UPDATE_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_WIFI_CREDENTIALS_UPDATE_REQUEST::class_swap()
 {
     m_params->struct_swap();
@@ -2063,6 +2495,14 @@ uint32_t& cACTION_BML_WIFI_CREDENTIALS_UPDATE_RESPONSE::error_code() {
     return (uint32_t&)(*m_error_code);
 }
 
+std::shared_ptr<cACTION_BML_WIFI_CREDENTIALS_UPDATE_RESPONSE> cACTION_BML_WIFI_CREDENTIALS_UPDATE_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_WIFI_CREDENTIALS_UPDATE_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_WIFI_CREDENTIALS_UPDATE_RESPONSE::class_swap()
 {
     tlvf_swap(32, reinterpret_cast<uint8_t*>(m_error_code));
@@ -2101,6 +2541,14 @@ sRestrictedChannels& cACTION_BML_SET_RESTRICTED_CHANNELS_REQUEST::params() {
     return (sRestrictedChannels&)(*m_params);
 }
 
+std::shared_ptr<cACTION_BML_SET_RESTRICTED_CHANNELS_REQUEST> cACTION_BML_SET_RESTRICTED_CHANNELS_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_SET_RESTRICTED_CHANNELS_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_SET_RESTRICTED_CHANNELS_REQUEST::class_swap()
 {
     m_params->struct_swap();
@@ -2140,6 +2588,14 @@ uint32_t& cACTION_BML_SET_RESTRICTED_CHANNELS_RESPONSE::error_code() {
     return (uint32_t&)(*m_error_code);
 }
 
+std::shared_ptr<cACTION_BML_SET_RESTRICTED_CHANNELS_RESPONSE> cACTION_BML_SET_RESTRICTED_CHANNELS_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_SET_RESTRICTED_CHANNELS_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_SET_RESTRICTED_CHANNELS_RESPONSE::class_swap()
 {
     tlvf_swap(32, reinterpret_cast<uint8_t*>(m_error_code));
@@ -2178,6 +2634,14 @@ sRestrictedChannels& cACTION_BML_GET_RESTRICTED_CHANNELS_REQUEST::params() {
     return (sRestrictedChannels&)(*m_params);
 }
 
+std::shared_ptr<cACTION_BML_GET_RESTRICTED_CHANNELS_REQUEST> cACTION_BML_GET_RESTRICTED_CHANNELS_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_GET_RESTRICTED_CHANNELS_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_GET_RESTRICTED_CHANNELS_REQUEST::class_swap()
 {
     m_params->struct_swap();
@@ -2217,6 +2681,14 @@ sRestrictedChannels& cACTION_BML_GET_RESTRICTED_CHANNELS_RESPONSE::params() {
     return (sRestrictedChannels&)(*m_params);
 }
 
+std::shared_ptr<cACTION_BML_GET_RESTRICTED_CHANNELS_RESPONSE> cACTION_BML_GET_RESTRICTED_CHANNELS_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_GET_RESTRICTED_CHANNELS_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_GET_RESTRICTED_CHANNELS_RESPONSE::class_swap()
 {
     m_params->struct_swap();
@@ -2256,6 +2728,14 @@ uint8_t& cACTION_BML_SET_CERTIFICATION_MODE_REQUEST::isEnable() {
     return (uint8_t&)(*m_isEnable);
 }
 
+std::shared_ptr<cACTION_BML_SET_CERTIFICATION_MODE_REQUEST> cACTION_BML_SET_CERTIFICATION_MODE_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_SET_CERTIFICATION_MODE_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_SET_CERTIFICATION_MODE_REQUEST::class_swap()
 {
 }
@@ -2289,6 +2769,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
 }
 cACTION_BML_SET_CERTIFICATION_MODE_RESPONSE::~cACTION_BML_SET_CERTIFICATION_MODE_RESPONSE() {
 }
+std::shared_ptr<cACTION_BML_SET_CERTIFICATION_MODE_RESPONSE> cACTION_BML_SET_CERTIFICATION_MODE_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_SET_CERTIFICATION_MODE_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_SET_CERTIFICATION_MODE_RESPONSE::class_swap()
 {
 }
@@ -2318,6 +2806,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
     m_init_succeeded = init();
 }
 cACTION_BML_GET_CERTIFICATION_MODE_REQUEST::~cACTION_BML_GET_CERTIFICATION_MODE_REQUEST() {
+}
+std::shared_ptr<cACTION_BML_GET_CERTIFICATION_MODE_REQUEST> cACTION_BML_GET_CERTIFICATION_MODE_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_GET_CERTIFICATION_MODE_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
 }
 void cACTION_BML_GET_CERTIFICATION_MODE_REQUEST::class_swap()
 {
@@ -2353,6 +2849,14 @@ uint8_t& cACTION_BML_GET_CERTIFICATION_MODE_RESPONSE::isEnable() {
     return (uint8_t&)(*m_isEnable);
 }
 
+std::shared_ptr<cACTION_BML_GET_CERTIFICATION_MODE_RESPONSE> cACTION_BML_GET_CERTIFICATION_MODE_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_GET_CERTIFICATION_MODE_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_GET_CERTIFICATION_MODE_RESPONSE::class_swap()
 {
 }
@@ -2433,6 +2937,14 @@ bool cACTION_BML_SET_VAP_LIST_CREDENTIALS_REQUEST::alloc_vap_list(size_t count) 
     return true;
 }
 
+std::shared_ptr<cACTION_BML_SET_VAP_LIST_CREDENTIALS_REQUEST> cACTION_BML_SET_VAP_LIST_CREDENTIALS_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_SET_VAP_LIST_CREDENTIALS_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_SET_VAP_LIST_CREDENTIALS_REQUEST::class_swap()
 {
     tlvf_swap(32, reinterpret_cast<uint8_t*>(m_result));
@@ -2482,6 +2994,14 @@ uint32_t& cACTION_BML_SET_VAP_LIST_CREDENTIALS_RESPONSE::result() {
     return (uint32_t&)(*m_result);
 }
 
+std::shared_ptr<cACTION_BML_SET_VAP_LIST_CREDENTIALS_RESPONSE> cACTION_BML_SET_VAP_LIST_CREDENTIALS_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_SET_VAP_LIST_CREDENTIALS_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_SET_VAP_LIST_CREDENTIALS_RESPONSE::class_swap()
 {
     tlvf_swap(32, reinterpret_cast<uint8_t*>(m_result));
@@ -2563,6 +3083,14 @@ bool cACTION_BML_GET_VAP_LIST_CREDENTIALS_RESPONSE::alloc_vap_list(size_t count)
     return true;
 }
 
+std::shared_ptr<cACTION_BML_GET_VAP_LIST_CREDENTIALS_RESPONSE> cACTION_BML_GET_VAP_LIST_CREDENTIALS_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_GET_VAP_LIST_CREDENTIALS_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_GET_VAP_LIST_CREDENTIALS_RESPONSE::class_swap()
 {
     tlvf_swap(32, reinterpret_cast<uint8_t*>(m_result));
@@ -2612,6 +3140,14 @@ uint32_t& cACTION_BML_GET_VAP_LIST_CREDENTIALS_REQUEST::result() {
     return (uint32_t&)(*m_result);
 }
 
+std::shared_ptr<cACTION_BML_GET_VAP_LIST_CREDENTIALS_REQUEST> cACTION_BML_GET_VAP_LIST_CREDENTIALS_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_GET_VAP_LIST_CREDENTIALS_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_GET_VAP_LIST_CREDENTIALS_REQUEST::class_swap()
 {
     tlvf_swap(32, reinterpret_cast<uint8_t*>(m_result));
@@ -2662,6 +3198,14 @@ uint8_t& cACTION_BML_STEERING_SET_GROUP_REQUEST::remove() {
     return (uint8_t&)(*m_remove);
 }
 
+std::shared_ptr<cACTION_BML_STEERING_SET_GROUP_REQUEST> cACTION_BML_STEERING_SET_GROUP_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_STEERING_SET_GROUP_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_STEERING_SET_GROUP_REQUEST::class_swap()
 {
     tlvf_swap(32, reinterpret_cast<uint8_t*>(m_steeringGroupIndex));
@@ -2713,6 +3257,14 @@ int32_t& cACTION_BML_STEERING_SET_GROUP_RESPONSE::error_code() {
     return (int32_t&)(*m_error_code);
 }
 
+std::shared_ptr<cACTION_BML_STEERING_SET_GROUP_RESPONSE> cACTION_BML_STEERING_SET_GROUP_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_STEERING_SET_GROUP_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_STEERING_SET_GROUP_RESPONSE::class_swap()
 {
     tlvf_swap(32, reinterpret_cast<uint8_t*>(m_error_code));
@@ -2767,6 +3319,14 @@ uint8_t& cACTION_BML_STEERING_CLIENT_SET_REQUEST::remove() {
     return (uint8_t&)(*m_remove);
 }
 
+std::shared_ptr<cACTION_BML_STEERING_CLIENT_SET_REQUEST> cACTION_BML_STEERING_CLIENT_SET_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_STEERING_CLIENT_SET_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_STEERING_CLIENT_SET_REQUEST::class_swap()
 {
     tlvf_swap(32, reinterpret_cast<uint8_t*>(m_steeringGroupIndex));
@@ -2823,6 +3383,14 @@ int32_t& cACTION_BML_STEERING_CLIENT_SET_RESPONSE::error_code() {
     return (int32_t&)(*m_error_code);
 }
 
+std::shared_ptr<cACTION_BML_STEERING_CLIENT_SET_RESPONSE> cACTION_BML_STEERING_CLIENT_SET_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_STEERING_CLIENT_SET_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_STEERING_CLIENT_SET_RESPONSE::class_swap()
 {
     tlvf_swap(32, reinterpret_cast<uint8_t*>(m_error_code));
@@ -2861,6 +3429,14 @@ uint8_t& cACTION_BML_STEERING_EVENT_REGISTER_UNREGISTER_REQUEST::unregister() {
     return (uint8_t&)(*m_unregister);
 }
 
+std::shared_ptr<cACTION_BML_STEERING_EVENT_REGISTER_UNREGISTER_REQUEST> cACTION_BML_STEERING_EVENT_REGISTER_UNREGISTER_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_STEERING_EVENT_REGISTER_UNREGISTER_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_STEERING_EVENT_REGISTER_UNREGISTER_REQUEST::class_swap()
 {
 }
@@ -2898,6 +3474,14 @@ int32_t& cACTION_BML_STEERING_EVENT_REGISTER_UNREGISTER_RESPONSE::error_code() {
     return (int32_t&)(*m_error_code);
 }
 
+std::shared_ptr<cACTION_BML_STEERING_EVENT_REGISTER_UNREGISTER_RESPONSE> cACTION_BML_STEERING_EVENT_REGISTER_UNREGISTER_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_STEERING_EVENT_REGISTER_UNREGISTER_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_STEERING_EVENT_REGISTER_UNREGISTER_RESPONSE::class_swap()
 {
     tlvf_swap(32, reinterpret_cast<uint8_t*>(m_error_code));
@@ -2952,6 +3536,14 @@ uint32_t& cACTION_BML_STEERING_CLIENT_DISCONNECT_REQUEST::reason() {
     return (uint32_t&)(*m_reason);
 }
 
+std::shared_ptr<cACTION_BML_STEERING_CLIENT_DISCONNECT_REQUEST> cACTION_BML_STEERING_CLIENT_DISCONNECT_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_STEERING_CLIENT_DISCONNECT_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_STEERING_CLIENT_DISCONNECT_REQUEST::class_swap()
 {
     tlvf_swap(32, reinterpret_cast<uint8_t*>(m_steeringGroupIndex));
@@ -3007,6 +3599,14 @@ int32_t& cACTION_BML_STEERING_CLIENT_DISCONNECT_RESPONSE::error_code() {
     return (int32_t&)(*m_error_code);
 }
 
+std::shared_ptr<cACTION_BML_STEERING_CLIENT_DISCONNECT_RESPONSE> cACTION_BML_STEERING_CLIENT_DISCONNECT_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_STEERING_CLIENT_DISCONNECT_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_STEERING_CLIENT_DISCONNECT_RESPONSE::class_swap()
 {
     tlvf_swap(32, reinterpret_cast<uint8_t*>(m_error_code));
@@ -3053,6 +3653,14 @@ sMacAddr& cACTION_BML_STEERING_CLIENT_MEASURE_REQUEST::client_mac() {
     return (sMacAddr&)(*m_client_mac);
 }
 
+std::shared_ptr<cACTION_BML_STEERING_CLIENT_MEASURE_REQUEST> cACTION_BML_STEERING_CLIENT_MEASURE_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_STEERING_CLIENT_MEASURE_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_STEERING_CLIENT_MEASURE_REQUEST::class_swap()
 {
     tlvf_swap(32, reinterpret_cast<uint8_t*>(m_steeringGroupIndex));
@@ -3101,6 +3709,14 @@ int32_t& cACTION_BML_STEERING_CLIENT_MEASURE_RESPONSE::error_code() {
     return (int32_t&)(*m_error_code);
 }
 
+std::shared_ptr<cACTION_BML_STEERING_CLIENT_MEASURE_RESPONSE> cACTION_BML_STEERING_CLIENT_MEASURE_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_STEERING_CLIENT_MEASURE_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_STEERING_CLIENT_MEASURE_RESPONSE::class_swap()
 {
     tlvf_swap(32, reinterpret_cast<uint8_t*>(m_error_code));
@@ -3190,6 +3806,14 @@ bool cACTION_BML_STEERING_EVENTS_UPDATE::alloc_buffer(size_t count) {
     return true;
 }
 
+std::shared_ptr<cACTION_BML_STEERING_EVENTS_UPDATE> cACTION_BML_STEERING_EVENTS_UPDATE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_STEERING_EVENTS_UPDATE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_STEERING_EVENTS_UPDATE::class_swap()
 {
     tlvf_swap(32, reinterpret_cast<uint8_t*>(m_buffer_size));
@@ -3234,6 +3858,14 @@ sMacAddr& cACTION_BML_TRIGGER_TOPOLOGY_QUERY::al_mac() {
     return (sMacAddr&)(*m_al_mac);
 }
 
+std::shared_ptr<cACTION_BML_TRIGGER_TOPOLOGY_QUERY> cACTION_BML_TRIGGER_TOPOLOGY_QUERY::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_TRIGGER_TOPOLOGY_QUERY>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_TRIGGER_TOPOLOGY_QUERY::class_swap()
 {
     m_al_mac->struct_swap();
@@ -3277,6 +3909,14 @@ sMacAddr& cACTION_BML_TRIGGER_CHANNEL_SELECTION_REQUEST::ruid() {
     return (sMacAddr&)(*m_ruid);
 }
 
+std::shared_ptr<cACTION_BML_TRIGGER_CHANNEL_SELECTION_REQUEST> cACTION_BML_TRIGGER_CHANNEL_SELECTION_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_TRIGGER_CHANNEL_SELECTION_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_TRIGGER_CHANNEL_SELECTION_REQUEST::class_swap()
 {
     m_al_mac->struct_swap();
@@ -3372,6 +4012,14 @@ bool cACTION_BML_WFA_CA_CONTROLLER_REQUEST::alloc_command(size_t count) {
     return true;
 }
 
+std::shared_ptr<cACTION_BML_WFA_CA_CONTROLLER_REQUEST> cACTION_BML_WFA_CA_CONTROLLER_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_WFA_CA_CONTROLLER_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_WFA_CA_CONTROLLER_REQUEST::class_swap()
 {
     tlvf_swap(16, reinterpret_cast<uint8_t*>(m_command_length));
@@ -3467,6 +4115,14 @@ bool cACTION_BML_WFA_CA_CONTROLLER_RESPONSE::alloc_reply(size_t count) {
     return true;
 }
 
+std::shared_ptr<cACTION_BML_WFA_CA_CONTROLLER_RESPONSE> cACTION_BML_WFA_CA_CONTROLLER_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BML_WFA_CA_CONTROLLER_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BML_WFA_CA_CONTROLLER_RESPONSE::class_swap()
 {
     tlvf_swap(16, reinterpret_cast<uint8_t*>(m_reply_length));

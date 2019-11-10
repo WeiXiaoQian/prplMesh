@@ -36,6 +36,7 @@ class tlvUnknown : public BaseClass
         size_t data_length() { return m_data_idx__ * sizeof(uint8_t); }
         uint8_t* data(size_t idx = 0);
         bool alloc_data(size_t count = 1);
+        static std::shared_ptr<tlvUnknown> castFrom(std::shared_ptr<BaseClass> source);
         void class_swap();
         static size_t get_initial_size();
 

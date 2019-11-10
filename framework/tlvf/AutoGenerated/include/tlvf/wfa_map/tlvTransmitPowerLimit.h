@@ -38,6 +38,7 @@ class tlvTransmitPowerLimit : public BaseClass
         //Transmit Power Limit EIRP per 20 MHz bandwidth representing the nominal transmit power limit for this radio.
         //The field is coded as a 2's complement signed integer in units of decibels relative to 1 mW (dBm).
         uint8_t& transmit_power_limit_dbm();
+        static std::shared_ptr<tlvTransmitPowerLimit> castFrom(std::shared_ptr<BaseClass> source);
         void class_swap();
         static size_t get_initial_size();
 

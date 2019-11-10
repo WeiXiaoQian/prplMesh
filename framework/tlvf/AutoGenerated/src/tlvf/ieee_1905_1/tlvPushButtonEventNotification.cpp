@@ -77,6 +77,9 @@ bool tlvPushButtonEventNotification::alloc_media_type_list(size_t count) {
     return true;
 }
 
+std::shared_ptr<tlvPushButtonEventNotification> tlvPushButtonEventNotification::castFrom(std::shared_ptr<BaseClass> source) {
+    return std::make_shared<tlvPushButtonEventNotification>(source->getStartBuffPtr(),source->getLen()+source->getBuffRemainingBytes(),true);
+}
 void tlvPushButtonEventNotification::class_swap()
 {
     tlvf_swap(16, reinterpret_cast<uint8_t*>(m_length));

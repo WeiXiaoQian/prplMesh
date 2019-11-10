@@ -68,6 +68,9 @@ bool tlvUnknown::alloc_data(size_t count) {
     return true;
 }
 
+std::shared_ptr<tlvUnknown> tlvUnknown::castFrom(std::shared_ptr<BaseClass> source) {
+    return std::make_shared<tlvUnknown>(source->getStartBuffPtr(),source->getLen()+source->getBuffRemainingBytes(),true);
+}
 void tlvUnknown::class_swap()
 {
     tlvf_swap(16, reinterpret_cast<uint8_t*>(m_length));

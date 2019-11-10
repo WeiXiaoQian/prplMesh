@@ -42,6 +42,7 @@ class tlvRadioOperationRestriction : public BaseClass
         std::tuple<bool, cRestrictedOperatingClasses&> operating_classes_list(size_t idx);
         std::shared_ptr<cRestrictedOperatingClasses> create_operating_classes_list();
         bool add_operating_classes_list(std::shared_ptr<cRestrictedOperatingClasses> ptr);
+        static std::shared_ptr<tlvRadioOperationRestriction> castFrom(std::shared_ptr<BaseClass> source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -81,6 +82,7 @@ class cRestrictedOperatingClasses : public BaseClass
         uint8_t& channel_list_length();
         std::tuple<bool, sChannelInfo&> channel_list(size_t idx);
         bool alloc_channel_list(size_t count = 1);
+        static std::shared_ptr<cRestrictedOperatingClasses> castFrom(std::shared_ptr<BaseClass> source);
         void class_swap();
         static size_t get_initial_size();
 

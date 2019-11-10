@@ -41,6 +41,7 @@ class tlvDeviceBridgingCapability : public BaseClass
         std::tuple<bool, cMacList&> bridging_tuples_list(size_t idx);
         std::shared_ptr<cMacList> create_bridging_tuples_list();
         bool add_bridging_tuples_list(std::shared_ptr<cMacList> ptr);
+        static std::shared_ptr<tlvDeviceBridgingCapability> castFrom(std::shared_ptr<BaseClass> source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -66,6 +67,7 @@ class cMacList : public BaseClass
         uint8_t& mac_list_length();
         std::tuple<bool, sMacAddr&> mac_list(size_t idx);
         bool alloc_mac_list(size_t count = 1);
+        static std::shared_ptr<cMacList> castFrom(std::shared_ptr<BaseClass> source);
         void class_swap();
         static size_t get_initial_size();
 

@@ -37,6 +37,9 @@ sMacAddr& tlvApRadioIdentifier::radio_uid() {
     return (sMacAddr&)(*m_radio_uid);
 }
 
+std::shared_ptr<tlvApRadioIdentifier> tlvApRadioIdentifier::castFrom(std::shared_ptr<BaseClass> source) {
+    return std::make_shared<tlvApRadioIdentifier>(source->getStartBuffPtr(),source->getLen()+source->getBuffRemainingBytes(),true);
+}
 void tlvApRadioIdentifier::class_swap()
 {
     tlvf_swap(16, reinterpret_cast<uint8_t*>(m_length));

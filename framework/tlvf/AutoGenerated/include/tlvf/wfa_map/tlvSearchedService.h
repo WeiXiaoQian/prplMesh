@@ -41,6 +41,7 @@ class tlvSearchedService : public BaseClass
         uint8_t& searched_service_list_length();
         std::tuple<bool, eSearchedService&> searched_service_list(size_t idx);
         bool alloc_searched_service_list(size_t count = 1);
+        static std::shared_ptr<tlvSearchedService> castFrom(std::shared_ptr<BaseClass> source);
         void class_swap();
         static size_t get_initial_size();
 

@@ -42,6 +42,7 @@ class tlvClientAssociationEvent : public BaseClass
         sMacAddr& client_mac();
         sMacAddr& bssid();
         eAssociationEvent& association_event();
+        static std::shared_ptr<tlvClientAssociationEvent> castFrom(std::shared_ptr<BaseClass> source);
         void class_swap();
         static size_t get_initial_size();
 

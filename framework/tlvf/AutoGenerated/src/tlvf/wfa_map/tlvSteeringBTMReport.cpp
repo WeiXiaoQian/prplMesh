@@ -49,6 +49,9 @@ sMacAddr& tlvSteeringBTMReport::target_bssid() {
     return (sMacAddr&)(*m_target_bssid);
 }
 
+std::shared_ptr<tlvSteeringBTMReport> tlvSteeringBTMReport::castFrom(std::shared_ptr<BaseClass> source) {
+    return std::make_shared<tlvSteeringBTMReport>(source->getStartBuffPtr(),source->getLen()+source->getBuffRemainingBytes(),true);
+}
 void tlvSteeringBTMReport::class_swap()
 {
     tlvf_swap(16, reinterpret_cast<uint8_t*>(m_length));

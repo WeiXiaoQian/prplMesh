@@ -37,6 +37,9 @@ tlvApCapability::sValue& tlvApCapability::value() {
     return (sValue&)(*m_value);
 }
 
+std::shared_ptr<tlvApCapability> tlvApCapability::castFrom(std::shared_ptr<BaseClass> source) {
+    return std::make_shared<tlvApCapability>(source->getStartBuffPtr(),source->getLen()+source->getBuffRemainingBytes(),true);
+}
 void tlvApCapability::class_swap()
 {
     tlvf_swap(16, reinterpret_cast<uint8_t*>(m_length));

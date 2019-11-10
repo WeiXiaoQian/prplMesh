@@ -448,6 +448,9 @@ WSC::sWscAttrAuthenticator& tlvWscM2::authenticator() {
     return (WSC::sWscAttrAuthenticator&)(*m_authenticator);
 }
 
+std::shared_ptr<tlvWscM2> tlvWscM2::castFrom(std::shared_ptr<BaseClass> source) {
+    return std::make_shared<tlvWscM2>(source->getStartBuffPtr(),source->getLen()+source->getBuffRemainingBytes(),true);
+}
 void tlvWscM2::class_swap()
 {
     tlvf_swap(16, reinterpret_cast<uint8_t*>(m_length));

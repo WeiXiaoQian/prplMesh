@@ -37,6 +37,9 @@ tlvAutoconfigFreqBand::eValue& tlvAutoconfigFreqBand::value() {
     return (eValue&)(*m_value);
 }
 
+std::shared_ptr<tlvAutoconfigFreqBand> tlvAutoconfigFreqBand::castFrom(std::shared_ptr<BaseClass> source) {
+    return std::make_shared<tlvAutoconfigFreqBand>(source->getStartBuffPtr(),source->getLen()+source->getBuffRemainingBytes(),true);
+}
 void tlvAutoconfigFreqBand::class_swap()
 {
     tlvf_swap(16, reinterpret_cast<uint8_t*>(m_length));

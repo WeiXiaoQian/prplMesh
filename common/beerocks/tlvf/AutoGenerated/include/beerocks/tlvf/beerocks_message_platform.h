@@ -37,6 +37,7 @@ class cACTION_PLATFORM_SON_SLAVE_BACKHAUL_CONNECTION_COMPLETE_NOTIFICATION : pub
             return (eActionOp_PLATFORM)(ACTION_PLATFORM_SON_SLAVE_BACKHAUL_CONNECTION_COMPLETE_NOTIFICATION);
         }
         uint8_t& is_backhaul_manager();
+        static std::shared_ptr<cACTION_PLATFORM_SON_SLAVE_BACKHAUL_CONNECTION_COMPLETE_NOTIFICATION> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -60,6 +61,7 @@ class cACTION_PLATFORM_SON_SLAVE_REGISTER_REQUEST : public BaseClass
         char* iface_name(size_t length = 0);
         bool set_iface_name(const std::string& str);
         bool set_iface_name(const char buffer[], size_t size);
+        static std::shared_ptr<cACTION_PLATFORM_SON_SLAVE_REGISTER_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -84,6 +86,7 @@ class cACTION_PLATFORM_SON_SLAVE_REGISTER_RESPONSE : public BaseClass
         sPlatformSettings& platform_settings();
         sWlanSettings& wlan_settings();
         uint32_t& valid();
+        static std::shared_ptr<cACTION_PLATFORM_SON_SLAVE_REGISTER_RESPONSE> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -109,6 +112,7 @@ class cACTION_PLATFORM_POST_INIT_CONFIG_REQUEST : public BaseClass
         char* iface_name(size_t length = 0);
         bool set_iface_name(const std::string& str);
         bool set_iface_name(const char buffer[], size_t size);
+        static std::shared_ptr<cACTION_PLATFORM_POST_INIT_CONFIG_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -131,6 +135,7 @@ class cACTION_PLATFORM_POST_INIT_CONFIG_RESPONSE : public BaseClass
             return (eActionOp_PLATFORM)(ACTION_PLATFORM_POST_INIT_CONFIG_RESPONSE);
         }
         uint8_t& result();
+        static std::shared_ptr<cACTION_PLATFORM_POST_INIT_CONFIG_RESPONSE> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -151,6 +156,7 @@ class cACTION_PLATFORM_ARP_MONITOR_NOTIFICATION : public BaseClass
             return (eActionOp_PLATFORM)(ACTION_PLATFORM_ARP_MONITOR_NOTIFICATION);
         }
         sArpMonitorData& params();
+        static std::shared_ptr<cACTION_PLATFORM_ARP_MONITOR_NOTIFICATION> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -171,6 +177,7 @@ class cACTION_PLATFORM_WLAN_PARAMS_CHANGED_NOTIFICATION : public BaseClass
             return (eActionOp_PLATFORM)(ACTION_PLATFORM_WLAN_PARAMS_CHANGED_NOTIFICATION);
         }
         sWlanSettings& wlan_settings();
+        static std::shared_ptr<cACTION_PLATFORM_WLAN_PARAMS_CHANGED_NOTIFICATION> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -198,6 +205,7 @@ class cACTION_PLATFORM_DHCP_MONITOR_NOTIFICATION : public BaseClass
         char* hostname(size_t length = 0);
         bool set_hostname(const std::string& str);
         bool set_hostname(const char buffer[], size_t size);
+        static std::shared_ptr<cACTION_PLATFORM_DHCP_MONITOR_NOTIFICATION> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -224,6 +232,7 @@ class cACTION_PLATFORM_CHANGE_MODULE_LOGGING_LEVEL : public BaseClass
             return (eActionOp_PLATFORM)(ACTION_PLATFORM_CHANGE_MODULE_LOGGING_LEVEL);
         }
         sLoggingLevelChange& params();
+        static std::shared_ptr<cACTION_PLATFORM_CHANGE_MODULE_LOGGING_LEVEL> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -244,6 +253,7 @@ class cACTION_PLATFORM_ARP_QUERY_REQUEST : public BaseClass
             return (eActionOp_PLATFORM)(ACTION_PLATFORM_ARP_QUERY_REQUEST);
         }
         sArpQuery& params();
+        static std::shared_ptr<cACTION_PLATFORM_ARP_QUERY_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -264,6 +274,7 @@ class cACTION_PLATFORM_ARP_QUERY_RESPONSE : public BaseClass
             return (eActionOp_PLATFORM)(ACTION_PLATFORM_ARP_QUERY_RESPONSE);
         }
         sArpMonitorData& params();
+        static std::shared_ptr<cACTION_PLATFORM_ARP_QUERY_RESPONSE> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -283,6 +294,7 @@ class cACTION_PLATFORM_ONBOARD_QUERY_REQUEST : public BaseClass
         static eActionOp_PLATFORM get_action_op(){
             return (eActionOp_PLATFORM)(ACTION_PLATFORM_ONBOARD_QUERY_REQUEST);
         }
+        static std::shared_ptr<cACTION_PLATFORM_ONBOARD_QUERY_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -302,6 +314,7 @@ class cACTION_PLATFORM_ONBOARD_QUERY_RESPONSE : public BaseClass
             return (eActionOp_PLATFORM)(ACTION_PLATFORM_ONBOARD_QUERY_RESPONSE);
         }
         sOnboarding& params();
+        static std::shared_ptr<cACTION_PLATFORM_ONBOARD_QUERY_RESPONSE> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -322,6 +335,7 @@ class cACTION_PLATFORM_ONBOARD_SET_REQUEST : public BaseClass
             return (eActionOp_PLATFORM)(ACTION_PLATFORM_ONBOARD_SET_REQUEST);
         }
         sOnboarding& params();
+        static std::shared_ptr<cACTION_PLATFORM_ONBOARD_SET_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -345,6 +359,7 @@ class cACTION_PLATFORM_WPS_ONBOARDING_REQUEST : public BaseClass
         char* iface_name(size_t length = 0);
         bool set_iface_name(const std::string& str);
         bool set_iface_name(const char buffer[], size_t size);
+        static std::shared_ptr<cACTION_PLATFORM_WPS_ONBOARDING_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -367,6 +382,7 @@ class cACTION_PLATFORM_BEEROCKS_CREDENTIALS_UPDATE_REQUEST : public BaseClass
             return (eActionOp_PLATFORM)(ACTION_PLATFORM_BEEROCKS_CREDENTIALS_UPDATE_REQUEST);
         }
         sWifiCredentials& params();
+        static std::shared_ptr<cACTION_PLATFORM_BEEROCKS_CREDENTIALS_UPDATE_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -387,6 +403,7 @@ class cACTION_PLATFORM_BEEROCKS_CREDENTIALS_UPDATE_RESPONSE : public BaseClass
             return (eActionOp_PLATFORM)(ACTION_PLATFORM_BEEROCKS_CREDENTIALS_UPDATE_RESPONSE);
         }
         uint32_t& result();
+        static std::shared_ptr<cACTION_PLATFORM_BEEROCKS_CREDENTIALS_UPDATE_RESPONSE> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -422,6 +439,7 @@ class cACTION_PLATFORM_WIFI_CREDENTIALS_SET_REQUEST : public BaseClass
         char* security_type(size_t length = 0);
         bool set_security_type(const std::string& str);
         bool set_security_type(const char buffer[], size_t size);
+        static std::shared_ptr<cACTION_PLATFORM_WIFI_CREDENTIALS_SET_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -454,6 +472,7 @@ class cACTION_PLATFORM_WIFI_CREDENTIALS_SET_RESPONSE : public BaseClass
         bool set_iface_name(const std::string& str);
         bool set_iface_name(const char buffer[], size_t size);
         uint8_t& success();
+        static std::shared_ptr<cACTION_PLATFORM_WIFI_CREDENTIALS_SET_RESPONSE> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -477,6 +496,7 @@ class cACTION_PLATFORM_ADVERTISE_SSID_FLAG_UPDATE_REQUEST : public BaseClass
             return (eActionOp_PLATFORM)(ACTION_PLATFORM_ADVERTISE_SSID_FLAG_UPDATE_REQUEST);
         }
         uint32_t& flag();
+        static std::shared_ptr<cACTION_PLATFORM_ADVERTISE_SSID_FLAG_UPDATE_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -497,6 +517,7 @@ class cACTION_PLATFORM_ADVERTISE_SSID_FLAG_UPDATE_RESPONSE : public BaseClass
             return (eActionOp_PLATFORM)(ACTION_PLATFORM_ADVERTISE_SSID_FLAG_UPDATE_RESPONSE);
         }
         uint32_t& result();
+        static std::shared_ptr<cACTION_PLATFORM_ADVERTISE_SSID_FLAG_UPDATE_RESPONSE> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -516,6 +537,7 @@ class cACTION_PLATFORM_GET_WLAN_READY_STATUS_REQUEST : public BaseClass
         static eActionOp_PLATFORM get_action_op(){
             return (eActionOp_PLATFORM)(ACTION_PLATFORM_GET_WLAN_READY_STATUS_REQUEST);
         }
+        static std::shared_ptr<cACTION_PLATFORM_GET_WLAN_READY_STATUS_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -535,6 +557,7 @@ class cACTION_PLATFORM_GET_WLAN_READY_STATUS_RESPONSE : public BaseClass
             return (eActionOp_PLATFORM)(ACTION_PLATFORM_GET_WLAN_READY_STATUS_RESPONSE);
         }
         uint8_t& result();
+        static std::shared_ptr<cACTION_PLATFORM_GET_WLAN_READY_STATUS_RESPONSE> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -555,6 +578,7 @@ class cACTION_PLATFORM_WIFI_CREDENTIALS_GET_REQUEST : public BaseClass
             return (eActionOp_PLATFORM)(ACTION_PLATFORM_WIFI_CREDENTIALS_GET_REQUEST);
         }
         uint8_t& vap_id();
+        static std::shared_ptr<cACTION_PLATFORM_WIFI_CREDENTIALS_GET_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -577,6 +601,7 @@ class cACTION_PLATFORM_WIFI_CREDENTIALS_GET_RESPONSE : public BaseClass
         sWifiCredentials& front_params();
         sWifiCredentials& back_params();
         uint32_t& result();
+        static std::shared_ptr<cACTION_PLATFORM_WIFI_CREDENTIALS_GET_RESPONSE> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -598,6 +623,7 @@ class cACTION_PLATFORM_ADMIN_CREDENTIALS_GET_REQUEST : public BaseClass
         static eActionOp_PLATFORM get_action_op(){
             return (eActionOp_PLATFORM)(ACTION_PLATFORM_ADMIN_CREDENTIALS_GET_REQUEST);
         }
+        static std::shared_ptr<cACTION_PLATFORM_ADMIN_CREDENTIALS_GET_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -618,6 +644,7 @@ class cACTION_PLATFORM_ADMIN_CREDENTIALS_GET_RESPONSE : public BaseClass
         }
         sAdminCredentials& params();
         uint32_t& result();
+        static std::shared_ptr<cACTION_PLATFORM_ADMIN_CREDENTIALS_GET_RESPONSE> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -638,6 +665,7 @@ class cACTION_PLATFORM_DEVICE_INFO_GET_REQUEST : public BaseClass
         static eActionOp_PLATFORM get_action_op(){
             return (eActionOp_PLATFORM)(ACTION_PLATFORM_DEVICE_INFO_GET_REQUEST);
         }
+        static std::shared_ptr<cACTION_PLATFORM_DEVICE_INFO_GET_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -658,6 +686,7 @@ class cACTION_PLATFORM_DEVICE_INFO_GET_RESPONSE : public BaseClass
         }
         sDeviceInfo& params();
         uint32_t& result();
+        static std::shared_ptr<cACTION_PLATFORM_DEVICE_INFO_GET_RESPONSE> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -678,6 +707,7 @@ class cACTION_PLATFORM_LOCAL_MASTER_GET_REQUEST : public BaseClass
         static eActionOp_PLATFORM get_action_op(){
             return (eActionOp_PLATFORM)(ACTION_PLATFORM_LOCAL_MASTER_GET_REQUEST);
         }
+        static std::shared_ptr<cACTION_PLATFORM_LOCAL_MASTER_GET_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -697,6 +727,7 @@ class cACTION_PLATFORM_LOCAL_MASTER_GET_RESPONSE : public BaseClass
             return (eActionOp_PLATFORM)(ACTION_PLATFORM_LOCAL_MASTER_GET_RESPONSE);
         }
         uint8_t& local_master();
+        static std::shared_ptr<cACTION_PLATFORM_LOCAL_MASTER_GET_RESPONSE> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -721,6 +752,7 @@ class cACTION_PLATFORM_WIFI_SET_IFACE_STATE_REQUEST : public BaseClass
         bool set_iface_name(const std::string& str);
         bool set_iface_name(const char buffer[], size_t size);
         int8_t& iface_operation();
+        static std::shared_ptr<cACTION_PLATFORM_WIFI_SET_IFACE_STATE_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -749,6 +781,7 @@ class cACTION_PLATFORM_WIFI_SET_IFACE_STATE_RESPONSE : public BaseClass
         bool set_iface_name(const char buffer[], size_t size);
         int8_t& iface_operation();
         uint8_t& success();
+        static std::shared_ptr<cACTION_PLATFORM_WIFI_SET_IFACE_STATE_RESPONSE> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -777,6 +810,7 @@ class cACTION_PLATFORM_WIFI_SET_RADIO_TX_STATE_REQUEST : public BaseClass
         bool set_iface_name(const std::string& str);
         bool set_iface_name(const char buffer[], size_t size);
         uint8_t& enable();
+        static std::shared_ptr<cACTION_PLATFORM_WIFI_SET_RADIO_TX_STATE_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -805,6 +839,7 @@ class cACTION_PLATFORM_WIFI_SET_RADIO_TX_STATE_RESPONSE : public BaseClass
         bool set_iface_name(const char buffer[], size_t size);
         uint8_t& enable();
         uint8_t& success();
+        static std::shared_ptr<cACTION_PLATFORM_WIFI_SET_RADIO_TX_STATE_RESPONSE> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -829,6 +864,7 @@ class cACTION_PLATFORM_VERSION_MISMATCH_NOTIFICATION : public BaseClass
             return (eActionOp_PLATFORM)(ACTION_PLATFORM_VERSION_MISMATCH_NOTIFICATION);
         }
         sVersions& versions();
+        static std::shared_ptr<cACTION_PLATFORM_VERSION_MISMATCH_NOTIFICATION> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -849,6 +885,7 @@ class cACTION_PLATFORM_MASTER_SLAVE_VERSIONS_NOTIFICATION : public BaseClass
             return (eActionOp_PLATFORM)(ACTION_PLATFORM_MASTER_SLAVE_VERSIONS_NOTIFICATION);
         }
         sVersions& versions();
+        static std::shared_ptr<cACTION_PLATFORM_MASTER_SLAVE_VERSIONS_NOTIFICATION> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -868,6 +905,7 @@ class cACTION_PLATFORM_GET_MASTER_SLAVE_VERSIONS_REQUEST : public BaseClass
         static eActionOp_PLATFORM get_action_op(){
             return (eActionOp_PLATFORM)(ACTION_PLATFORM_GET_MASTER_SLAVE_VERSIONS_REQUEST);
         }
+        static std::shared_ptr<cACTION_PLATFORM_GET_MASTER_SLAVE_VERSIONS_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -888,6 +926,7 @@ class cACTION_PLATFORM_GET_MASTER_SLAVE_VERSIONS_RESPONSE : public BaseClass
         }
         sVersions& versions();
         uint32_t& result();
+        static std::shared_ptr<cACTION_PLATFORM_GET_MASTER_SLAVE_VERSIONS_RESPONSE> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -913,6 +952,7 @@ class cACTION_PLATFORM_ERROR_NOTIFICATION : public BaseClass
         char* data(size_t length = 0);
         bool set_data(const std::string& str);
         bool set_data(const char buffer[], size_t size);
+        static std::shared_ptr<cACTION_PLATFORM_ERROR_NOTIFICATION> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -948,6 +988,7 @@ class cACTION_PLATFORM_WIFI_INTERFACE_STATUS_NOTIFICATION : public BaseClass
         uint8_t& status_bh_wired();
         uint8_t& is_bh_manager();
         uint8_t& status_operational();
+        static std::shared_ptr<cACTION_PLATFORM_WIFI_INTERFACE_STATUS_NOTIFICATION> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -977,6 +1018,7 @@ class cACTION_PLATFORM_WIFI_CONFIGURATION_UPDATE_REQUEST : public BaseClass
             return (eActionOp_PLATFORM)(ACTION_PLATFORM_WIFI_CONFIGURATION_UPDATE_REQUEST);
         }
         uint8_t& config_start();
+        static std::shared_ptr<cACTION_PLATFORM_WIFI_CONFIGURATION_UPDATE_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -996,6 +1038,7 @@ class cACTION_PLATFORM_WIFI_CONFIGURATION_UPDATE_RESPONSE : public BaseClass
         static eActionOp_PLATFORM get_action_op(){
             return (eActionOp_PLATFORM)(ACTION_PLATFORM_WIFI_CONFIGURATION_UPDATE_RESPONSE);
         }
+        static std::shared_ptr<cACTION_PLATFORM_WIFI_CONFIGURATION_UPDATE_RESPONSE> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -1015,6 +1058,7 @@ class cACTION_PLATFORM_OPERATIONAL_NOTIFICATION : public BaseClass
             return (eActionOp_PLATFORM)(ACTION_PLATFORM_OPERATIONAL_NOTIFICATION);
         }
         uint8_t& operational();
+        static std::shared_ptr<cACTION_PLATFORM_OPERATIONAL_NOTIFICATION> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 

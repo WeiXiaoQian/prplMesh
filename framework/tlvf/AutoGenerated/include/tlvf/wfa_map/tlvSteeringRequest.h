@@ -87,6 +87,7 @@ class tlvSteeringRequest : public BaseClass
         uint8_t& target_bssid_list_length();
         std::tuple<bool, sTargetBssidInfo&> target_bssid_list(size_t idx);
         bool alloc_target_bssid_list(size_t count = 1);
+        static std::shared_ptr<tlvSteeringRequest> castFrom(std::shared_ptr<BaseClass> source);
         void class_swap();
         static size_t get_initial_size();
 

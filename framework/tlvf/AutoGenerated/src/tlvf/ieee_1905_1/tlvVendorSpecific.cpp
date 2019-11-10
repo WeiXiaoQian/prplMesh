@@ -37,6 +37,9 @@ sVendorOUI& tlvVendorSpecific::vendor_oui() {
     return (sVendorOUI&)(*m_vendor_oui);
 }
 
+std::shared_ptr<tlvVendorSpecific> tlvVendorSpecific::castFrom(std::shared_ptr<BaseClass> source) {
+    return std::make_shared<tlvVendorSpecific>(source->getStartBuffPtr(),source->getLen()+source->getBuffRemainingBytes(),true);
+}
 void tlvVendorSpecific::class_swap()
 {
     tlvf_swap(16, reinterpret_cast<uint8_t*>(m_length));

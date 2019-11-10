@@ -52,6 +52,7 @@ class tlvOperatingChannelReport : public BaseClass
         //The field is coded as a 2's complement signed integer in units of decibels relative to 1 mW (dBm).
         //This value is less than or equal to the Maximum Transmit Power specified in the AP Radio Basic Capabilities TLV for the current operating class.    
         int8_t& current_transmit_power();
+        static std::shared_ptr<tlvOperatingChannelReport> castFrom(std::shared_ptr<BaseClass> source);
         void class_swap();
         static size_t get_initial_size();
 

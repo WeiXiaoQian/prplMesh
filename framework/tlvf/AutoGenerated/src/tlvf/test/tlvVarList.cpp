@@ -352,6 +352,9 @@ bool tlvTestVarList::add_unknown_length_list(std::shared_ptr<cInner> ptr) {
     return true;
 }
 
+std::shared_ptr<tlvTestVarList> tlvTestVarList::castFrom(std::shared_ptr<BaseClass> source) {
+    return std::make_shared<tlvTestVarList>(source->getStartBuffPtr(),source->getLen()+source->getBuffRemainingBytes(),true);
+}
 void tlvTestVarList::class_swap()
 {
     tlvf_swap(16, reinterpret_cast<uint8_t*>(m_type));
@@ -597,6 +600,9 @@ bool cInner::alloc_unknown_length_list_inner(size_t count) {
     return true;
 }
 
+std::shared_ptr<cInner> cInner::castFrom(std::shared_ptr<BaseClass> source) {
+    return std::make_shared<cInner>(source->getStartBuffPtr(),source->getLen()+source->getBuffRemainingBytes(),true);
+}
 void cInner::class_swap()
 {
     tlvf_swap(16, reinterpret_cast<uint8_t*>(m_type));

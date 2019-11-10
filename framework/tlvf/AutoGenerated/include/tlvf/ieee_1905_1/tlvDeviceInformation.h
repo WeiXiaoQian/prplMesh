@@ -53,6 +53,7 @@ class tlvDeviceInformation : public BaseClass
         uint8_t& info_length();
         std::tuple<bool, sInfo&> info(size_t idx);
         bool alloc_info(size_t count = 1);
+        static std::shared_ptr<tlvDeviceInformation> castFrom(std::shared_ptr<BaseClass> source);
         void class_swap();
         static size_t get_initial_size();
 

@@ -45,6 +45,9 @@ tlvClientAssociationEvent::eAssociationEvent& tlvClientAssociationEvent::associa
     return (eAssociationEvent&)(*m_association_event);
 }
 
+std::shared_ptr<tlvClientAssociationEvent> tlvClientAssociationEvent::castFrom(std::shared_ptr<BaseClass> source) {
+    return std::make_shared<tlvClientAssociationEvent>(source->getStartBuffPtr(),source->getLen()+source->getBuffRemainingBytes(),true);
+}
 void tlvClientAssociationEvent::class_swap()
 {
     tlvf_swap(16, reinterpret_cast<uint8_t*>(m_length));

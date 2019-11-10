@@ -89,6 +89,9 @@ bool tlvClientAssociationControlRequest::alloc_sta_list(size_t count) {
     return true;
 }
 
+std::shared_ptr<tlvClientAssociationControlRequest> tlvClientAssociationControlRequest::castFrom(std::shared_ptr<BaseClass> source) {
+    return std::make_shared<tlvClientAssociationControlRequest>(source->getStartBuffPtr(),source->getLen()+source->getBuffRemainingBytes(),true);
+}
 void tlvClientAssociationControlRequest::class_swap()
 {
     tlvf_swap(16, reinterpret_cast<uint8_t*>(m_length));

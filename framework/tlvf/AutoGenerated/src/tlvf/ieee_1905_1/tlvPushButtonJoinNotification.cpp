@@ -49,6 +49,9 @@ sMacAddr& tlvPushButtonJoinNotification::iface_mac_of_new_device_joined() {
     return (sMacAddr&)(*m_iface_mac_of_new_device_joined);
 }
 
+std::shared_ptr<tlvPushButtonJoinNotification> tlvPushButtonJoinNotification::castFrom(std::shared_ptr<BaseClass> source) {
+    return std::make_shared<tlvPushButtonJoinNotification>(source->getStartBuffPtr(),source->getLen()+source->getBuffRemainingBytes(),true);
+}
 void tlvPushButtonJoinNotification::class_swap()
 {
     tlvf_swap(16, reinterpret_cast<uint8_t*>(m_length));

@@ -41,6 +41,9 @@ tlvChannelSelectionResponse::eResponseCode& tlvChannelSelectionResponse::respons
     return (eResponseCode&)(*m_response_code);
 }
 
+std::shared_ptr<tlvChannelSelectionResponse> tlvChannelSelectionResponse::castFrom(std::shared_ptr<BaseClass> source) {
+    return std::make_shared<tlvChannelSelectionResponse>(source->getStartBuffPtr(),source->getLen()+source->getBuffRemainingBytes(),true);
+}
 void tlvChannelSelectionResponse::class_swap()
 {
     tlvf_swap(16, reinterpret_cast<uint8_t*>(m_length));

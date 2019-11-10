@@ -43,6 +43,7 @@ class tlvChannelSelectionResponse : public BaseClass
         const uint16_t& length();
         sMacAddr& radio_uid();
         eResponseCode& response_code();
+        static std::shared_ptr<tlvChannelSelectionResponse> castFrom(std::shared_ptr<BaseClass> source);
         void class_swap();
         static size_t get_initial_size();
 

@@ -184,6 +184,9 @@ sWscAttrVendorExtMultiAp& cConfigData::multiap_attr() {
     return (sWscAttrVendorExtMultiAp&)(*m_multiap_attr);
 }
 
+std::shared_ptr<cConfigData> cConfigData::castFrom(std::shared_ptr<BaseClass> source) {
+    return std::make_shared<cConfigData>(source->getStartBuffPtr(),source->getLen()+source->getBuffRemainingBytes(),true);
+}
 void cConfigData::class_swap()
 {
     tlvf_swap(16, reinterpret_cast<uint8_t*>(m_ssid_type));
@@ -350,6 +353,9 @@ bool cWscAttrEncryptedSettings::alloc_encrypted_settings(size_t count) {
     return true;
 }
 
+std::shared_ptr<cWscAttrEncryptedSettings> cWscAttrEncryptedSettings::castFrom(std::shared_ptr<BaseClass> source) {
+    return std::make_shared<cWscAttrEncryptedSettings>(source->getStartBuffPtr(),source->getLen()+source->getBuffRemainingBytes(),true);
+}
 void cWscAttrEncryptedSettings::class_swap()
 {
     tlvf_swap(16, reinterpret_cast<uint8_t*>(m_type));

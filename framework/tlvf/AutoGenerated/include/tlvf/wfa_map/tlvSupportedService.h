@@ -42,6 +42,7 @@ class tlvSupportedService : public BaseClass
         uint8_t& supported_service_list_length();
         std::tuple<bool, eSupportedService&> supported_service_list(size_t idx);
         bool alloc_supported_service_list(size_t count = 1);
+        static std::shared_ptr<tlvSupportedService> castFrom(std::shared_ptr<BaseClass> source);
         void class_swap();
         static size_t get_initial_size();
 

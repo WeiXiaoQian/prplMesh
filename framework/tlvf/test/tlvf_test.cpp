@@ -737,7 +737,33 @@ int test_all()
     MAPF_INFO(__FUNCTION__ << " Finished, errors = " << errors << std::endl);
     return errors;
 }
+int test_gal()
+{
+    int errors = 0;
+    uint8_t tx_buffer[4096];
+    //creating cmdu message class and setting the header
+    CmduMessageTx msg = CmduMessageTx(tx_buffer, sizeof(tx_buffer));
 
+    //create method initializes the buffer and returns shared pointer to the message header
+    auto header = msg.create(0, eMessageType::AP_AUTOCONFIGURATION_WSC_MESSAGE);
+    header->flags().last_fragment_indicator = 1;
+    header->flags().relay_indicator         = 1;
+    msg.addClass<tlvTestVarList>();
+    LOG(DEBUG) << "Finalize";
+    msg.finalize(true);
+    uint8_t recv_buffer[sizeof(tx_buffer)];
+    memcpy(recv_buffer, tx_buffer, sizeof(recv_buffer));
+
+    CmduMessageRx received_message;
+    received_message.parse(recv_buffer, sizeof(recv_buffer), true, true);
+
+    auto tlv1 = received_message.getClass<tlvUnknown>();
+    auto varlist = tlvTestVarList::castFrom(tlv1);
+
+    MAPF_INFO(__FUNCTION__ << " Finished, errors = " << errors << std::endl);
+    return errors;
+
+}
 int main(int argc, char *argv[])
 {
     mapf::Logger::Instance().LoggerInit("tlvf_test");
@@ -748,6 +774,7 @@ int main(int argc, char *argv[])
     errors += test_complex_list();
     errors += test_all();
     errors += test_parser();
+    errors += test_gal();
     MAPF_INFO(__FUNCTION__ << " Finished, errors = " << errors << std::endl);
     return errors;
 }

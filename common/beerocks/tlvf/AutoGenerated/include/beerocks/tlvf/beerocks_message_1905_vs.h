@@ -46,6 +46,7 @@ class tlvVsClientAssociationEvent : public BaseClass
         uint8_t& disconnect_source();
         //relevant only on disconnect event
         uint8_t& disconnect_type();
+        static std::shared_ptr<tlvVsClientAssociationEvent> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -72,6 +73,7 @@ class tlvVsClientAssociationControlRequest : public BaseClass
             return (eActionOp_1905_VS)(ACTION_TLV_VENDOR_SPECIFIC);
         }
         beerocks::net::sIpv4Addr& ipv4();
+        static std::shared_ptr<tlvVsClientAssociationControlRequest> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 

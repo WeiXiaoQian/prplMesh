@@ -42,6 +42,7 @@ class tlvPushButtonJoinNotification : public BaseClass
         //Interface-specific MAC address of the interface of the new device that was
         //joined to the network as a result of the push button configuration sequence.
         sMacAddr& iface_mac_of_new_device_joined();
+        static std::shared_ptr<tlvPushButtonJoinNotification> castFrom(std::shared_ptr<BaseClass> source);
         void class_swap();
         static size_t get_initial_size();
 

@@ -37,6 +37,7 @@ class cACTION_APMANAGER_4ADDR_STA_JOINED : public BaseClass
         }
         sMacAddr& src_mac();
         sMacAddr& dst_mac();
+        static std::shared_ptr<cACTION_APMANAGER_4ADDR_STA_JOINED> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -59,6 +60,7 @@ class cACTION_APMANAGER_JOINED_NOTIFICATION : public BaseClass
         }
         sNodeHostap& params();
         sApChannelSwitch& cs_params();
+        static std::shared_ptr<cACTION_APMANAGER_JOINED_NOTIFICATION> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -79,6 +81,7 @@ class cACTION_APMANAGER_INIT_DONE_NOTIFICATION : public BaseClass
         static eActionOp_APMANAGER get_action_op(){
             return (eActionOp_APMANAGER)(ACTION_APMANAGER_INIT_DONE_NOTIFICATION);
         }
+        static std::shared_ptr<cACTION_APMANAGER_INIT_DONE_NOTIFICATION> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -98,6 +101,7 @@ class cACTION_APMANAGER_HOSTAP_SET_RESTRICTED_FAILSAFE_CHANNEL_REQUEST : public 
             return (eActionOp_APMANAGER)(ACTION_APMANAGER_HOSTAP_SET_RESTRICTED_FAILSAFE_CHANNEL_REQUEST);
         }
         sApSetRestrictedFailsafe& params();
+        static std::shared_ptr<cACTION_APMANAGER_HOSTAP_SET_RESTRICTED_FAILSAFE_CHANNEL_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -118,6 +122,7 @@ class cACTION_APMANAGER_HOSTAP_SET_RESTRICTED_FAILSAFE_CHANNEL_RESPONSE : public
             return (eActionOp_APMANAGER)(ACTION_APMANAGER_HOSTAP_SET_RESTRICTED_FAILSAFE_CHANNEL_RESPONSE);
         }
         uint8_t& success();
+        static std::shared_ptr<cACTION_APMANAGER_HOSTAP_SET_RESTRICTED_FAILSAFE_CHANNEL_RESPONSE> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -138,6 +143,7 @@ class cACTION_APMANAGER_HOSTAP_AP_DISABLED_NOTIFICATION : public BaseClass
             return (eActionOp_APMANAGER)(ACTION_APMANAGER_HOSTAP_AP_DISABLED_NOTIFICATION);
         }
         int8_t& vap_id();
+        static std::shared_ptr<cACTION_APMANAGER_HOSTAP_AP_DISABLED_NOTIFICATION> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -159,6 +165,7 @@ class cACTION_APMANAGER_HOSTAP_AP_ENABLED_NOTIFICATION : public BaseClass
         }
         int8_t& vap_id();
         sVapInfo& vap_info();
+        static std::shared_ptr<cACTION_APMANAGER_HOSTAP_AP_ENABLED_NOTIFICATION> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -179,6 +186,7 @@ class cACTION_APMANAGER_HOSTAP_VAPS_LIST_UPDATE_REQUEST : public BaseClass
         static eActionOp_APMANAGER get_action_op(){
             return (eActionOp_APMANAGER)(ACTION_APMANAGER_HOSTAP_VAPS_LIST_UPDATE_REQUEST);
         }
+        static std::shared_ptr<cACTION_APMANAGER_HOSTAP_VAPS_LIST_UPDATE_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -198,6 +206,7 @@ class cACTION_APMANAGER_HOSTAP_VAPS_LIST_UPDATE_NOTIFICATION : public BaseClass
             return (eActionOp_APMANAGER)(ACTION_APMANAGER_HOSTAP_VAPS_LIST_UPDATE_NOTIFICATION);
         }
         sVapsList& params();
+        static std::shared_ptr<cACTION_APMANAGER_HOSTAP_VAPS_LIST_UPDATE_NOTIFICATION> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -218,6 +227,7 @@ class cACTION_APMANAGER_HOSTAP_CHANNEL_SWITCH_ACS_START : public BaseClass
             return (eActionOp_APMANAGER)(ACTION_APMANAGER_HOSTAP_CHANNEL_SWITCH_ACS_START);
         }
         sApChannelSwitch& cs_params();
+        static std::shared_ptr<cACTION_APMANAGER_HOSTAP_CHANNEL_SWITCH_ACS_START> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -238,6 +248,7 @@ class cACTION_APMANAGER_HOSTAP_CSA_ERROR_NOTIFICATION : public BaseClass
             return (eActionOp_APMANAGER)(ACTION_APMANAGER_HOSTAP_CSA_ERROR_NOTIFICATION);
         }
         sApChannelSwitch& cs_params();
+        static std::shared_ptr<cACTION_APMANAGER_HOSTAP_CSA_ERROR_NOTIFICATION> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -258,6 +269,7 @@ class cACTION_APMANAGER_HOSTAP_CSA_NOTIFICATION : public BaseClass
             return (eActionOp_APMANAGER)(ACTION_APMANAGER_HOSTAP_CSA_NOTIFICATION);
         }
         sApChannelSwitch& cs_params();
+        static std::shared_ptr<cACTION_APMANAGER_HOSTAP_CSA_NOTIFICATION> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -278,6 +290,7 @@ class cACTION_APMANAGER_HOSTAP_ACS_ERROR_NOTIFICATION : public BaseClass
             return (eActionOp_APMANAGER)(ACTION_APMANAGER_HOSTAP_ACS_ERROR_NOTIFICATION);
         }
         sApChannelSwitch& cs_params();
+        static std::shared_ptr<cACTION_APMANAGER_HOSTAP_ACS_ERROR_NOTIFICATION> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -299,6 +312,7 @@ class cACTION_APMANAGER_HOSTAP_ACS_NOTIFICATION : public BaseClass
         }
         sApChannelSwitch& cs_params();
         std::tuple<bool, sWifiChannel&> supported_channels_list(size_t idx);
+        static std::shared_ptr<cACTION_APMANAGER_HOSTAP_ACS_NOTIFICATION> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -322,6 +336,7 @@ class cACTION_APMANAGER_HOSTAP_DFS_CAC_COMPLETED_NOTIFICATION : public BaseClass
             return (eActionOp_APMANAGER)(ACTION_APMANAGER_HOSTAP_DFS_CAC_COMPLETED_NOTIFICATION);
         }
         sDfsCacCompleted& params();
+        static std::shared_ptr<cACTION_APMANAGER_HOSTAP_DFS_CAC_COMPLETED_NOTIFICATION> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -342,6 +357,7 @@ class cACTION_APMANAGER_HOSTAP_DFS_CHANNEL_AVAILABLE_NOTIFICATION : public BaseC
             return (eActionOp_APMANAGER)(ACTION_APMANAGER_HOSTAP_DFS_CHANNEL_AVAILABLE_NOTIFICATION);
         }
         sDfsChannelAvailable& params();
+        static std::shared_ptr<cACTION_APMANAGER_HOSTAP_DFS_CHANNEL_AVAILABLE_NOTIFICATION> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -362,6 +378,7 @@ class cACTION_APMANAGER_HOSTAP_ADD_4ADDR_STA_UPDATE : public BaseClass
             return (eActionOp_APMANAGER)(ACTION_APMANAGER_HOSTAP_ADD_4ADDR_STA_UPDATE);
         }
         sMacAddr& mac();
+        static std::shared_ptr<cACTION_APMANAGER_HOSTAP_ADD_4ADDR_STA_UPDATE> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -382,6 +399,7 @@ class cACTION_APMANAGER_HOSTAP_DEL_4ADDR_STA_UPDATE : public BaseClass
             return (eActionOp_APMANAGER)(ACTION_APMANAGER_HOSTAP_DEL_4ADDR_STA_UPDATE);
         }
         sMacAddr& mac();
+        static std::shared_ptr<cACTION_APMANAGER_HOSTAP_DEL_4ADDR_STA_UPDATE> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -402,6 +420,7 @@ class cACTION_APMANAGER_HOSTAP_SET_NEIGHBOR_11K_REQUEST : public BaseClass
             return (eActionOp_APMANAGER)(ACTION_APMANAGER_HOSTAP_SET_NEIGHBOR_11K_REQUEST);
         }
         sNeighborSetParams11k& params();
+        static std::shared_ptr<cACTION_APMANAGER_HOSTAP_SET_NEIGHBOR_11K_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -422,6 +441,7 @@ class cACTION_APMANAGER_HOSTAP_REMOVE_NEIGHBOR_11K_REQUEST : public BaseClass
             return (eActionOp_APMANAGER)(ACTION_APMANAGER_HOSTAP_REMOVE_NEIGHBOR_11K_REQUEST);
         }
         sNeighborRemoveParams11k& params();
+        static std::shared_ptr<cACTION_APMANAGER_HOSTAP_REMOVE_NEIGHBOR_11K_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -442,6 +462,7 @@ class cACTION_APMANAGER_CLIENT_ASSOCIATED_NOTIFICATION : public BaseClass
             return (eActionOp_APMANAGER)(ACTION_APMANAGER_CLIENT_ASSOCIATED_NOTIFICATION);
         }
         sClientAssociationParams& params();
+        static std::shared_ptr<cACTION_APMANAGER_CLIENT_ASSOCIATED_NOTIFICATION> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -462,6 +483,7 @@ class cACTION_APMANAGER_CLIENT_DISCONNECTED_NOTIFICATION : public BaseClass
             return (eActionOp_APMANAGER)(ACTION_APMANAGER_CLIENT_DISCONNECTED_NOTIFICATION);
         }
         sClientDisconnectionParams& params();
+        static std::shared_ptr<cACTION_APMANAGER_CLIENT_DISCONNECTED_NOTIFICATION> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -485,6 +507,7 @@ class cACTION_APMANAGER_CLIENT_DISCONNECT_REQUEST : public BaseClass
         int8_t& vap_id();
         uint32_t& type();
         uint32_t& reason();
+        static std::shared_ptr<cACTION_APMANAGER_CLIENT_DISCONNECT_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -508,6 +531,7 @@ class cACTION_APMANAGER_CLIENT_DISCONNECT_RESPONSE : public BaseClass
             return (eActionOp_APMANAGER)(ACTION_APMANAGER_CLIENT_DISCONNECT_RESPONSE);
         }
         sClientDisconnectResponse& params();
+        static std::shared_ptr<cACTION_APMANAGER_CLIENT_DISCONNECT_RESPONSE> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -528,6 +552,7 @@ class cACTION_APMANAGER_CLIENT_DISALLOW_REQUEST : public BaseClass
             return (eActionOp_APMANAGER)(ACTION_APMANAGER_CLIENT_DISALLOW_REQUEST);
         }
         sMacAddr& mac();
+        static std::shared_ptr<cACTION_APMANAGER_CLIENT_DISALLOW_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -549,6 +574,7 @@ class cACTION_APMANAGER_CLIENT_ALLOW_REQUEST : public BaseClass
         }
         sMacAddr& mac();
         beerocks::net::sIpv4Addr& ipv4();
+        static std::shared_ptr<cACTION_APMANAGER_CLIENT_ALLOW_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -570,6 +596,7 @@ class cACTION_APMANAGER_CLIENT_RX_RSSI_MEASUREMENT_REQUEST : public BaseClass
             return (eActionOp_APMANAGER)(ACTION_APMANAGER_CLIENT_RX_RSSI_MEASUREMENT_REQUEST);
         }
         sNodeRssiMeasurementRequest& params();
+        static std::shared_ptr<cACTION_APMANAGER_CLIENT_RX_RSSI_MEASUREMENT_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -590,6 +617,7 @@ class cACTION_APMANAGER_CLIENT_RX_RSSI_MEASUREMENT_RESPONSE : public BaseClass
             return (eActionOp_APMANAGER)(ACTION_APMANAGER_CLIENT_RX_RSSI_MEASUREMENT_RESPONSE);
         }
         sNodeRssiMeasurement& params();
+        static std::shared_ptr<cACTION_APMANAGER_CLIENT_RX_RSSI_MEASUREMENT_RESPONSE> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -610,6 +638,7 @@ class cACTION_APMANAGER_CLIENT_IRE_CONNECTED_NOTIFICATION : public BaseClass
             return (eActionOp_APMANAGER)(ACTION_APMANAGER_CLIENT_IRE_CONNECTED_NOTIFICATION);
         }
         sMacAddr& mac();
+        static std::shared_ptr<cACTION_APMANAGER_CLIENT_IRE_CONNECTED_NOTIFICATION> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -631,6 +660,7 @@ class cACTION_APMANAGER_ACK : public BaseClass
         }
         uint8_t& reason();
         sMacAddr& sta_mac();
+        static std::shared_ptr<cACTION_APMANAGER_ACK> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -652,6 +682,7 @@ class cACTION_APMANAGER_CLIENT_BSS_STEER_REQUEST : public BaseClass
             return (eActionOp_APMANAGER)(ACTION_APMANAGER_CLIENT_BSS_STEER_REQUEST);
         }
         sNodeBssSteerRequest& params();
+        static std::shared_ptr<cACTION_APMANAGER_CLIENT_BSS_STEER_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -672,6 +703,7 @@ class cACTION_APMANAGER_CLIENT_BSS_STEER_RESPONSE : public BaseClass
             return (eActionOp_APMANAGER)(ACTION_APMANAGER_CLIENT_BSS_STEER_RESPONSE);
         }
         sNodeBssSteerResponse& params();
+        static std::shared_ptr<cACTION_APMANAGER_CLIENT_BSS_STEER_RESPONSE> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -692,6 +724,7 @@ class cACTION_APMANAGER_CLIENT_RX_RSSI_MEASUREMENT_CMD_RESPONSE : public BaseCla
             return (eActionOp_APMANAGER)(ACTION_APMANAGER_CLIENT_RX_RSSI_MEASUREMENT_CMD_RESPONSE);
         }
         sMacAddr& mac();
+        static std::shared_ptr<cACTION_APMANAGER_CLIENT_RX_RSSI_MEASUREMENT_CMD_RESPONSE> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -712,6 +745,7 @@ class cACTION_APMANAGER_STEERING_CLIENT_SET_REQUEST : public BaseClass
             return (eActionOp_APMANAGER)(ACTION_APMANAGER_STEERING_CLIENT_SET_REQUEST);
         }
         sSteeringClientSetRequest& params();
+        static std::shared_ptr<cACTION_APMANAGER_STEERING_CLIENT_SET_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -732,6 +766,7 @@ class cACTION_APMANAGER_STEERING_CLIENT_SET_RESPONSE : public BaseClass
             return (eActionOp_APMANAGER)(ACTION_APMANAGER_STEERING_CLIENT_SET_RESPONSE);
         }
         sSteeringClientSetResponse& params();
+        static std::shared_ptr<cACTION_APMANAGER_STEERING_CLIENT_SET_RESPONSE> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -752,6 +787,7 @@ class cACTION_APMANAGER_STEERING_EVENT_PROBE_REQ_NOTIFICATION : public BaseClass
             return (eActionOp_APMANAGER)(ACTION_APMANAGER_STEERING_EVENT_PROBE_REQ_NOTIFICATION);
         }
         sSteeringEvProbeReq& params();
+        static std::shared_ptr<cACTION_APMANAGER_STEERING_EVENT_PROBE_REQ_NOTIFICATION> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -772,6 +808,7 @@ class cACTION_APMANAGER_STEERING_EVENT_AUTH_FAIL_NOTIFICATION : public BaseClass
             return (eActionOp_APMANAGER)(ACTION_APMANAGER_STEERING_EVENT_AUTH_FAIL_NOTIFICATION);
         }
         sSteeringEvAuthFail& params();
+        static std::shared_ptr<cACTION_APMANAGER_STEERING_EVENT_AUTH_FAIL_NOTIFICATION> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -791,6 +828,7 @@ class cACTION_APMANAGER_HEARTBEAT_NOTIFICATION : public BaseClass
         static eActionOp_APMANAGER get_action_op(){
             return (eActionOp_APMANAGER)(ACTION_APMANAGER_HEARTBEAT_NOTIFICATION);
         }
+        static std::shared_ptr<cACTION_APMANAGER_HEARTBEAT_NOTIFICATION> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 

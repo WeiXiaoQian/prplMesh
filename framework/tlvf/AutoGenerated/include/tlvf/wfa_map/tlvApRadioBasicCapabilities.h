@@ -43,6 +43,7 @@ class tlvApRadioBasicCapabilities : public BaseClass
         std::tuple<bool, cOperatingClassesInfo&> operating_classes_info_list(size_t idx);
         std::shared_ptr<cOperatingClassesInfo> create_operating_classes_info_list();
         bool add_operating_classes_info_list(std::shared_ptr<cOperatingClassesInfo> ptr);
+        static std::shared_ptr<tlvApRadioBasicCapabilities> castFrom(std::shared_ptr<BaseClass> source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -72,6 +73,7 @@ class cOperatingClassesInfo : public BaseClass
         uint8_t& statically_non_operable_channels_list_length();
         uint8_t* statically_non_operable_channels_list(size_t idx = 0);
         bool alloc_statically_non_operable_channels_list(size_t count = 1);
+        static std::shared_ptr<cOperatingClassesInfo> castFrom(std::shared_ptr<BaseClass> source);
         void class_swap();
         static size_t get_initial_size();
 

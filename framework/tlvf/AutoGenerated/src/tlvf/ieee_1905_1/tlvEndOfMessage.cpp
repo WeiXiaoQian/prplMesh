@@ -33,6 +33,9 @@ const uint16_t& tlvEndOfMessage::length() {
     return (const uint16_t&)(*m_length);
 }
 
+std::shared_ptr<tlvEndOfMessage> tlvEndOfMessage::castFrom(std::shared_ptr<BaseClass> source) {
+    return std::make_shared<tlvEndOfMessage>(source->getStartBuffPtr(),source->getLen()+source->getBuffRemainingBytes(),true);
+}
 void tlvEndOfMessage::class_swap()
 {
     tlvf_swap(16, reinterpret_cast<uint8_t*>(m_length));

@@ -37,6 +37,9 @@ tlvSupportedRole::eValue& tlvSupportedRole::value() {
     return (eValue&)(*m_value);
 }
 
+std::shared_ptr<tlvSupportedRole> tlvSupportedRole::castFrom(std::shared_ptr<BaseClass> source) {
+    return std::make_shared<tlvSupportedRole>(source->getStartBuffPtr(),source->getLen()+source->getBuffRemainingBytes(),true);
+}
 void tlvSupportedRole::class_swap()
 {
     tlvf_swap(16, reinterpret_cast<uint8_t*>(m_length));

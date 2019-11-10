@@ -55,6 +55,7 @@ class tlvTestVarList : public BaseClass
         std::tuple<bool, cInner&> unknown_length_list(size_t idx);
         std::shared_ptr<cInner> create_unknown_length_list();
         bool add_unknown_length_list(std::shared_ptr<cInner> ptr);
+        static std::shared_ptr<tlvTestVarList> castFrom(std::shared_ptr<BaseClass> source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -102,6 +103,7 @@ class cInner : public BaseClass
         bool set_unknown_length_list_inner(const std::string& str);
         bool set_unknown_length_list_inner(const char buffer[], size_t size);
         bool alloc_unknown_length_list_inner(size_t count = 1);
+        static std::shared_ptr<cInner> castFrom(std::shared_ptr<BaseClass> source);
         void class_swap();
         static size_t get_initial_size();
 

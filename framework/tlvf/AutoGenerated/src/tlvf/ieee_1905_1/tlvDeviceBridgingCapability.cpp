@@ -101,6 +101,9 @@ bool tlvDeviceBridgingCapability::add_bridging_tuples_list(std::shared_ptr<cMacL
     return true;
 }
 
+std::shared_ptr<tlvDeviceBridgingCapability> tlvDeviceBridgingCapability::castFrom(std::shared_ptr<BaseClass> source) {
+    return std::make_shared<tlvDeviceBridgingCapability>(source->getStartBuffPtr(),source->getLen()+source->getBuffRemainingBytes(),true);
+}
 void tlvDeviceBridgingCapability::class_swap()
 {
     tlvf_swap(16, reinterpret_cast<uint8_t*>(m_length));
@@ -213,6 +216,9 @@ bool cMacList::alloc_mac_list(size_t count) {
     return true;
 }
 
+std::shared_ptr<cMacList> cMacList::castFrom(std::shared_ptr<BaseClass> source) {
+    return std::make_shared<cMacList>(source->getStartBuffPtr(),source->getLen()+source->getBuffRemainingBytes(),true);
+}
 void cMacList::class_swap()
 {
     for (size_t i = 0; i < (size_t)*m_mac_list_length; i++){

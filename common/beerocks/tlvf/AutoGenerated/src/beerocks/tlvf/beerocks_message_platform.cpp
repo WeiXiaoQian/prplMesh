@@ -29,6 +29,14 @@ uint8_t& cACTION_PLATFORM_SON_SLAVE_BACKHAUL_CONNECTION_COMPLETE_NOTIFICATION::i
     return (uint8_t&)(*m_is_backhaul_manager);
 }
 
+std::shared_ptr<cACTION_PLATFORM_SON_SLAVE_BACKHAUL_CONNECTION_COMPLETE_NOTIFICATION> cACTION_PLATFORM_SON_SLAVE_BACKHAUL_CONNECTION_COMPLETE_NOTIFICATION::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_PLATFORM_SON_SLAVE_BACKHAUL_CONNECTION_COMPLETE_NOTIFICATION>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_PLATFORM_SON_SLAVE_BACKHAUL_CONNECTION_COMPLETE_NOTIFICATION::class_swap()
 {
 }
@@ -89,6 +97,14 @@ bool cACTION_PLATFORM_SON_SLAVE_REGISTER_REQUEST::set_iface_name(const char str[
     std::copy(str, str + size, m_iface_name);
     return true;
 }
+std::shared_ptr<cACTION_PLATFORM_SON_SLAVE_REGISTER_REQUEST> cACTION_PLATFORM_SON_SLAVE_REGISTER_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_PLATFORM_SON_SLAVE_REGISTER_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_PLATFORM_SON_SLAVE_REGISTER_REQUEST::class_swap()
 {
 }
@@ -135,6 +151,14 @@ uint32_t& cACTION_PLATFORM_SON_SLAVE_REGISTER_RESPONSE::valid() {
     return (uint32_t&)(*m_valid);
 }
 
+std::shared_ptr<cACTION_PLATFORM_SON_SLAVE_REGISTER_RESPONSE> cACTION_PLATFORM_SON_SLAVE_REGISTER_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_PLATFORM_SON_SLAVE_REGISTER_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_PLATFORM_SON_SLAVE_REGISTER_RESPONSE::class_swap()
 {
     m_platform_settings->struct_swap();
@@ -206,6 +230,14 @@ bool cACTION_PLATFORM_POST_INIT_CONFIG_REQUEST::set_iface_name(const char str[],
     std::copy(str, str + size, m_iface_name);
     return true;
 }
+std::shared_ptr<cACTION_PLATFORM_POST_INIT_CONFIG_REQUEST> cACTION_PLATFORM_POST_INIT_CONFIG_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_PLATFORM_POST_INIT_CONFIG_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_PLATFORM_POST_INIT_CONFIG_REQUEST::class_swap()
 {
 }
@@ -244,6 +276,14 @@ uint8_t& cACTION_PLATFORM_POST_INIT_CONFIG_RESPONSE::result() {
     return (uint8_t&)(*m_result);
 }
 
+std::shared_ptr<cACTION_PLATFORM_POST_INIT_CONFIG_RESPONSE> cACTION_PLATFORM_POST_INIT_CONFIG_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_PLATFORM_POST_INIT_CONFIG_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_PLATFORM_POST_INIT_CONFIG_RESPONSE::class_swap()
 {
 }
@@ -281,6 +321,14 @@ sArpMonitorData& cACTION_PLATFORM_ARP_MONITOR_NOTIFICATION::params() {
     return (sArpMonitorData&)(*m_params);
 }
 
+std::shared_ptr<cACTION_PLATFORM_ARP_MONITOR_NOTIFICATION> cACTION_PLATFORM_ARP_MONITOR_NOTIFICATION::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_PLATFORM_ARP_MONITOR_NOTIFICATION>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_PLATFORM_ARP_MONITOR_NOTIFICATION::class_swap()
 {
     m_params->struct_swap();
@@ -320,6 +368,14 @@ sWlanSettings& cACTION_PLATFORM_WLAN_PARAMS_CHANGED_NOTIFICATION::wlan_settings(
     return (sWlanSettings&)(*m_wlan_settings);
 }
 
+std::shared_ptr<cACTION_PLATFORM_WLAN_PARAMS_CHANGED_NOTIFICATION> cACTION_PLATFORM_WLAN_PARAMS_CHANGED_NOTIFICATION::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_PLATFORM_WLAN_PARAMS_CHANGED_NOTIFICATION>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_PLATFORM_WLAN_PARAMS_CHANGED_NOTIFICATION::class_swap()
 {
     m_wlan_settings->struct_swap();
@@ -398,6 +454,14 @@ bool cACTION_PLATFORM_DHCP_MONITOR_NOTIFICATION::set_hostname(const char str[], 
     std::copy(str, str + size, m_hostname);
     return true;
 }
+std::shared_ptr<cACTION_PLATFORM_DHCP_MONITOR_NOTIFICATION> cACTION_PLATFORM_DHCP_MONITOR_NOTIFICATION::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_PLATFORM_DHCP_MONITOR_NOTIFICATION>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_PLATFORM_DHCP_MONITOR_NOTIFICATION::class_swap()
 {
     tlvf_swap(32, reinterpret_cast<uint8_t*>(m_op));
@@ -453,6 +517,14 @@ sLoggingLevelChange& cACTION_PLATFORM_CHANGE_MODULE_LOGGING_LEVEL::params() {
     return (sLoggingLevelChange&)(*m_params);
 }
 
+std::shared_ptr<cACTION_PLATFORM_CHANGE_MODULE_LOGGING_LEVEL> cACTION_PLATFORM_CHANGE_MODULE_LOGGING_LEVEL::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_PLATFORM_CHANGE_MODULE_LOGGING_LEVEL>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_PLATFORM_CHANGE_MODULE_LOGGING_LEVEL::class_swap()
 {
     m_params->struct_swap();
@@ -492,6 +564,14 @@ sArpQuery& cACTION_PLATFORM_ARP_QUERY_REQUEST::params() {
     return (sArpQuery&)(*m_params);
 }
 
+std::shared_ptr<cACTION_PLATFORM_ARP_QUERY_REQUEST> cACTION_PLATFORM_ARP_QUERY_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_PLATFORM_ARP_QUERY_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_PLATFORM_ARP_QUERY_REQUEST::class_swap()
 {
     m_params->struct_swap();
@@ -531,6 +611,14 @@ sArpMonitorData& cACTION_PLATFORM_ARP_QUERY_RESPONSE::params() {
     return (sArpMonitorData&)(*m_params);
 }
 
+std::shared_ptr<cACTION_PLATFORM_ARP_QUERY_RESPONSE> cACTION_PLATFORM_ARP_QUERY_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_PLATFORM_ARP_QUERY_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_PLATFORM_ARP_QUERY_RESPONSE::class_swap()
 {
     m_params->struct_swap();
@@ -566,6 +654,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
 }
 cACTION_PLATFORM_ONBOARD_QUERY_REQUEST::~cACTION_PLATFORM_ONBOARD_QUERY_REQUEST() {
 }
+std::shared_ptr<cACTION_PLATFORM_ONBOARD_QUERY_REQUEST> cACTION_PLATFORM_ONBOARD_QUERY_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_PLATFORM_ONBOARD_QUERY_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_PLATFORM_ONBOARD_QUERY_REQUEST::class_swap()
 {
 }
@@ -600,6 +696,14 @@ sOnboarding& cACTION_PLATFORM_ONBOARD_QUERY_RESPONSE::params() {
     return (sOnboarding&)(*m_params);
 }
 
+std::shared_ptr<cACTION_PLATFORM_ONBOARD_QUERY_RESPONSE> cACTION_PLATFORM_ONBOARD_QUERY_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_PLATFORM_ONBOARD_QUERY_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_PLATFORM_ONBOARD_QUERY_RESPONSE::class_swap()
 {
     m_params->struct_swap();
@@ -639,6 +743,14 @@ sOnboarding& cACTION_PLATFORM_ONBOARD_SET_REQUEST::params() {
     return (sOnboarding&)(*m_params);
 }
 
+std::shared_ptr<cACTION_PLATFORM_ONBOARD_SET_REQUEST> cACTION_PLATFORM_ONBOARD_SET_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_PLATFORM_ONBOARD_SET_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_PLATFORM_ONBOARD_SET_REQUEST::class_swap()
 {
     m_params->struct_swap();
@@ -701,6 +813,14 @@ bool cACTION_PLATFORM_WPS_ONBOARDING_REQUEST::set_iface_name(const char str[], s
     std::copy(str, str + size, m_iface_name);
     return true;
 }
+std::shared_ptr<cACTION_PLATFORM_WPS_ONBOARDING_REQUEST> cACTION_PLATFORM_WPS_ONBOARDING_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_PLATFORM_WPS_ONBOARDING_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_PLATFORM_WPS_ONBOARDING_REQUEST::class_swap()
 {
 }
@@ -739,6 +859,14 @@ sWifiCredentials& cACTION_PLATFORM_BEEROCKS_CREDENTIALS_UPDATE_REQUEST::params()
     return (sWifiCredentials&)(*m_params);
 }
 
+std::shared_ptr<cACTION_PLATFORM_BEEROCKS_CREDENTIALS_UPDATE_REQUEST> cACTION_PLATFORM_BEEROCKS_CREDENTIALS_UPDATE_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_PLATFORM_BEEROCKS_CREDENTIALS_UPDATE_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_PLATFORM_BEEROCKS_CREDENTIALS_UPDATE_REQUEST::class_swap()
 {
     m_params->struct_swap();
@@ -778,6 +906,14 @@ uint32_t& cACTION_PLATFORM_BEEROCKS_CREDENTIALS_UPDATE_RESPONSE::result() {
     return (uint32_t&)(*m_result);
 }
 
+std::shared_ptr<cACTION_PLATFORM_BEEROCKS_CREDENTIALS_UPDATE_RESPONSE> cACTION_PLATFORM_BEEROCKS_CREDENTIALS_UPDATE_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_PLATFORM_BEEROCKS_CREDENTIALS_UPDATE_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_PLATFORM_BEEROCKS_CREDENTIALS_UPDATE_RESPONSE::class_swap()
 {
     tlvf_swap(32, reinterpret_cast<uint8_t*>(m_result));
@@ -920,6 +1056,14 @@ bool cACTION_PLATFORM_WIFI_CREDENTIALS_SET_REQUEST::set_security_type(const char
     std::copy(str, str + size, m_security_type);
     return true;
 }
+std::shared_ptr<cACTION_PLATFORM_WIFI_CREDENTIALS_SET_REQUEST> cACTION_PLATFORM_WIFI_CREDENTIALS_SET_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_PLATFORM_WIFI_CREDENTIALS_SET_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_PLATFORM_WIFI_CREDENTIALS_SET_REQUEST::class_swap()
 {
 }
@@ -997,6 +1141,14 @@ uint8_t& cACTION_PLATFORM_WIFI_CREDENTIALS_SET_RESPONSE::success() {
     return (uint8_t&)(*m_success);
 }
 
+std::shared_ptr<cACTION_PLATFORM_WIFI_CREDENTIALS_SET_RESPONSE> cACTION_PLATFORM_WIFI_CREDENTIALS_SET_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_PLATFORM_WIFI_CREDENTIALS_SET_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_PLATFORM_WIFI_CREDENTIALS_SET_RESPONSE::class_swap()
 {
 }
@@ -1038,6 +1190,14 @@ uint32_t& cACTION_PLATFORM_ADVERTISE_SSID_FLAG_UPDATE_REQUEST::flag() {
     return (uint32_t&)(*m_flag);
 }
 
+std::shared_ptr<cACTION_PLATFORM_ADVERTISE_SSID_FLAG_UPDATE_REQUEST> cACTION_PLATFORM_ADVERTISE_SSID_FLAG_UPDATE_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_PLATFORM_ADVERTISE_SSID_FLAG_UPDATE_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_PLATFORM_ADVERTISE_SSID_FLAG_UPDATE_REQUEST::class_swap()
 {
     tlvf_swap(32, reinterpret_cast<uint8_t*>(m_flag));
@@ -1076,6 +1236,14 @@ uint32_t& cACTION_PLATFORM_ADVERTISE_SSID_FLAG_UPDATE_RESPONSE::result() {
     return (uint32_t&)(*m_result);
 }
 
+std::shared_ptr<cACTION_PLATFORM_ADVERTISE_SSID_FLAG_UPDATE_RESPONSE> cACTION_PLATFORM_ADVERTISE_SSID_FLAG_UPDATE_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_PLATFORM_ADVERTISE_SSID_FLAG_UPDATE_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_PLATFORM_ADVERTISE_SSID_FLAG_UPDATE_RESPONSE::class_swap()
 {
     tlvf_swap(32, reinterpret_cast<uint8_t*>(m_result));
@@ -1109,6 +1277,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
     m_init_succeeded = init();
 }
 cACTION_PLATFORM_GET_WLAN_READY_STATUS_REQUEST::~cACTION_PLATFORM_GET_WLAN_READY_STATUS_REQUEST() {
+}
+std::shared_ptr<cACTION_PLATFORM_GET_WLAN_READY_STATUS_REQUEST> cACTION_PLATFORM_GET_WLAN_READY_STATUS_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_PLATFORM_GET_WLAN_READY_STATUS_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
 }
 void cACTION_PLATFORM_GET_WLAN_READY_STATUS_REQUEST::class_swap()
 {
@@ -1144,6 +1320,14 @@ uint8_t& cACTION_PLATFORM_GET_WLAN_READY_STATUS_RESPONSE::result() {
     return (uint8_t&)(*m_result);
 }
 
+std::shared_ptr<cACTION_PLATFORM_GET_WLAN_READY_STATUS_RESPONSE> cACTION_PLATFORM_GET_WLAN_READY_STATUS_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_PLATFORM_GET_WLAN_READY_STATUS_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_PLATFORM_GET_WLAN_READY_STATUS_RESPONSE::class_swap()
 {
 }
@@ -1181,6 +1365,14 @@ uint8_t& cACTION_PLATFORM_WIFI_CREDENTIALS_GET_REQUEST::vap_id() {
     return (uint8_t&)(*m_vap_id);
 }
 
+std::shared_ptr<cACTION_PLATFORM_WIFI_CREDENTIALS_GET_REQUEST> cACTION_PLATFORM_WIFI_CREDENTIALS_GET_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_PLATFORM_WIFI_CREDENTIALS_GET_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_PLATFORM_WIFI_CREDENTIALS_GET_REQUEST::class_swap()
 {
 }
@@ -1226,6 +1418,14 @@ uint32_t& cACTION_PLATFORM_WIFI_CREDENTIALS_GET_RESPONSE::result() {
     return (uint32_t&)(*m_result);
 }
 
+std::shared_ptr<cACTION_PLATFORM_WIFI_CREDENTIALS_GET_RESPONSE> cACTION_PLATFORM_WIFI_CREDENTIALS_GET_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_PLATFORM_WIFI_CREDENTIALS_GET_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_PLATFORM_WIFI_CREDENTIALS_GET_RESPONSE::class_swap()
 {
     m_front_params->struct_swap();
@@ -1270,6 +1470,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
 }
 cACTION_PLATFORM_ADMIN_CREDENTIALS_GET_REQUEST::~cACTION_PLATFORM_ADMIN_CREDENTIALS_GET_REQUEST() {
 }
+std::shared_ptr<cACTION_PLATFORM_ADMIN_CREDENTIALS_GET_REQUEST> cACTION_PLATFORM_ADMIN_CREDENTIALS_GET_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_PLATFORM_ADMIN_CREDENTIALS_GET_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_PLATFORM_ADMIN_CREDENTIALS_GET_REQUEST::class_swap()
 {
 }
@@ -1308,6 +1516,14 @@ uint32_t& cACTION_PLATFORM_ADMIN_CREDENTIALS_GET_RESPONSE::result() {
     return (uint32_t&)(*m_result);
 }
 
+std::shared_ptr<cACTION_PLATFORM_ADMIN_CREDENTIALS_GET_RESPONSE> cACTION_PLATFORM_ADMIN_CREDENTIALS_GET_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_PLATFORM_ADMIN_CREDENTIALS_GET_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_PLATFORM_ADMIN_CREDENTIALS_GET_RESPONSE::class_swap()
 {
     m_params->struct_swap();
@@ -1347,6 +1563,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
 }
 cACTION_PLATFORM_DEVICE_INFO_GET_REQUEST::~cACTION_PLATFORM_DEVICE_INFO_GET_REQUEST() {
 }
+std::shared_ptr<cACTION_PLATFORM_DEVICE_INFO_GET_REQUEST> cACTION_PLATFORM_DEVICE_INFO_GET_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_PLATFORM_DEVICE_INFO_GET_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_PLATFORM_DEVICE_INFO_GET_REQUEST::class_swap()
 {
 }
@@ -1385,6 +1609,14 @@ uint32_t& cACTION_PLATFORM_DEVICE_INFO_GET_RESPONSE::result() {
     return (uint32_t&)(*m_result);
 }
 
+std::shared_ptr<cACTION_PLATFORM_DEVICE_INFO_GET_RESPONSE> cACTION_PLATFORM_DEVICE_INFO_GET_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_PLATFORM_DEVICE_INFO_GET_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_PLATFORM_DEVICE_INFO_GET_RESPONSE::class_swap()
 {
     m_params->struct_swap();
@@ -1424,6 +1656,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
 }
 cACTION_PLATFORM_LOCAL_MASTER_GET_REQUEST::~cACTION_PLATFORM_LOCAL_MASTER_GET_REQUEST() {
 }
+std::shared_ptr<cACTION_PLATFORM_LOCAL_MASTER_GET_REQUEST> cACTION_PLATFORM_LOCAL_MASTER_GET_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_PLATFORM_LOCAL_MASTER_GET_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_PLATFORM_LOCAL_MASTER_GET_REQUEST::class_swap()
 {
 }
@@ -1458,6 +1698,14 @@ uint8_t& cACTION_PLATFORM_LOCAL_MASTER_GET_RESPONSE::local_master() {
     return (uint8_t&)(*m_local_master);
 }
 
+std::shared_ptr<cACTION_PLATFORM_LOCAL_MASTER_GET_RESPONSE> cACTION_PLATFORM_LOCAL_MASTER_GET_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_PLATFORM_LOCAL_MASTER_GET_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_PLATFORM_LOCAL_MASTER_GET_RESPONSE::class_swap()
 {
 }
@@ -1522,6 +1770,14 @@ int8_t& cACTION_PLATFORM_WIFI_SET_IFACE_STATE_REQUEST::iface_operation() {
     return (int8_t&)(*m_iface_operation);
 }
 
+std::shared_ptr<cACTION_PLATFORM_WIFI_SET_IFACE_STATE_REQUEST> cACTION_PLATFORM_WIFI_SET_IFACE_STATE_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_PLATFORM_WIFI_SET_IFACE_STATE_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_PLATFORM_WIFI_SET_IFACE_STATE_REQUEST::class_swap()
 {
 }
@@ -1594,6 +1850,14 @@ uint8_t& cACTION_PLATFORM_WIFI_SET_IFACE_STATE_RESPONSE::success() {
     return (uint8_t&)(*m_success);
 }
 
+std::shared_ptr<cACTION_PLATFORM_WIFI_SET_IFACE_STATE_RESPONSE> cACTION_PLATFORM_WIFI_SET_IFACE_STATE_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_PLATFORM_WIFI_SET_IFACE_STATE_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_PLATFORM_WIFI_SET_IFACE_STATE_RESPONSE::class_swap()
 {
 }
@@ -1665,6 +1929,14 @@ uint8_t& cACTION_PLATFORM_WIFI_SET_RADIO_TX_STATE_REQUEST::enable() {
     return (uint8_t&)(*m_enable);
 }
 
+std::shared_ptr<cACTION_PLATFORM_WIFI_SET_RADIO_TX_STATE_REQUEST> cACTION_PLATFORM_WIFI_SET_RADIO_TX_STATE_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_PLATFORM_WIFI_SET_RADIO_TX_STATE_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_PLATFORM_WIFI_SET_RADIO_TX_STATE_REQUEST::class_swap()
 {
 }
@@ -1737,6 +2009,14 @@ uint8_t& cACTION_PLATFORM_WIFI_SET_RADIO_TX_STATE_RESPONSE::success() {
     return (uint8_t&)(*m_success);
 }
 
+std::shared_ptr<cACTION_PLATFORM_WIFI_SET_RADIO_TX_STATE_RESPONSE> cACTION_PLATFORM_WIFI_SET_RADIO_TX_STATE_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_PLATFORM_WIFI_SET_RADIO_TX_STATE_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_PLATFORM_WIFI_SET_RADIO_TX_STATE_RESPONSE::class_swap()
 {
 }
@@ -1781,6 +2061,14 @@ sVersions& cACTION_PLATFORM_VERSION_MISMATCH_NOTIFICATION::versions() {
     return (sVersions&)(*m_versions);
 }
 
+std::shared_ptr<cACTION_PLATFORM_VERSION_MISMATCH_NOTIFICATION> cACTION_PLATFORM_VERSION_MISMATCH_NOTIFICATION::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_PLATFORM_VERSION_MISMATCH_NOTIFICATION>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_PLATFORM_VERSION_MISMATCH_NOTIFICATION::class_swap()
 {
     m_versions->struct_swap();
@@ -1820,6 +2108,14 @@ sVersions& cACTION_PLATFORM_MASTER_SLAVE_VERSIONS_NOTIFICATION::versions() {
     return (sVersions&)(*m_versions);
 }
 
+std::shared_ptr<cACTION_PLATFORM_MASTER_SLAVE_VERSIONS_NOTIFICATION> cACTION_PLATFORM_MASTER_SLAVE_VERSIONS_NOTIFICATION::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_PLATFORM_MASTER_SLAVE_VERSIONS_NOTIFICATION>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_PLATFORM_MASTER_SLAVE_VERSIONS_NOTIFICATION::class_swap()
 {
     m_versions->struct_swap();
@@ -1854,6 +2150,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
     m_init_succeeded = init();
 }
 cACTION_PLATFORM_GET_MASTER_SLAVE_VERSIONS_REQUEST::~cACTION_PLATFORM_GET_MASTER_SLAVE_VERSIONS_REQUEST() {
+}
+std::shared_ptr<cACTION_PLATFORM_GET_MASTER_SLAVE_VERSIONS_REQUEST> cACTION_PLATFORM_GET_MASTER_SLAVE_VERSIONS_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_PLATFORM_GET_MASTER_SLAVE_VERSIONS_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
 }
 void cACTION_PLATFORM_GET_MASTER_SLAVE_VERSIONS_REQUEST::class_swap()
 {
@@ -1893,6 +2197,14 @@ uint32_t& cACTION_PLATFORM_GET_MASTER_SLAVE_VERSIONS_RESPONSE::result() {
     return (uint32_t&)(*m_result);
 }
 
+std::shared_ptr<cACTION_PLATFORM_GET_MASTER_SLAVE_VERSIONS_RESPONSE> cACTION_PLATFORM_GET_MASTER_SLAVE_VERSIONS_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_PLATFORM_GET_MASTER_SLAVE_VERSIONS_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_PLATFORM_GET_MASTER_SLAVE_VERSIONS_RESPONSE::class_swap()
 {
     m_versions->struct_swap();
@@ -1962,6 +2274,14 @@ bool cACTION_PLATFORM_ERROR_NOTIFICATION::set_data(const char str[], size_t size
     }
     std::copy(str, str + size, m_data);
     return true;
+}
+std::shared_ptr<cACTION_PLATFORM_ERROR_NOTIFICATION> cACTION_PLATFORM_ERROR_NOTIFICATION::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_PLATFORM_ERROR_NOTIFICATION>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
 }
 void cACTION_PLATFORM_ERROR_NOTIFICATION::class_swap()
 {
@@ -2075,6 +2395,14 @@ uint8_t& cACTION_PLATFORM_WIFI_INTERFACE_STATUS_NOTIFICATION::status_operational
     return (uint8_t&)(*m_status_operational);
 }
 
+std::shared_ptr<cACTION_PLATFORM_WIFI_INTERFACE_STATUS_NOTIFICATION> cACTION_PLATFORM_WIFI_INTERFACE_STATUS_NOTIFICATION::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_PLATFORM_WIFI_INTERFACE_STATUS_NOTIFICATION>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_PLATFORM_WIFI_INTERFACE_STATUS_NOTIFICATION::class_swap()
 {
 }
@@ -2132,6 +2460,14 @@ uint8_t& cACTION_PLATFORM_WIFI_CONFIGURATION_UPDATE_REQUEST::config_start() {
     return (uint8_t&)(*m_config_start);
 }
 
+std::shared_ptr<cACTION_PLATFORM_WIFI_CONFIGURATION_UPDATE_REQUEST> cACTION_PLATFORM_WIFI_CONFIGURATION_UPDATE_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_PLATFORM_WIFI_CONFIGURATION_UPDATE_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_PLATFORM_WIFI_CONFIGURATION_UPDATE_REQUEST::class_swap()
 {
 }
@@ -2164,6 +2500,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
     m_init_succeeded = init();
 }
 cACTION_PLATFORM_WIFI_CONFIGURATION_UPDATE_RESPONSE::~cACTION_PLATFORM_WIFI_CONFIGURATION_UPDATE_RESPONSE() {
+}
+std::shared_ptr<cACTION_PLATFORM_WIFI_CONFIGURATION_UPDATE_RESPONSE> cACTION_PLATFORM_WIFI_CONFIGURATION_UPDATE_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_PLATFORM_WIFI_CONFIGURATION_UPDATE_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
 }
 void cACTION_PLATFORM_WIFI_CONFIGURATION_UPDATE_RESPONSE::class_swap()
 {
@@ -2199,6 +2543,14 @@ uint8_t& cACTION_PLATFORM_OPERATIONAL_NOTIFICATION::operational() {
     return (uint8_t&)(*m_operational);
 }
 
+std::shared_ptr<cACTION_PLATFORM_OPERATIONAL_NOTIFICATION> cACTION_PLATFORM_OPERATIONAL_NOTIFICATION::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_PLATFORM_OPERATIONAL_NOTIFICATION>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_PLATFORM_OPERATIONAL_NOTIFICATION::class_swap()
 {
 }

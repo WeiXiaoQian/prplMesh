@@ -92,6 +92,14 @@ uint8_t& cACTION_CONTROL_SLAVE_JOINED_NOTIFICATION::is_slave_reconf() {
     return (uint8_t&)(*m_is_slave_reconf);
 }
 
+std::shared_ptr<cACTION_CONTROL_SLAVE_JOINED_NOTIFICATION> cACTION_CONTROL_SLAVE_JOINED_NOTIFICATION::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_SLAVE_JOINED_NOTIFICATION>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_SLAVE_JOINED_NOTIFICATION::class_swap()
 {
     m_platform_settings->struct_swap();
@@ -203,6 +211,14 @@ sSonConfig& cACTION_CONTROL_SLAVE_JOINED_RESPONSE::config() {
     return (sSonConfig&)(*m_config);
 }
 
+std::shared_ptr<cACTION_CONTROL_SLAVE_JOINED_RESPONSE> cACTION_CONTROL_SLAVE_JOINED_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_SLAVE_JOINED_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_SLAVE_JOINED_RESPONSE::class_swap()
 {
     m_config->struct_swap();
@@ -265,6 +281,14 @@ sNodeHostap& cACTION_CONTROL_SLAVE_JOINED_4ADDR_MODE_NOTIFICATION::hostap() {
     return (sNodeHostap&)(*m_hostap);
 }
 
+std::shared_ptr<cACTION_CONTROL_SLAVE_JOINED_4ADDR_MODE_NOTIFICATION> cACTION_CONTROL_SLAVE_JOINED_4ADDR_MODE_NOTIFICATION::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_SLAVE_JOINED_4ADDR_MODE_NOTIFICATION>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_SLAVE_JOINED_4ADDR_MODE_NOTIFICATION::class_swap()
 {
     m_backhaul_iface_mac->struct_swap();
@@ -324,6 +348,14 @@ sSonConfig& cACTION_CONTROL_SON_CONFIG_UPDATE::config() {
     return (sSonConfig&)(*m_config);
 }
 
+std::shared_ptr<cACTION_CONTROL_SON_CONFIG_UPDATE> cACTION_CONTROL_SON_CONFIG_UPDATE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_SON_CONFIG_UPDATE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_SON_CONFIG_UPDATE::class_swap()
 {
     m_config->struct_swap();
@@ -405,6 +437,14 @@ bool cACTION_CONTROL_CONTROLLER_PING_REQUEST::alloc_data(size_t count) {
     return true;
 }
 
+std::shared_ptr<cACTION_CONTROL_CONTROLLER_PING_REQUEST> cACTION_CONTROL_CONTROLLER_PING_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_CONTROLLER_PING_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_CONTROLLER_PING_REQUEST::class_swap()
 {
     tlvf_swap(16, reinterpret_cast<uint8_t*>(m_total));
@@ -494,6 +534,14 @@ bool cACTION_CONTROL_CONTROLLER_PING_RESPONSE::alloc_data(size_t count) {
     return true;
 }
 
+std::shared_ptr<cACTION_CONTROL_CONTROLLER_PING_RESPONSE> cACTION_CONTROL_CONTROLLER_PING_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_CONTROLLER_PING_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_CONTROLLER_PING_RESPONSE::class_swap()
 {
     tlvf_swap(16, reinterpret_cast<uint8_t*>(m_total));
@@ -583,6 +631,14 @@ bool cACTION_CONTROL_AGENT_PING_REQUEST::alloc_data(size_t count) {
     return true;
 }
 
+std::shared_ptr<cACTION_CONTROL_AGENT_PING_REQUEST> cACTION_CONTROL_AGENT_PING_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_AGENT_PING_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_AGENT_PING_REQUEST::class_swap()
 {
     tlvf_swap(16, reinterpret_cast<uint8_t*>(m_total));
@@ -672,6 +728,14 @@ bool cACTION_CONTROL_AGENT_PING_RESPONSE::alloc_data(size_t count) {
     return true;
 }
 
+std::shared_ptr<cACTION_CONTROL_AGENT_PING_RESPONSE> cACTION_CONTROL_AGENT_PING_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_AGENT_PING_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_AGENT_PING_RESPONSE::class_swap()
 {
     tlvf_swap(16, reinterpret_cast<uint8_t*>(m_total));
@@ -719,6 +783,14 @@ sArpQuery& cACTION_CONTROL_ARP_QUERY_REQUEST::params() {
     return (sArpQuery&)(*m_params);
 }
 
+std::shared_ptr<cACTION_CONTROL_ARP_QUERY_REQUEST> cACTION_CONTROL_ARP_QUERY_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_ARP_QUERY_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_ARP_QUERY_REQUEST::class_swap()
 {
     m_params->struct_swap();
@@ -758,6 +830,14 @@ sArpMonitorData& cACTION_CONTROL_ARP_QUERY_RESPONSE::params() {
     return (sArpMonitorData&)(*m_params);
 }
 
+std::shared_ptr<cACTION_CONTROL_ARP_QUERY_RESPONSE> cACTION_CONTROL_ARP_QUERY_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_ARP_QUERY_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_ARP_QUERY_RESPONSE::class_swap()
 {
     m_params->struct_swap();
@@ -801,6 +881,14 @@ uint8_t& cACTION_CONTROL_PLATFORM_OPERATIONAL_NOTIFICATION::operational() {
     return (uint8_t&)(*m_operational);
 }
 
+std::shared_ptr<cACTION_CONTROL_PLATFORM_OPERATIONAL_NOTIFICATION> cACTION_CONTROL_PLATFORM_OPERATIONAL_NOTIFICATION::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_PLATFORM_OPERATIONAL_NOTIFICATION>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_PLATFORM_OPERATIONAL_NOTIFICATION::class_swap()
 {
     m_bridge_mac->struct_swap();
@@ -843,6 +931,14 @@ sBackhaulRssi& cACTION_CONTROL_BACKHAUL_DL_RSSI_REPORT_NOTIFICATION::params() {
     return (sBackhaulRssi&)(*m_params);
 }
 
+std::shared_ptr<cACTION_CONTROL_BACKHAUL_DL_RSSI_REPORT_NOTIFICATION> cACTION_CONTROL_BACKHAUL_DL_RSSI_REPORT_NOTIFICATION::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_BACKHAUL_DL_RSSI_REPORT_NOTIFICATION>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_BACKHAUL_DL_RSSI_REPORT_NOTIFICATION::class_swap()
 {
     m_params->struct_swap();
@@ -878,6 +974,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
 }
 cACTION_CONTROL_BACKHAUL_RESET::~cACTION_CONTROL_BACKHAUL_RESET() {
 }
+std::shared_ptr<cACTION_CONTROL_BACKHAUL_RESET> cACTION_CONTROL_BACKHAUL_RESET::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_BACKHAUL_RESET>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_BACKHAUL_RESET::class_swap()
 {
 }
@@ -912,6 +1016,14 @@ sBackhaulRoam& cACTION_CONTROL_BACKHAUL_ROAM_REQUEST::params() {
     return (sBackhaulRoam&)(*m_params);
 }
 
+std::shared_ptr<cACTION_CONTROL_BACKHAUL_ROAM_REQUEST> cACTION_CONTROL_BACKHAUL_ROAM_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_BACKHAUL_ROAM_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_BACKHAUL_ROAM_REQUEST::class_swap()
 {
     m_params->struct_swap();
@@ -951,6 +1063,14 @@ sLoggingLevelChange& cACTION_CONTROL_CHANGE_MODULE_LOGGING_LEVEL::params() {
     return (sLoggingLevelChange&)(*m_params);
 }
 
+std::shared_ptr<cACTION_CONTROL_CHANGE_MODULE_LOGGING_LEVEL> cACTION_CONTROL_CHANGE_MODULE_LOGGING_LEVEL::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_CHANGE_MODULE_LOGGING_LEVEL>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_CHANGE_MODULE_LOGGING_LEVEL::class_swap()
 {
     m_params->struct_swap();
@@ -990,6 +1110,14 @@ sWifiCredentials& cACTION_CONTROL_WIFI_CREDENTIALS_UPDATE_PREPARE_REQUEST::param
     return (sWifiCredentials&)(*m_params);
 }
 
+std::shared_ptr<cACTION_CONTROL_WIFI_CREDENTIALS_UPDATE_PREPARE_REQUEST> cACTION_CONTROL_WIFI_CREDENTIALS_UPDATE_PREPARE_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_WIFI_CREDENTIALS_UPDATE_PREPARE_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_WIFI_CREDENTIALS_UPDATE_PREPARE_REQUEST::class_swap()
 {
     m_params->struct_swap();
@@ -1029,6 +1157,14 @@ uint32_t& cACTION_CONTROL_WIFI_CREDENTIALS_UPDATE_PREPARE_RESPONSE::error_code()
     return (uint32_t&)(*m_error_code);
 }
 
+std::shared_ptr<cACTION_CONTROL_WIFI_CREDENTIALS_UPDATE_PREPARE_RESPONSE> cACTION_CONTROL_WIFI_CREDENTIALS_UPDATE_PREPARE_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_WIFI_CREDENTIALS_UPDATE_PREPARE_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_WIFI_CREDENTIALS_UPDATE_PREPARE_RESPONSE::class_swap()
 {
     tlvf_swap(32, reinterpret_cast<uint8_t*>(m_error_code));
@@ -1062,6 +1198,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
     m_init_succeeded = init();
 }
 cACTION_CONTROL_WIFI_CREDENTIALS_UPDATE_PRE_COMMIT_REQUEST::~cACTION_CONTROL_WIFI_CREDENTIALS_UPDATE_PRE_COMMIT_REQUEST() {
+}
+std::shared_ptr<cACTION_CONTROL_WIFI_CREDENTIALS_UPDATE_PRE_COMMIT_REQUEST> cACTION_CONTROL_WIFI_CREDENTIALS_UPDATE_PRE_COMMIT_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_WIFI_CREDENTIALS_UPDATE_PRE_COMMIT_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
 }
 void cACTION_CONTROL_WIFI_CREDENTIALS_UPDATE_PRE_COMMIT_REQUEST::class_swap()
 {
@@ -1097,6 +1241,14 @@ uint32_t& cACTION_CONTROL_WIFI_CREDENTIALS_UPDATE_PRE_COMMIT_RESPONSE::error_cod
     return (uint32_t&)(*m_error_code);
 }
 
+std::shared_ptr<cACTION_CONTROL_WIFI_CREDENTIALS_UPDATE_PRE_COMMIT_RESPONSE> cACTION_CONTROL_WIFI_CREDENTIALS_UPDATE_PRE_COMMIT_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_WIFI_CREDENTIALS_UPDATE_PRE_COMMIT_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_WIFI_CREDENTIALS_UPDATE_PRE_COMMIT_RESPONSE::class_swap()
 {
     tlvf_swap(32, reinterpret_cast<uint8_t*>(m_error_code));
@@ -1131,6 +1283,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
 }
 cACTION_CONTROL_WIFI_CREDENTIALS_UPDATE_COMMIT_REQUEST::~cACTION_CONTROL_WIFI_CREDENTIALS_UPDATE_COMMIT_REQUEST() {
 }
+std::shared_ptr<cACTION_CONTROL_WIFI_CREDENTIALS_UPDATE_COMMIT_REQUEST> cACTION_CONTROL_WIFI_CREDENTIALS_UPDATE_COMMIT_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_WIFI_CREDENTIALS_UPDATE_COMMIT_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_WIFI_CREDENTIALS_UPDATE_COMMIT_REQUEST::class_swap()
 {
 }
@@ -1160,6 +1320,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
     m_init_succeeded = init();
 }
 cACTION_CONTROL_WIFI_CREDENTIALS_UPDATE_ABORT_REQUEST::~cACTION_CONTROL_WIFI_CREDENTIALS_UPDATE_ABORT_REQUEST() {
+}
+std::shared_ptr<cACTION_CONTROL_WIFI_CREDENTIALS_UPDATE_ABORT_REQUEST> cACTION_CONTROL_WIFI_CREDENTIALS_UPDATE_ABORT_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_WIFI_CREDENTIALS_UPDATE_ABORT_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
 }
 void cACTION_CONTROL_WIFI_CREDENTIALS_UPDATE_ABORT_REQUEST::class_swap()
 {
@@ -1191,6 +1359,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
 }
 cACTION_CONTROL_HOSTAP_TX_ON_REQUEST::~cACTION_CONTROL_HOSTAP_TX_ON_REQUEST() {
 }
+std::shared_ptr<cACTION_CONTROL_HOSTAP_TX_ON_REQUEST> cACTION_CONTROL_HOSTAP_TX_ON_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_HOSTAP_TX_ON_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_HOSTAP_TX_ON_REQUEST::class_swap()
 {
 }
@@ -1221,6 +1397,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
 }
 cACTION_CONTROL_HOSTAP_TX_OFF_REQUEST::~cACTION_CONTROL_HOSTAP_TX_OFF_REQUEST() {
 }
+std::shared_ptr<cACTION_CONTROL_HOSTAP_TX_OFF_REQUEST> cACTION_CONTROL_HOSTAP_TX_OFF_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_HOSTAP_TX_OFF_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_HOSTAP_TX_OFF_REQUEST::class_swap()
 {
 }
@@ -1250,6 +1434,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
     m_init_succeeded = init();
 }
 cACTION_CONTROL_HOSTAP_TX_ON_RESPONSE::~cACTION_CONTROL_HOSTAP_TX_ON_RESPONSE() {
+}
+std::shared_ptr<cACTION_CONTROL_HOSTAP_TX_ON_RESPONSE> cACTION_CONTROL_HOSTAP_TX_ON_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_HOSTAP_TX_ON_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
 }
 void cACTION_CONTROL_HOSTAP_TX_ON_RESPONSE::class_swap()
 {
@@ -1285,6 +1477,14 @@ sApChannelSwitch& cACTION_CONTROL_HOSTAP_CSA_ERROR_NOTIFICATION::cs_params() {
     return (sApChannelSwitch&)(*m_cs_params);
 }
 
+std::shared_ptr<cACTION_CONTROL_HOSTAP_CSA_ERROR_NOTIFICATION> cACTION_CONTROL_HOSTAP_CSA_ERROR_NOTIFICATION::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_HOSTAP_CSA_ERROR_NOTIFICATION>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_HOSTAP_CSA_ERROR_NOTIFICATION::class_swap()
 {
     m_cs_params->struct_swap();
@@ -1324,6 +1524,14 @@ sApChannelSwitch& cACTION_CONTROL_HOSTAP_CSA_NOTIFICATION::cs_params() {
     return (sApChannelSwitch&)(*m_cs_params);
 }
 
+std::shared_ptr<cACTION_CONTROL_HOSTAP_CSA_NOTIFICATION> cACTION_CONTROL_HOSTAP_CSA_NOTIFICATION::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_HOSTAP_CSA_NOTIFICATION>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_HOSTAP_CSA_NOTIFICATION::class_swap()
 {
     m_cs_params->struct_swap();
@@ -1363,6 +1571,14 @@ sApChannelSwitch& cACTION_CONTROL_HOSTAP_ACS_ERROR_NOTIFICATION::cs_params() {
     return (sApChannelSwitch&)(*m_cs_params);
 }
 
+std::shared_ptr<cACTION_CONTROL_HOSTAP_ACS_ERROR_NOTIFICATION> cACTION_CONTROL_HOSTAP_ACS_ERROR_NOTIFICATION::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_HOSTAP_ACS_ERROR_NOTIFICATION>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_HOSTAP_ACS_ERROR_NOTIFICATION::class_swap()
 {
     m_cs_params->struct_swap();
@@ -1411,6 +1627,14 @@ std::tuple<bool, sWifiChannel&> cACTION_CONTROL_HOSTAP_ACS_NOTIFICATION::support
     return std::forward_as_tuple(ret_success, m_supported_channels[ret_idx]);
 }
 
+std::shared_ptr<cACTION_CONTROL_HOSTAP_ACS_NOTIFICATION> cACTION_CONTROL_HOSTAP_ACS_NOTIFICATION::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_HOSTAP_ACS_NOTIFICATION>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_HOSTAP_ACS_NOTIFICATION::class_swap()
 {
     m_cs_params->struct_swap();
@@ -1460,6 +1684,14 @@ sDfsCacCompleted& cACTION_CONTROL_HOSTAP_DFS_CAC_COMPLETED_NOTIFICATION::params(
     return (sDfsCacCompleted&)(*m_params);
 }
 
+std::shared_ptr<cACTION_CONTROL_HOSTAP_DFS_CAC_COMPLETED_NOTIFICATION> cACTION_CONTROL_HOSTAP_DFS_CAC_COMPLETED_NOTIFICATION::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_HOSTAP_DFS_CAC_COMPLETED_NOTIFICATION>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_HOSTAP_DFS_CAC_COMPLETED_NOTIFICATION::class_swap()
 {
     m_params->struct_swap();
@@ -1499,6 +1731,14 @@ sDfsChannelAvailable& cACTION_CONTROL_HOSTAP_DFS_CHANNEL_AVAILABLE_NOTIFICATION:
     return (sDfsChannelAvailable&)(*m_params);
 }
 
+std::shared_ptr<cACTION_CONTROL_HOSTAP_DFS_CHANNEL_AVAILABLE_NOTIFICATION> cACTION_CONTROL_HOSTAP_DFS_CHANNEL_AVAILABLE_NOTIFICATION::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_HOSTAP_DFS_CHANNEL_AVAILABLE_NOTIFICATION>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_HOSTAP_DFS_CHANNEL_AVAILABLE_NOTIFICATION::class_swap()
 {
     m_params->struct_swap();
@@ -1538,6 +1778,14 @@ sApSetRestrictedFailsafe& cACTION_CONTROL_HOSTAP_SET_RESTRICTED_FAILSAFE_CHANNEL
     return (sApSetRestrictedFailsafe&)(*m_params);
 }
 
+std::shared_ptr<cACTION_CONTROL_HOSTAP_SET_RESTRICTED_FAILSAFE_CHANNEL_REQUEST> cACTION_CONTROL_HOSTAP_SET_RESTRICTED_FAILSAFE_CHANNEL_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_HOSTAP_SET_RESTRICTED_FAILSAFE_CHANNEL_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_HOSTAP_SET_RESTRICTED_FAILSAFE_CHANNEL_REQUEST::class_swap()
 {
     m_params->struct_swap();
@@ -1577,6 +1825,14 @@ uint8_t& cACTION_CONTROL_HOSTAP_SET_RESTRICTED_FAILSAFE_CHANNEL_RESPONSE::succes
     return (uint8_t&)(*m_success);
 }
 
+std::shared_ptr<cACTION_CONTROL_HOSTAP_SET_RESTRICTED_FAILSAFE_CHANNEL_RESPONSE> cACTION_CONTROL_HOSTAP_SET_RESTRICTED_FAILSAFE_CHANNEL_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_HOSTAP_SET_RESTRICTED_FAILSAFE_CHANNEL_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_HOSTAP_SET_RESTRICTED_FAILSAFE_CHANNEL_RESPONSE::class_swap()
 {
 }
@@ -1614,6 +1870,14 @@ sApChannelSwitch& cACTION_CONTROL_HOSTAP_CHANNEL_SWITCH_ACS_START::cs_params() {
     return (sApChannelSwitch&)(*m_cs_params);
 }
 
+std::shared_ptr<cACTION_CONTROL_HOSTAP_CHANNEL_SWITCH_ACS_START> cACTION_CONTROL_HOSTAP_CHANNEL_SWITCH_ACS_START::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_HOSTAP_CHANNEL_SWITCH_ACS_START>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_HOSTAP_CHANNEL_SWITCH_ACS_START::class_swap()
 {
     m_cs_params->struct_swap();
@@ -1653,6 +1917,14 @@ uint32_t& cACTION_CONTROL_HOSTAP_UPDATE_STOP_ON_FAILURE_ATTEMPTS_REQUEST::attemp
     return (uint32_t&)(*m_attempts);
 }
 
+std::shared_ptr<cACTION_CONTROL_HOSTAP_UPDATE_STOP_ON_FAILURE_ATTEMPTS_REQUEST> cACTION_CONTROL_HOSTAP_UPDATE_STOP_ON_FAILURE_ATTEMPTS_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_HOSTAP_UPDATE_STOP_ON_FAILURE_ATTEMPTS_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_HOSTAP_UPDATE_STOP_ON_FAILURE_ATTEMPTS_REQUEST::class_swap()
 {
     tlvf_swap(32, reinterpret_cast<uint8_t*>(m_attempts));
@@ -1686,6 +1958,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
     m_init_succeeded = init();
 }
 cACTION_CONTROL_HOSTAP_DISABLED_BY_MASTER::~cACTION_CONTROL_HOSTAP_DISABLED_BY_MASTER() {
+}
+std::shared_ptr<cACTION_CONTROL_HOSTAP_DISABLED_BY_MASTER> cACTION_CONTROL_HOSTAP_DISABLED_BY_MASTER::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_HOSTAP_DISABLED_BY_MASTER>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
 }
 void cACTION_CONTROL_HOSTAP_DISABLED_BY_MASTER::class_swap()
 {
@@ -1721,6 +2001,14 @@ sApChannelSwitch& cACTION_CONTROL_HOSTAP_CHANNEL_SWITCH_REQUEST::cs_params() {
     return (sApChannelSwitch&)(*m_cs_params);
 }
 
+std::shared_ptr<cACTION_CONTROL_HOSTAP_CHANNEL_SWITCH_REQUEST> cACTION_CONTROL_HOSTAP_CHANNEL_SWITCH_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_HOSTAP_CHANNEL_SWITCH_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_HOSTAP_CHANNEL_SWITCH_REQUEST::class_swap()
 {
     m_cs_params->struct_swap();
@@ -1760,6 +2048,14 @@ uint8_t& cACTION_CONTROL_HOSTAP_STATS_MEASUREMENT_REQUEST::sync() {
     return (uint8_t&)(*m_sync);
 }
 
+std::shared_ptr<cACTION_CONTROL_HOSTAP_STATS_MEASUREMENT_REQUEST> cACTION_CONTROL_HOSTAP_STATS_MEASUREMENT_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_HOSTAP_STATS_MEASUREMENT_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_HOSTAP_STATS_MEASUREMENT_REQUEST::class_swap()
 {
 }
@@ -1840,6 +2136,14 @@ bool cACTION_CONTROL_HOSTAP_STATS_MEASUREMENT_RESPONSE::alloc_sta_stats(size_t c
     return true;
 }
 
+std::shared_ptr<cACTION_CONTROL_HOSTAP_STATS_MEASUREMENT_RESPONSE> cACTION_CONTROL_HOSTAP_STATS_MEASUREMENT_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_HOSTAP_STATS_MEASUREMENT_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_HOSTAP_STATS_MEASUREMENT_RESPONSE::class_swap()
 {
     m_ap_stats->struct_swap();
@@ -1890,6 +2194,14 @@ sApLoadNotificationParams& cACTION_CONTROL_HOSTAP_LOAD_MEASUREMENT_NOTIFICATION:
     return (sApLoadNotificationParams&)(*m_params);
 }
 
+std::shared_ptr<cACTION_CONTROL_HOSTAP_LOAD_MEASUREMENT_NOTIFICATION> cACTION_CONTROL_HOSTAP_LOAD_MEASUREMENT_NOTIFICATION::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_HOSTAP_LOAD_MEASUREMENT_NOTIFICATION>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_HOSTAP_LOAD_MEASUREMENT_NOTIFICATION::class_swap()
 {
     m_params->struct_swap();
@@ -1929,6 +2241,14 @@ sNeighborSetParams11k& cACTION_CONTROL_HOSTAP_SET_NEIGHBOR_11K_REQUEST::params()
     return (sNeighborSetParams11k&)(*m_params);
 }
 
+std::shared_ptr<cACTION_CONTROL_HOSTAP_SET_NEIGHBOR_11K_REQUEST> cACTION_CONTROL_HOSTAP_SET_NEIGHBOR_11K_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_HOSTAP_SET_NEIGHBOR_11K_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_HOSTAP_SET_NEIGHBOR_11K_REQUEST::class_swap()
 {
     m_params->struct_swap();
@@ -1968,6 +2288,14 @@ sNeighborRemoveParams11k& cACTION_CONTROL_HOSTAP_REMOVE_NEIGHBOR_11K_REQUEST::pa
     return (sNeighborRemoveParams11k&)(*m_params);
 }
 
+std::shared_ptr<cACTION_CONTROL_HOSTAP_REMOVE_NEIGHBOR_11K_REQUEST> cACTION_CONTROL_HOSTAP_REMOVE_NEIGHBOR_11K_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_HOSTAP_REMOVE_NEIGHBOR_11K_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_HOSTAP_REMOVE_NEIGHBOR_11K_REQUEST::class_swap()
 {
     m_params->struct_swap();
@@ -2007,6 +2335,14 @@ sApActivityNotificationParams& cACTION_CONTROL_HOSTAP_ACTIVITY_NOTIFICATION::par
     return (sApActivityNotificationParams&)(*m_params);
 }
 
+std::shared_ptr<cACTION_CONTROL_HOSTAP_ACTIVITY_NOTIFICATION> cACTION_CONTROL_HOSTAP_ACTIVITY_NOTIFICATION::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_HOSTAP_ACTIVITY_NOTIFICATION>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_HOSTAP_ACTIVITY_NOTIFICATION::class_swap()
 {
     m_params->struct_swap();
@@ -2046,6 +2382,14 @@ sVapsList& cACTION_CONTROL_HOSTAP_VAPS_LIST_UPDATE_NOTIFICATION::params() {
     return (sVapsList&)(*m_params);
 }
 
+std::shared_ptr<cACTION_CONTROL_HOSTAP_VAPS_LIST_UPDATE_NOTIFICATION> cACTION_CONTROL_HOSTAP_VAPS_LIST_UPDATE_NOTIFICATION::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_HOSTAP_VAPS_LIST_UPDATE_NOTIFICATION>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_HOSTAP_VAPS_LIST_UPDATE_NOTIFICATION::class_swap()
 {
     m_params->struct_swap();
@@ -2085,6 +2429,14 @@ int8_t& cACTION_CONTROL_HOSTAP_AP_DISABLED_NOTIFICATION::vap_id() {
     return (int8_t&)(*m_vap_id);
 }
 
+std::shared_ptr<cACTION_CONTROL_HOSTAP_AP_DISABLED_NOTIFICATION> cACTION_CONTROL_HOSTAP_AP_DISABLED_NOTIFICATION::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_HOSTAP_AP_DISABLED_NOTIFICATION>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_HOSTAP_AP_DISABLED_NOTIFICATION::class_swap()
 {
 }
@@ -2126,6 +2478,14 @@ sVapInfo& cACTION_CONTROL_HOSTAP_AP_ENABLED_NOTIFICATION::vap_info() {
     return (sVapInfo&)(*m_vap_info);
 }
 
+std::shared_ptr<cACTION_CONTROL_HOSTAP_AP_ENABLED_NOTIFICATION> cACTION_CONTROL_HOSTAP_AP_ENABLED_NOTIFICATION::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_HOSTAP_AP_ENABLED_NOTIFICATION>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_HOSTAP_AP_ENABLED_NOTIFICATION::class_swap()
 {
     m_vap_info->struct_swap();
@@ -2168,6 +2528,14 @@ sClientMonitoringParams& cACTION_CONTROL_CLIENT_START_MONITORING_REQUEST::params
     return (sClientMonitoringParams&)(*m_params);
 }
 
+std::shared_ptr<cACTION_CONTROL_CLIENT_START_MONITORING_REQUEST> cACTION_CONTROL_CLIENT_START_MONITORING_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_CLIENT_START_MONITORING_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_CLIENT_START_MONITORING_REQUEST::class_swap()
 {
     m_params->struct_swap();
@@ -2207,6 +2575,14 @@ sMacAddr& cACTION_CONTROL_CLIENT_STOP_MONITORING_REQUEST::mac() {
     return (sMacAddr&)(*m_mac);
 }
 
+std::shared_ptr<cACTION_CONTROL_CLIENT_STOP_MONITORING_REQUEST> cACTION_CONTROL_CLIENT_STOP_MONITORING_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_CLIENT_STOP_MONITORING_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_CLIENT_STOP_MONITORING_REQUEST::class_swap()
 {
     m_mac->struct_swap();
@@ -2246,6 +2622,14 @@ sNodeRssiMeasurementRequest& cACTION_CONTROL_CLIENT_RX_RSSI_MEASUREMENT_REQUEST:
     return (sNodeRssiMeasurementRequest&)(*m_params);
 }
 
+std::shared_ptr<cACTION_CONTROL_CLIENT_RX_RSSI_MEASUREMENT_REQUEST> cACTION_CONTROL_CLIENT_RX_RSSI_MEASUREMENT_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_CLIENT_RX_RSSI_MEASUREMENT_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_CLIENT_RX_RSSI_MEASUREMENT_REQUEST::class_swap()
 {
     m_params->struct_swap();
@@ -2285,6 +2669,14 @@ sNodeRssiMeasurement& cACTION_CONTROL_CLIENT_RX_RSSI_MEASUREMENT_RESPONSE::param
     return (sNodeRssiMeasurement&)(*m_params);
 }
 
+std::shared_ptr<cACTION_CONTROL_CLIENT_RX_RSSI_MEASUREMENT_RESPONSE> cACTION_CONTROL_CLIENT_RX_RSSI_MEASUREMENT_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_CLIENT_RX_RSSI_MEASUREMENT_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_CLIENT_RX_RSSI_MEASUREMENT_RESPONSE::class_swap()
 {
     m_params->struct_swap();
@@ -2324,6 +2716,14 @@ sMacAddr& cACTION_CONTROL_CLIENT_RX_RSSI_MEASUREMENT_START_NOTIFICATION::mac() {
     return (sMacAddr&)(*m_mac);
 }
 
+std::shared_ptr<cACTION_CONTROL_CLIENT_RX_RSSI_MEASUREMENT_START_NOTIFICATION> cACTION_CONTROL_CLIENT_RX_RSSI_MEASUREMENT_START_NOTIFICATION::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_CLIENT_RX_RSSI_MEASUREMENT_START_NOTIFICATION>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_CLIENT_RX_RSSI_MEASUREMENT_START_NOTIFICATION::class_swap()
 {
     m_mac->struct_swap();
@@ -2363,6 +2763,14 @@ sMacAddr& cACTION_CONTROL_CLIENT_RX_RSSI_MEASUREMENT_CMD_RESPONSE::mac() {
     return (sMacAddr&)(*m_mac);
 }
 
+std::shared_ptr<cACTION_CONTROL_CLIENT_RX_RSSI_MEASUREMENT_CMD_RESPONSE> cACTION_CONTROL_CLIENT_RX_RSSI_MEASUREMENT_CMD_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_CLIENT_RX_RSSI_MEASUREMENT_CMD_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_CLIENT_RX_RSSI_MEASUREMENT_CMD_RESPONSE::class_swap()
 {
     m_mac->struct_swap();
@@ -2402,6 +2810,14 @@ sNodeRssiMeasurement& cACTION_CONTROL_CLIENT_RX_RSSI_MEASUREMENT_NOTIFICATION::p
     return (sNodeRssiMeasurement&)(*m_params);
 }
 
+std::shared_ptr<cACTION_CONTROL_CLIENT_RX_RSSI_MEASUREMENT_NOTIFICATION> cACTION_CONTROL_CLIENT_RX_RSSI_MEASUREMENT_NOTIFICATION::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_CLIENT_RX_RSSI_MEASUREMENT_NOTIFICATION>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_CLIENT_RX_RSSI_MEASUREMENT_NOTIFICATION::class_swap()
 {
     m_params->struct_swap();
@@ -2441,6 +2857,14 @@ sMacAddr& cACTION_CONTROL_CLIENT_NO_ACTIVITY_NOTIFICATION::mac() {
     return (sMacAddr&)(*m_mac);
 }
 
+std::shared_ptr<cACTION_CONTROL_CLIENT_NO_ACTIVITY_NOTIFICATION> cACTION_CONTROL_CLIENT_NO_ACTIVITY_NOTIFICATION::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_CLIENT_NO_ACTIVITY_NOTIFICATION>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_CLIENT_NO_ACTIVITY_NOTIFICATION::class_swap()
 {
     m_mac->struct_swap();
@@ -2480,6 +2904,14 @@ sMacAddr& cACTION_CONTROL_CLIENT_NO_RESPONSE_NOTIFICATION::mac() {
     return (sMacAddr&)(*m_mac);
 }
 
+std::shared_ptr<cACTION_CONTROL_CLIENT_NO_RESPONSE_NOTIFICATION> cACTION_CONTROL_CLIENT_NO_RESPONSE_NOTIFICATION::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_CLIENT_NO_RESPONSE_NOTIFICATION>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_CLIENT_NO_RESPONSE_NOTIFICATION::class_swap()
 {
     m_mac->struct_swap();
@@ -2531,6 +2963,14 @@ uint32_t& cACTION_CONTROL_CLIENT_DISCONNECT_REQUEST::reason() {
     return (uint32_t&)(*m_reason);
 }
 
+std::shared_ptr<cACTION_CONTROL_CLIENT_DISCONNECT_REQUEST> cACTION_CONTROL_CLIENT_DISCONNECT_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_CLIENT_DISCONNECT_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_CLIENT_DISCONNECT_REQUEST::class_swap()
 {
     m_mac->struct_swap();
@@ -2581,6 +3021,14 @@ sClientDisconnectResponse& cACTION_CONTROL_CLIENT_DISCONNECT_RESPONSE::params() 
     return (sClientDisconnectResponse&)(*m_params);
 }
 
+std::shared_ptr<cACTION_CONTROL_CLIENT_DISCONNECT_RESPONSE> cACTION_CONTROL_CLIENT_DISCONNECT_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_CLIENT_DISCONNECT_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_CLIENT_DISCONNECT_RESPONSE::class_swap()
 {
     m_params->struct_swap();
@@ -2651,6 +3099,14 @@ bool cACTION_CONTROL_CLIENT_DHCP_COMPLETE_NOTIFICATION::set_name(const char str[
     std::copy(str, str + size, m_name);
     return true;
 }
+std::shared_ptr<cACTION_CONTROL_CLIENT_DHCP_COMPLETE_NOTIFICATION> cACTION_CONTROL_CLIENT_DHCP_COMPLETE_NOTIFICATION::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_CLIENT_DHCP_COMPLETE_NOTIFICATION>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_CLIENT_DHCP_COMPLETE_NOTIFICATION::class_swap()
 {
     m_mac->struct_swap();
@@ -2699,6 +3155,14 @@ sArpMonitorData& cACTION_CONTROL_CLIENT_ARP_MONITOR_NOTIFICATION::params() {
     return (sArpMonitorData&)(*m_params);
 }
 
+std::shared_ptr<cACTION_CONTROL_CLIENT_ARP_MONITOR_NOTIFICATION> cACTION_CONTROL_CLIENT_ARP_MONITOR_NOTIFICATION::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_CLIENT_ARP_MONITOR_NOTIFICATION>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_CLIENT_ARP_MONITOR_NOTIFICATION::class_swap()
 {
     m_params->struct_swap();
@@ -2738,6 +3202,14 @@ sBeaconRequest11k& cACTION_CONTROL_CLIENT_BEACON_11K_REQUEST::params() {
     return (sBeaconRequest11k&)(*m_params);
 }
 
+std::shared_ptr<cACTION_CONTROL_CLIENT_BEACON_11K_REQUEST> cACTION_CONTROL_CLIENT_BEACON_11K_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_CLIENT_BEACON_11K_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_CLIENT_BEACON_11K_REQUEST::class_swap()
 {
     m_params->struct_swap();
@@ -2777,6 +3249,14 @@ sBeaconResponse11k& cACTION_CONTROL_CLIENT_BEACON_11K_RESPONSE::params() {
     return (sBeaconResponse11k&)(*m_params);
 }
 
+std::shared_ptr<cACTION_CONTROL_CLIENT_BEACON_11K_RESPONSE> cACTION_CONTROL_CLIENT_BEACON_11K_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_CLIENT_BEACON_11K_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_CLIENT_BEACON_11K_RESPONSE::class_swap()
 {
     m_params->struct_swap();
@@ -2816,6 +3296,14 @@ sStaChannelLoadRequest11k& cACTION_CONTROL_CLIENT_CHANNEL_LOAD_11K_REQUEST::para
     return (sStaChannelLoadRequest11k&)(*m_params);
 }
 
+std::shared_ptr<cACTION_CONTROL_CLIENT_CHANNEL_LOAD_11K_REQUEST> cACTION_CONTROL_CLIENT_CHANNEL_LOAD_11K_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_CLIENT_CHANNEL_LOAD_11K_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_CLIENT_CHANNEL_LOAD_11K_REQUEST::class_swap()
 {
     m_params->struct_swap();
@@ -2855,6 +3343,14 @@ sStaChannelLoadResponse11k& cACTION_CONTROL_CLIENT_CHANNEL_LOAD_11K_RESPONSE::pa
     return (sStaChannelLoadResponse11k&)(*m_params);
 }
 
+std::shared_ptr<cACTION_CONTROL_CLIENT_CHANNEL_LOAD_11K_RESPONSE> cACTION_CONTROL_CLIENT_CHANNEL_LOAD_11K_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_CLIENT_CHANNEL_LOAD_11K_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_CLIENT_CHANNEL_LOAD_11K_RESPONSE::class_swap()
 {
     m_params->struct_swap();
@@ -2894,6 +3390,14 @@ sStatisticsRequest11k& cACTION_CONTROL_CLIENT_STATISTICS_11K_REQUEST::params() {
     return (sStatisticsRequest11k&)(*m_params);
 }
 
+std::shared_ptr<cACTION_CONTROL_CLIENT_STATISTICS_11K_REQUEST> cACTION_CONTROL_CLIENT_STATISTICS_11K_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_CLIENT_STATISTICS_11K_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_CLIENT_STATISTICS_11K_REQUEST::class_swap()
 {
     m_params->struct_swap();
@@ -2933,6 +3437,14 @@ sStatisticsResponse11k& cACTION_CONTROL_CLIENT_STATISTICS_11K_RESPONSE::params()
     return (sStatisticsResponse11k&)(*m_params);
 }
 
+std::shared_ptr<cACTION_CONTROL_CLIENT_STATISTICS_11K_RESPONSE> cACTION_CONTROL_CLIENT_STATISTICS_11K_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_CLIENT_STATISTICS_11K_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_CLIENT_STATISTICS_11K_RESPONSE::class_swap()
 {
     m_params->struct_swap();
@@ -2972,6 +3484,14 @@ sMacAddr& cACTION_CONTROL_CLIENT_LINK_MEASUREMENT_11K_REQUEST::mac() {
     return (sMacAddr&)(*m_mac);
 }
 
+std::shared_ptr<cACTION_CONTROL_CLIENT_LINK_MEASUREMENT_11K_REQUEST> cACTION_CONTROL_CLIENT_LINK_MEASUREMENT_11K_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_CLIENT_LINK_MEASUREMENT_11K_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_CLIENT_LINK_MEASUREMENT_11K_REQUEST::class_swap()
 {
     m_mac->struct_swap();
@@ -3011,6 +3531,14 @@ sLinkMeasurementsResponse11k& cACTION_CONTROL_CLIENT_LINK_MEASUREMENTS_11K_RESPO
     return (sLinkMeasurementsResponse11k&)(*m_params);
 }
 
+std::shared_ptr<cACTION_CONTROL_CLIENT_LINK_MEASUREMENTS_11K_RESPONSE> cACTION_CONTROL_CLIENT_LINK_MEASUREMENTS_11K_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_CLIENT_LINK_MEASUREMENTS_11K_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_CLIENT_LINK_MEASUREMENTS_11K_RESPONSE::class_swap()
 {
     m_params->struct_swap();
@@ -3050,6 +3578,14 @@ sSteeringSetGroupRequest& cACTION_CONTROL_STEERING_CLIENT_SET_GROUP_REQUEST::par
     return (sSteeringSetGroupRequest&)(*m_params);
 }
 
+std::shared_ptr<cACTION_CONTROL_STEERING_CLIENT_SET_GROUP_REQUEST> cACTION_CONTROL_STEERING_CLIENT_SET_GROUP_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_STEERING_CLIENT_SET_GROUP_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_STEERING_CLIENT_SET_GROUP_REQUEST::class_swap()
 {
     m_params->struct_swap();
@@ -3089,6 +3625,14 @@ sSteeringSetGroupResponse& cACTION_CONTROL_STEERING_CLIENT_SET_GROUP_RESPONSE::p
     return (sSteeringSetGroupResponse&)(*m_params);
 }
 
+std::shared_ptr<cACTION_CONTROL_STEERING_CLIENT_SET_GROUP_RESPONSE> cACTION_CONTROL_STEERING_CLIENT_SET_GROUP_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_STEERING_CLIENT_SET_GROUP_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_STEERING_CLIENT_SET_GROUP_RESPONSE::class_swap()
 {
     m_params->struct_swap();
@@ -3128,6 +3672,14 @@ sSteeringClientSetRequest& cACTION_CONTROL_STEERING_CLIENT_SET_REQUEST::params()
     return (sSteeringClientSetRequest&)(*m_params);
 }
 
+std::shared_ptr<cACTION_CONTROL_STEERING_CLIENT_SET_REQUEST> cACTION_CONTROL_STEERING_CLIENT_SET_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_STEERING_CLIENT_SET_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_STEERING_CLIENT_SET_REQUEST::class_swap()
 {
     m_params->struct_swap();
@@ -3167,6 +3719,14 @@ sSteeringClientSetResponse& cACTION_CONTROL_STEERING_CLIENT_SET_RESPONSE::params
     return (sSteeringClientSetResponse&)(*m_params);
 }
 
+std::shared_ptr<cACTION_CONTROL_STEERING_CLIENT_SET_RESPONSE> cACTION_CONTROL_STEERING_CLIENT_SET_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_STEERING_CLIENT_SET_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_STEERING_CLIENT_SET_RESPONSE::class_swap()
 {
     m_params->struct_swap();
@@ -3206,6 +3766,14 @@ sSteeringEvActivity& cACTION_CONTROL_STEERING_EVENT_CLIENT_ACTIVITY_NOTIFICATION
     return (sSteeringEvActivity&)(*m_params);
 }
 
+std::shared_ptr<cACTION_CONTROL_STEERING_EVENT_CLIENT_ACTIVITY_NOTIFICATION> cACTION_CONTROL_STEERING_EVENT_CLIENT_ACTIVITY_NOTIFICATION::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_STEERING_EVENT_CLIENT_ACTIVITY_NOTIFICATION>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_STEERING_EVENT_CLIENT_ACTIVITY_NOTIFICATION::class_swap()
 {
     m_params->struct_swap();
@@ -3245,6 +3813,14 @@ sSteeringEvSnrXing& cACTION_CONTROL_STEERING_EVENT_SNR_XING_NOTIFICATION::params
     return (sSteeringEvSnrXing&)(*m_params);
 }
 
+std::shared_ptr<cACTION_CONTROL_STEERING_EVENT_SNR_XING_NOTIFICATION> cACTION_CONTROL_STEERING_EVENT_SNR_XING_NOTIFICATION::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_STEERING_EVENT_SNR_XING_NOTIFICATION>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_STEERING_EVENT_SNR_XING_NOTIFICATION::class_swap()
 {
     m_params->struct_swap();
@@ -3284,6 +3860,14 @@ sSteeringEvProbeReq& cACTION_CONTROL_STEERING_EVENT_PROBE_REQ_NOTIFICATION::para
     return (sSteeringEvProbeReq&)(*m_params);
 }
 
+std::shared_ptr<cACTION_CONTROL_STEERING_EVENT_PROBE_REQ_NOTIFICATION> cACTION_CONTROL_STEERING_EVENT_PROBE_REQ_NOTIFICATION::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_STEERING_EVENT_PROBE_REQ_NOTIFICATION>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_STEERING_EVENT_PROBE_REQ_NOTIFICATION::class_swap()
 {
     m_params->struct_swap();
@@ -3323,6 +3907,14 @@ sSteeringEvAuthFail& cACTION_CONTROL_STEERING_EVENT_AUTH_FAIL_NOTIFICATION::para
     return (sSteeringEvAuthFail&)(*m_params);
 }
 
+std::shared_ptr<cACTION_CONTROL_STEERING_EVENT_AUTH_FAIL_NOTIFICATION> cACTION_CONTROL_STEERING_EVENT_AUTH_FAIL_NOTIFICATION::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CONTROL_STEERING_EVENT_AUTH_FAIL_NOTIFICATION>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CONTROL_STEERING_EVENT_AUTH_FAIL_NOTIFICATION::class_swap()
 {
     m_params->struct_swap();

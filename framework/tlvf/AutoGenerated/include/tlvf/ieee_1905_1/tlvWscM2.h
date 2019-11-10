@@ -85,6 +85,7 @@ class tlvWscM2 : public BaseClass
         bool add_encrypted_settings(std::shared_ptr<WSC::cWscAttrEncryptedSettings> ptr);
         std::shared_ptr<WSC::cWscAttrEncryptedSettings> encrypted_settings() { return m_encrypted_settings_ptr; }
         WSC::sWscAttrAuthenticator& authenticator();
+        static std::shared_ptr<tlvWscM2> castFrom(std::shared_ptr<BaseClass> source);
         void class_swap();
         static size_t get_initial_size();
 

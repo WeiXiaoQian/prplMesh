@@ -37,6 +37,9 @@ tlvLinkMetricResultCode::eValue& tlvLinkMetricResultCode::value() {
     return (eValue&)(*m_value);
 }
 
+std::shared_ptr<tlvLinkMetricResultCode> tlvLinkMetricResultCode::castFrom(std::shared_ptr<BaseClass> source) {
+    return std::make_shared<tlvLinkMetricResultCode>(source->getStartBuffPtr(),source->getLen()+source->getBuffRemainingBytes(),true);
+}
 void tlvLinkMetricResultCode::class_swap()
 {
     tlvf_swap(16, reinterpret_cast<uint8_t*>(m_length));

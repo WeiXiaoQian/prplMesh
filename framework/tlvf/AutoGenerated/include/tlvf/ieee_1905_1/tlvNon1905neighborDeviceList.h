@@ -39,6 +39,7 @@ class tlvNon1905neighborDeviceList : public BaseClass
         size_t mac_non_1905_device_length() { return m_mac_non_1905_device_idx__ * sizeof(sMacAddr); }
         std::tuple<bool, sMacAddr&> mac_non_1905_device(size_t idx);
         bool alloc_mac_non_1905_device(size_t count = 1);
+        static std::shared_ptr<tlvNon1905neighborDeviceList> castFrom(std::shared_ptr<BaseClass> source);
         void class_swap();
         static size_t get_initial_size();
 

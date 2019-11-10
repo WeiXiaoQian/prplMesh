@@ -95,6 +95,14 @@ uint8_t& cACTION_BACKHAUL_REGISTER_REQUEST::onboarding() {
     return (uint8_t&)(*m_onboarding);
 }
 
+std::shared_ptr<cACTION_BACKHAUL_REGISTER_REQUEST> cACTION_BACKHAUL_REGISTER_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BACKHAUL_REGISTER_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BACKHAUL_REGISTER_REQUEST::class_swap()
 {
 }
@@ -149,6 +157,14 @@ uint8_t& cACTION_BACKHAUL_REGISTER_RESPONSE::is_backhaul_manager() {
     return (uint8_t&)(*m_is_backhaul_manager);
 }
 
+std::shared_ptr<cACTION_BACKHAUL_REGISTER_RESPONSE> cACTION_BACKHAUL_REGISTER_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BACKHAUL_REGISTER_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BACKHAUL_REGISTER_RESPONSE::class_swap()
 {
 }
@@ -181,6 +197,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
     m_init_succeeded = init();
 }
 cACTION_BACKHAUL_BUSY_NOTIFICATION::~cACTION_BACKHAUL_BUSY_NOTIFICATION() {
+}
+std::shared_ptr<cACTION_BACKHAUL_BUSY_NOTIFICATION> cACTION_BACKHAUL_BUSY_NOTIFICATION::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BACKHAUL_BUSY_NOTIFICATION>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
 }
 void cACTION_BACKHAUL_BUSY_NOTIFICATION::class_swap()
 {
@@ -402,6 +426,14 @@ uint8_t& cACTION_BACKHAUL_ENABLE::wired_backhaul() {
     return (uint8_t&)(*m_wired_backhaul);
 }
 
+std::shared_ptr<cACTION_BACKHAUL_ENABLE> cACTION_BACKHAUL_ENABLE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BACKHAUL_ENABLE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BACKHAUL_ENABLE::class_swap()
 {
     m_iface_mac->struct_swap();
@@ -486,6 +518,14 @@ sBackhaulParams& cACTION_BACKHAUL_CONNECTED_NOTIFICATION::params() {
     return (sBackhaulParams&)(*m_params);
 }
 
+std::shared_ptr<cACTION_BACKHAUL_CONNECTED_NOTIFICATION> cACTION_BACKHAUL_CONNECTED_NOTIFICATION::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BACKHAUL_CONNECTED_NOTIFICATION>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BACKHAUL_CONNECTED_NOTIFICATION::class_swap()
 {
     m_params->struct_swap();
@@ -525,6 +565,14 @@ uint8_t& cACTION_BACKHAUL_DISCONNECTED_NOTIFICATION::stopped() {
     return (uint8_t&)(*m_stopped);
 }
 
+std::shared_ptr<cACTION_BACKHAUL_DISCONNECTED_NOTIFICATION> cACTION_BACKHAUL_DISCONNECTED_NOTIFICATION::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BACKHAUL_DISCONNECTED_NOTIFICATION>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BACKHAUL_DISCONNECTED_NOTIFICATION::class_swap()
 {
 }
@@ -562,6 +610,14 @@ sBackhaulRoam& cACTION_BACKHAUL_ROAM_REQUEST::params() {
     return (sBackhaulRoam&)(*m_params);
 }
 
+std::shared_ptr<cACTION_BACKHAUL_ROAM_REQUEST> cACTION_BACKHAUL_ROAM_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BACKHAUL_ROAM_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BACKHAUL_ROAM_REQUEST::class_swap()
 {
     m_params->struct_swap();
@@ -601,6 +657,14 @@ uint8_t& cACTION_BACKHAUL_ROAM_RESPONSE::connected() {
     return (uint8_t&)(*m_connected);
 }
 
+std::shared_ptr<cACTION_BACKHAUL_ROAM_RESPONSE> cACTION_BACKHAUL_ROAM_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BACKHAUL_ROAM_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BACKHAUL_ROAM_RESPONSE::class_swap()
 {
 }
@@ -633,6 +697,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
     m_init_succeeded = init();
 }
 cACTION_BACKHAUL_RESET::~cACTION_BACKHAUL_RESET() {
+}
+std::shared_ptr<cACTION_BACKHAUL_RESET> cACTION_BACKHAUL_RESET::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BACKHAUL_RESET>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
 }
 void cACTION_BACKHAUL_RESET::class_swap()
 {
@@ -668,6 +740,14 @@ sMacAddr& cACTION_BACKHAUL_4ADDR_CONNECTED::mac() {
     return (sMacAddr&)(*m_mac);
 }
 
+std::shared_ptr<cACTION_BACKHAUL_4ADDR_CONNECTED> cACTION_BACKHAUL_4ADDR_CONNECTED::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BACKHAUL_4ADDR_CONNECTED>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BACKHAUL_4ADDR_CONNECTED::class_swap()
 {
     m_mac->struct_swap();
@@ -707,6 +787,14 @@ sBackhaulRssi& cACTION_BACKHAUL_DL_RSSI_REPORT_NOTIFICATION::params() {
     return (sBackhaulRssi&)(*m_params);
 }
 
+std::shared_ptr<cACTION_BACKHAUL_DL_RSSI_REPORT_NOTIFICATION> cACTION_BACKHAUL_DL_RSSI_REPORT_NOTIFICATION::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BACKHAUL_DL_RSSI_REPORT_NOTIFICATION>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BACKHAUL_DL_RSSI_REPORT_NOTIFICATION::class_swap()
 {
     m_params->struct_swap();
@@ -746,6 +834,14 @@ uint32_t& cACTION_BACKHAUL_UPDATE_STOP_ON_FAILURE_ATTEMPTS_REQUEST::attempts() {
     return (uint32_t&)(*m_attempts);
 }
 
+std::shared_ptr<cACTION_BACKHAUL_UPDATE_STOP_ON_FAILURE_ATTEMPTS_REQUEST> cACTION_BACKHAUL_UPDATE_STOP_ON_FAILURE_ATTEMPTS_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BACKHAUL_UPDATE_STOP_ON_FAILURE_ATTEMPTS_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BACKHAUL_UPDATE_STOP_ON_FAILURE_ATTEMPTS_REQUEST::class_swap()
 {
     tlvf_swap(32, reinterpret_cast<uint8_t*>(m_attempts));
@@ -784,6 +880,14 @@ sNodeRssiMeasurementRequest& cACTION_BACKHAUL_CLIENT_RX_RSSI_MEASUREMENT_REQUEST
     return (sNodeRssiMeasurementRequest&)(*m_params);
 }
 
+std::shared_ptr<cACTION_BACKHAUL_CLIENT_RX_RSSI_MEASUREMENT_REQUEST> cACTION_BACKHAUL_CLIENT_RX_RSSI_MEASUREMENT_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BACKHAUL_CLIENT_RX_RSSI_MEASUREMENT_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BACKHAUL_CLIENT_RX_RSSI_MEASUREMENT_REQUEST::class_swap()
 {
     m_params->struct_swap();
@@ -823,6 +927,14 @@ sNodeRssiMeasurement& cACTION_BACKHAUL_CLIENT_RX_RSSI_MEASUREMENT_RESPONSE::para
     return (sNodeRssiMeasurement&)(*m_params);
 }
 
+std::shared_ptr<cACTION_BACKHAUL_CLIENT_RX_RSSI_MEASUREMENT_RESPONSE> cACTION_BACKHAUL_CLIENT_RX_RSSI_MEASUREMENT_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BACKHAUL_CLIENT_RX_RSSI_MEASUREMENT_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BACKHAUL_CLIENT_RX_RSSI_MEASUREMENT_RESPONSE::class_swap()
 {
     m_params->struct_swap();
@@ -862,6 +974,14 @@ sMacAddr& cACTION_BACKHAUL_CLIENT_RX_RSSI_MEASUREMENT_CMD_RESPONSE::mac() {
     return (sMacAddr&)(*m_mac);
 }
 
+std::shared_ptr<cACTION_BACKHAUL_CLIENT_RX_RSSI_MEASUREMENT_CMD_RESPONSE> cACTION_BACKHAUL_CLIENT_RX_RSSI_MEASUREMENT_CMD_RESPONSE::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_BACKHAUL_CLIENT_RX_RSSI_MEASUREMENT_CMD_RESPONSE>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_BACKHAUL_CLIENT_RX_RSSI_MEASUREMENT_CMD_RESPONSE::class_swap()
 {
     m_mac->struct_swap();

@@ -48,6 +48,7 @@ class tlvLinkMetricQuery : public BaseClass
         eNeighborType& neighbor_type();
         sMacAddr& mac_al_1905_device();
         eLinkMetricsType& link_metrics();
+        static std::shared_ptr<tlvLinkMetricQuery> castFrom(std::shared_ptr<BaseClass> source);
         void class_swap();
         static size_t get_initial_size();
 

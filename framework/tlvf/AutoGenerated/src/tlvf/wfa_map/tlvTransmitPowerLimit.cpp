@@ -41,6 +41,9 @@ uint8_t& tlvTransmitPowerLimit::transmit_power_limit_dbm() {
     return (uint8_t&)(*m_transmit_power_limit_dbm);
 }
 
+std::shared_ptr<tlvTransmitPowerLimit> tlvTransmitPowerLimit::castFrom(std::shared_ptr<BaseClass> source) {
+    return std::make_shared<tlvTransmitPowerLimit>(source->getStartBuffPtr(),source->getLen()+source->getBuffRemainingBytes(),true);
+}
 void tlvTransmitPowerLimit::class_swap()
 {
     tlvf_swap(16, reinterpret_cast<uint8_t*>(m_length));

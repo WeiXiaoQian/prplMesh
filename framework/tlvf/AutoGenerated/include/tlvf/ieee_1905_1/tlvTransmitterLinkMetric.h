@@ -92,6 +92,7 @@ class tlvTransmitterLinkMetric : public BaseClass
         size_t interface_pair_info_length() { return m_interface_pair_info_idx__ * sizeof(tlvTransmitterLinkMetric::sInterfacePairInfo); }
         std::tuple<bool, sInterfacePairInfo&> interface_pair_info(size_t idx);
         bool alloc_interface_pair_info(size_t count = 1);
+        static std::shared_ptr<tlvTransmitterLinkMetric> castFrom(std::shared_ptr<BaseClass> source);
         void class_swap();
         static size_t get_initial_size();
 

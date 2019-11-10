@@ -40,6 +40,7 @@ class tlvVendorSpecific : public BaseClass
         const eTlvType& type();
         uint16_t& length();
         sVendorOUI& vendor_oui();
+        static std::shared_ptr<tlvVendorSpecific> castFrom(std::shared_ptr<BaseClass> source);
         void class_swap();
         static size_t get_initial_size();
 

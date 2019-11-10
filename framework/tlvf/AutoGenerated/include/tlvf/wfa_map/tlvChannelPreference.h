@@ -43,6 +43,7 @@ class tlvChannelPreference : public BaseClass
         std::tuple<bool, cPreferenceOperatingClasses&> operating_classes_list(size_t idx);
         std::shared_ptr<cPreferenceOperatingClasses> create_operating_classes_list();
         bool add_operating_classes_list(std::shared_ptr<cPreferenceOperatingClasses> ptr);
+        static std::shared_ptr<tlvChannelPreference> castFrom(std::shared_ptr<BaseClass> source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -101,6 +102,7 @@ class cPreferenceOperatingClasses : public BaseClass
         uint8_t* channel_list(size_t idx = 0);
         bool alloc_channel_list(size_t count = 1);
         sFlags& flags();
+        static std::shared_ptr<cPreferenceOperatingClasses> castFrom(std::shared_ptr<BaseClass> source);
         void class_swap();
         static size_t get_initial_size();
 

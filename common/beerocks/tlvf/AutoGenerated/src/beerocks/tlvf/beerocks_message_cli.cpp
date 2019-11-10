@@ -29,6 +29,14 @@ int8_t& cACTION_CLI_ENABLE_DIAGNOSTICS_MEASUREMENTS::isEnable() {
     return (int8_t&)(*m_isEnable);
 }
 
+std::shared_ptr<cACTION_CLI_ENABLE_DIAGNOSTICS_MEASUREMENTS> cACTION_CLI_ENABLE_DIAGNOSTICS_MEASUREMENTS::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CLI_ENABLE_DIAGNOSTICS_MEASUREMENTS>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CLI_ENABLE_DIAGNOSTICS_MEASUREMENTS::class_swap()
 {
 }
@@ -66,6 +74,14 @@ int8_t& cACTION_CLI_ENABLE_LOAD_BALANCER::isEnable() {
     return (int8_t&)(*m_isEnable);
 }
 
+std::shared_ptr<cACTION_CLI_ENABLE_LOAD_BALANCER> cACTION_CLI_ENABLE_LOAD_BALANCER::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CLI_ENABLE_LOAD_BALANCER>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CLI_ENABLE_LOAD_BALANCER::class_swap()
 {
 }
@@ -103,6 +119,14 @@ int8_t& cACTION_CLI_ENABLE_DEBUG::isEnable() {
     return (int8_t&)(*m_isEnable);
 }
 
+std::shared_ptr<cACTION_CLI_ENABLE_DEBUG> cACTION_CLI_ENABLE_DEBUG::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CLI_ENABLE_DEBUG>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CLI_ENABLE_DEBUG::class_swap()
 {
 }
@@ -140,6 +164,14 @@ int32_t& cACTION_CLI_SET_SLAVES_STOP_ON_FAILURE_ATTEMPTS::attempts() {
     return (int32_t&)(*m_attempts);
 }
 
+std::shared_ptr<cACTION_CLI_SET_SLAVES_STOP_ON_FAILURE_ATTEMPTS> cACTION_CLI_SET_SLAVES_STOP_ON_FAILURE_ATTEMPTS::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CLI_SET_SLAVES_STOP_ON_FAILURE_ATTEMPTS>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CLI_SET_SLAVES_STOP_ON_FAILURE_ATTEMPTS::class_swap()
 {
     tlvf_swap(32, reinterpret_cast<uint8_t*>(m_attempts));
@@ -182,6 +214,14 @@ int8_t& cACTION_CLI_RESPONSE_INT::currentValue() {
     return (int8_t&)(*m_currentValue);
 }
 
+std::shared_ptr<cACTION_CLI_RESPONSE_INT> cACTION_CLI_RESPONSE_INT::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CLI_RESPONSE_INT>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CLI_RESPONSE_INT::class_swap()
 {
 }
@@ -273,6 +313,14 @@ bool cACTION_CLI_RESPONSE_STR::alloc_buffer(size_t count) {
     return true;
 }
 
+std::shared_ptr<cACTION_CLI_RESPONSE_STR> cACTION_CLI_RESPONSE_STR::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CLI_RESPONSE_STR>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CLI_RESPONSE_STR::class_swap()
 {
     tlvf_swap(32, reinterpret_cast<uint8_t*>(m_buffer_size));
@@ -325,6 +373,14 @@ uint16_t& cACTION_CLI_CROSS_RX_RSSI_MEASUREMENT::center_frequency() {
     return (uint16_t&)(*m_center_frequency);
 }
 
+std::shared_ptr<cACTION_CLI_CROSS_RX_RSSI_MEASUREMENT> cACTION_CLI_CROSS_RX_RSSI_MEASUREMENT::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CLI_CROSS_RX_RSSI_MEASUREMENT>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CLI_CROSS_RX_RSSI_MEASUREMENT::class_swap()
 {
     m_client_mac->struct_swap();
@@ -374,6 +430,14 @@ sMacAddr& cACTION_CLI_OPTIMAL_PATH_TASK::client_mac() {
     return (sMacAddr&)(*m_client_mac);
 }
 
+std::shared_ptr<cACTION_CLI_OPTIMAL_PATH_TASK> cACTION_CLI_OPTIMAL_PATH_TASK::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CLI_OPTIMAL_PATH_TASK>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CLI_OPTIMAL_PATH_TASK::class_swap()
 {
     m_client_mac->struct_swap();
@@ -413,6 +477,14 @@ sMacAddr& cACTION_CLI_LOAD_BALANCER_TASK::ap_mac() {
     return (sMacAddr&)(*m_ap_mac);
 }
 
+std::shared_ptr<cACTION_CLI_LOAD_BALANCER_TASK> cACTION_CLI_LOAD_BALANCER_TASK::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CLI_LOAD_BALANCER_TASK>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CLI_LOAD_BALANCER_TASK::class_swap()
 {
     m_ap_mac->struct_swap();
@@ -448,6 +520,14 @@ BaseClass(base->getBuffPtr(), base->getBuffRemainingBytes(), parse, swap_needed)
 }
 cACTION_CLI_IRE_NETWORK_OPTIMIZATION_TASK::~cACTION_CLI_IRE_NETWORK_OPTIMIZATION_TASK() {
 }
+std::shared_ptr<cACTION_CLI_IRE_NETWORK_OPTIMIZATION_TASK> cACTION_CLI_IRE_NETWORK_OPTIMIZATION_TASK::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CLI_IRE_NETWORK_OPTIMIZATION_TASK>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CLI_IRE_NETWORK_OPTIMIZATION_TASK::class_swap()
 {
 }
@@ -482,6 +562,14 @@ sMacAddr& cACTION_CLI_DUMP_NODE_INFO::mac() {
     return (sMacAddr&)(*m_mac);
 }
 
+std::shared_ptr<cACTION_CLI_DUMP_NODE_INFO> cACTION_CLI_DUMP_NODE_INFO::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CLI_DUMP_NODE_INFO>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CLI_DUMP_NODE_INFO::class_swap()
 {
     m_mac->struct_swap();
@@ -529,6 +617,14 @@ uint16_t& cACTION_CLI_PING_SLAVE_REQUEST::size() {
     return (uint16_t&)(*m_size);
 }
 
+std::shared_ptr<cACTION_CLI_PING_SLAVE_REQUEST> cACTION_CLI_PING_SLAVE_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CLI_PING_SLAVE_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CLI_PING_SLAVE_REQUEST::class_swap()
 {
     m_mac->struct_swap();
@@ -580,6 +676,14 @@ uint16_t& cACTION_CLI_PING_ALL_SLAVES_REQUEST::size() {
     return (uint16_t&)(*m_size);
 }
 
+std::shared_ptr<cACTION_CLI_PING_ALL_SLAVES_REQUEST> cACTION_CLI_PING_ALL_SLAVES_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CLI_PING_ALL_SLAVES_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CLI_PING_ALL_SLAVES_REQUEST::class_swap()
 {
     tlvf_swap(16, reinterpret_cast<uint8_t*>(m_num_of_req));
@@ -622,6 +726,14 @@ sMacAddr& cACTION_CLI_BACKHAUL_SCAN_RESULTS::mac() {
     return (sMacAddr&)(*m_mac);
 }
 
+std::shared_ptr<cACTION_CLI_BACKHAUL_SCAN_RESULTS> cACTION_CLI_BACKHAUL_SCAN_RESULTS::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CLI_BACKHAUL_SCAN_RESULTS>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CLI_BACKHAUL_SCAN_RESULTS::class_swap()
 {
     m_mac->struct_swap();
@@ -665,6 +777,14 @@ sMacAddr& cACTION_CLI_BACKHAUL_ROAM_REQUEST::bssid() {
     return (sMacAddr&)(*m_bssid);
 }
 
+std::shared_ptr<cACTION_CLI_BACKHAUL_ROAM_REQUEST> cACTION_CLI_BACKHAUL_ROAM_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CLI_BACKHAUL_ROAM_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CLI_BACKHAUL_ROAM_REQUEST::class_swap()
 {
     m_slave_mac->struct_swap();
@@ -713,6 +833,14 @@ sMacAddr& cACTION_CLI_CLIENT_ALLOW_REQUEST::hostap_mac() {
     return (sMacAddr&)(*m_hostap_mac);
 }
 
+std::shared_ptr<cACTION_CLI_CLIENT_ALLOW_REQUEST> cACTION_CLI_CLIENT_ALLOW_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CLI_CLIENT_ALLOW_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CLI_CLIENT_ALLOW_REQUEST::class_swap()
 {
     m_client_mac->struct_swap();
@@ -761,6 +889,14 @@ sMacAddr& cACTION_CLI_CLIENT_DISALLOW_REQUEST::hostap_mac() {
     return (sMacAddr&)(*m_hostap_mac);
 }
 
+std::shared_ptr<cACTION_CLI_CLIENT_DISALLOW_REQUEST> cACTION_CLI_CLIENT_DISALLOW_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CLI_CLIENT_DISALLOW_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CLI_CLIENT_DISALLOW_REQUEST::class_swap()
 {
     m_client_mac->struct_swap();
@@ -813,6 +949,14 @@ uint32_t& cACTION_CLI_CLIENT_DISCONNECT_REQUEST::reason() {
     return (uint32_t&)(*m_reason);
 }
 
+std::shared_ptr<cACTION_CLI_CLIENT_DISCONNECT_REQUEST> cACTION_CLI_CLIENT_DISCONNECT_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CLI_CLIENT_DISCONNECT_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CLI_CLIENT_DISCONNECT_REQUEST::class_swap()
 {
     m_client_mac->struct_swap();
@@ -868,6 +1012,14 @@ uint32_t& cACTION_CLI_CLIENT_BSS_STEER_REQUEST::disassoc_timer_ms() {
     return (uint32_t&)(*m_disassoc_timer_ms);
 }
 
+std::shared_ptr<cACTION_CLI_CLIENT_BSS_STEER_REQUEST> cACTION_CLI_CLIENT_BSS_STEER_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CLI_CLIENT_BSS_STEER_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CLI_CLIENT_BSS_STEER_REQUEST::class_swap()
 {
     m_client_mac->struct_swap();
@@ -920,6 +1072,14 @@ sMacAddr& cACTION_CLI_CLIENT_LINK_MEASUREMENT_11K_REQUEST::client_mac() {
     return (sMacAddr&)(*m_client_mac);
 }
 
+std::shared_ptr<cACTION_CLI_CLIENT_LINK_MEASUREMENT_11K_REQUEST> cACTION_CLI_CLIENT_LINK_MEASUREMENT_11K_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CLI_CLIENT_LINK_MEASUREMENT_11K_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CLI_CLIENT_LINK_MEASUREMENT_11K_REQUEST::class_swap()
 {
     m_hostap_mac->struct_swap();
@@ -972,6 +1132,14 @@ uint8_t& cACTION_CLI_CLIENT_CHANNEL_LOAD_11K_REQUEST::channel() {
     return (uint8_t&)(*m_channel);
 }
 
+std::shared_ptr<cACTION_CLI_CLIENT_CHANNEL_LOAD_11K_REQUEST> cACTION_CLI_CLIENT_CHANNEL_LOAD_11K_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CLI_CLIENT_CHANNEL_LOAD_11K_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CLI_CLIENT_CHANNEL_LOAD_11K_REQUEST::class_swap()
 {
     m_hostap_mac->struct_swap();
@@ -1059,6 +1227,14 @@ int16_t& cACTION_CLI_CLIENT_BEACON_11K_REQUEST::op_class() {
     return (int16_t&)(*m_op_class);
 }
 
+std::shared_ptr<cACTION_CLI_CLIENT_BEACON_11K_REQUEST> cACTION_CLI_CLIENT_BEACON_11K_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CLI_CLIENT_BEACON_11K_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CLI_CLIENT_BEACON_11K_REQUEST::class_swap()
 {
     m_client_mac->struct_swap();
@@ -1144,6 +1320,14 @@ uint8_t& cACTION_CLI_CLIENT_STATISTICS_11K_REQUEST::group_identity() {
     return (uint8_t&)(*m_group_identity);
 }
 
+std::shared_ptr<cACTION_CLI_CLIENT_STATISTICS_11K_REQUEST> cACTION_CLI_CLIENT_STATISTICS_11K_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CLI_CLIENT_STATISTICS_11K_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CLI_CLIENT_STATISTICS_11K_REQUEST::class_swap()
 {
     m_hostap_mac->struct_swap();
@@ -1200,6 +1384,14 @@ sApChannelSwitch& cACTION_CLI_HOSTAP_CHANNEL_SWITCH_REQUEST::cs_params() {
     return (sApChannelSwitch&)(*m_cs_params);
 }
 
+std::shared_ptr<cACTION_CLI_HOSTAP_CHANNEL_SWITCH_REQUEST> cACTION_CLI_HOSTAP_CHANNEL_SWITCH_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CLI_HOSTAP_CHANNEL_SWITCH_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CLI_HOSTAP_CHANNEL_SWITCH_REQUEST::class_swap()
 {
     m_mac->struct_swap();
@@ -1244,6 +1436,14 @@ sMacAddr& cACTION_CLI_HOSTAP_TX_ON_REQUEST::ap_mac() {
     return (sMacAddr&)(*m_ap_mac);
 }
 
+std::shared_ptr<cACTION_CLI_HOSTAP_TX_ON_REQUEST> cACTION_CLI_HOSTAP_TX_ON_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CLI_HOSTAP_TX_ON_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CLI_HOSTAP_TX_ON_REQUEST::class_swap()
 {
     m_ap_mac->struct_swap();
@@ -1283,6 +1483,14 @@ sMacAddr& cACTION_CLI_HOSTAP_TX_OFF_REQUEST::ap_mac() {
     return (sMacAddr&)(*m_ap_mac);
 }
 
+std::shared_ptr<cACTION_CLI_HOSTAP_TX_OFF_REQUEST> cACTION_CLI_HOSTAP_TX_OFF_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CLI_HOSTAP_TX_OFF_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CLI_HOSTAP_TX_OFF_REQUEST::class_swap()
 {
     m_ap_mac->struct_swap();
@@ -1334,6 +1542,14 @@ int8_t& cACTION_CLI_HOSTAP_SET_NEIGHBOR_11K_REQUEST::vap_id() {
     return (int8_t&)(*m_vap_id);
 }
 
+std::shared_ptr<cACTION_CLI_HOSTAP_SET_NEIGHBOR_11K_REQUEST> cACTION_CLI_HOSTAP_SET_NEIGHBOR_11K_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CLI_HOSTAP_SET_NEIGHBOR_11K_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CLI_HOSTAP_SET_NEIGHBOR_11K_REQUEST::class_swap()
 {
     m_ap_mac->struct_swap();
@@ -1392,6 +1608,14 @@ int8_t& cACTION_CLI_HOSTAP_REMOVE_NEIGHBOR_11K_REQUEST::vap_id() {
     return (int8_t&)(*m_vap_id);
 }
 
+std::shared_ptr<cACTION_CLI_HOSTAP_REMOVE_NEIGHBOR_11K_REQUEST> cACTION_CLI_HOSTAP_REMOVE_NEIGHBOR_11K_REQUEST::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CLI_HOSTAP_REMOVE_NEIGHBOR_11K_REQUEST>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CLI_HOSTAP_REMOVE_NEIGHBOR_11K_REQUEST::class_swap()
 {
     m_ap_mac->struct_swap();
@@ -1439,6 +1663,14 @@ sMacAddr& cACTION_CLI_HOSTAP_STATS_MEASUREMENT::ap_mac() {
     return (sMacAddr&)(*m_ap_mac);
 }
 
+std::shared_ptr<cACTION_CLI_HOSTAP_STATS_MEASUREMENT> cACTION_CLI_HOSTAP_STATS_MEASUREMENT::castFrom(BaseClass& source) {
+    try {
+        return std::make_shared<cACTION_CLI_HOSTAP_STATS_MEASUREMENT>(source.getBuffPtr(),source.getLen());
+    }
+    catch(const std::exception& e){
+        return nullptr;
+    }
+}
 void cACTION_CLI_HOSTAP_STATS_MEASUREMENT::class_swap()
 {
     m_ap_mac->struct_swap();

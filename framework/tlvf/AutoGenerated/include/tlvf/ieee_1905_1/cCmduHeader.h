@@ -59,6 +59,7 @@ class cCmduHeader : public BaseClass
         uint16_t& message_id();
         uint8_t& fragment_id();
         sFlags& flags();
+        static std::shared_ptr<cCmduHeader> castFrom(std::shared_ptr<BaseClass> source);
         void class_swap();
         static size_t get_initial_size();
 

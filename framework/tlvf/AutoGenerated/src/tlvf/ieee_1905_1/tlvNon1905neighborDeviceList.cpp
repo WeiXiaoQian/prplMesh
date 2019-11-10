@@ -76,6 +76,9 @@ bool tlvNon1905neighborDeviceList::alloc_mac_non_1905_device(size_t count) {
     return true;
 }
 
+std::shared_ptr<tlvNon1905neighborDeviceList> tlvNon1905neighborDeviceList::castFrom(std::shared_ptr<BaseClass> source) {
+    return std::make_shared<tlvNon1905neighborDeviceList>(source->getStartBuffPtr(),source->getLen()+source->getBuffRemainingBytes(),true);
+}
 void tlvNon1905neighborDeviceList::class_swap()
 {
     tlvf_swap(16, reinterpret_cast<uint8_t*>(m_length));

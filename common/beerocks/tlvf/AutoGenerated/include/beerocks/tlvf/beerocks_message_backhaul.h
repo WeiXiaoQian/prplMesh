@@ -48,6 +48,7 @@ class cACTION_BACKHAUL_REGISTER_REQUEST : public BaseClass
         uint8_t& local_gw();
         uint8_t& sta_iface_filter_low();
         uint8_t& onboarding();
+        static std::shared_ptr<cACTION_BACKHAUL_REGISTER_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -76,6 +77,7 @@ class cACTION_BACKHAUL_REGISTER_RESPONSE : public BaseClass
             return (eActionOp_BACKHAUL)(ACTION_BACKHAUL_REGISTER_RESPONSE);
         }
         uint8_t& is_backhaul_manager();
+        static std::shared_ptr<cACTION_BACKHAUL_REGISTER_RESPONSE> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -95,6 +97,7 @@ class cACTION_BACKHAUL_BUSY_NOTIFICATION : public BaseClass
         static eActionOp_BACKHAUL get_action_op(){
             return (eActionOp_BACKHAUL)(ACTION_BACKHAUL_BUSY_NOTIFICATION);
         }
+        static std::shared_ptr<cACTION_BACKHAUL_BUSY_NOTIFICATION> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -144,6 +147,7 @@ class cACTION_BACKHAUL_ENABLE : public BaseClass
         uint8_t& wire_iface_type();
         uint8_t& wireless_iface_type();
         uint8_t& wired_backhaul();
+        static std::shared_ptr<cACTION_BACKHAUL_ENABLE> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -183,6 +187,7 @@ class cACTION_BACKHAUL_CONNECTED_NOTIFICATION : public BaseClass
             return (eActionOp_BACKHAUL)(ACTION_BACKHAUL_CONNECTED_NOTIFICATION);
         }
         sBackhaulParams& params();
+        static std::shared_ptr<cACTION_BACKHAUL_CONNECTED_NOTIFICATION> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -203,6 +208,7 @@ class cACTION_BACKHAUL_DISCONNECTED_NOTIFICATION : public BaseClass
             return (eActionOp_BACKHAUL)(ACTION_BACKHAUL_DISCONNECTED_NOTIFICATION);
         }
         uint8_t& stopped();
+        static std::shared_ptr<cACTION_BACKHAUL_DISCONNECTED_NOTIFICATION> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -223,6 +229,7 @@ class cACTION_BACKHAUL_ROAM_REQUEST : public BaseClass
             return (eActionOp_BACKHAUL)(ACTION_BACKHAUL_ROAM_REQUEST);
         }
         sBackhaulRoam& params();
+        static std::shared_ptr<cACTION_BACKHAUL_ROAM_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -243,6 +250,7 @@ class cACTION_BACKHAUL_ROAM_RESPONSE : public BaseClass
             return (eActionOp_BACKHAUL)(ACTION_BACKHAUL_ROAM_RESPONSE);
         }
         uint8_t& connected();
+        static std::shared_ptr<cACTION_BACKHAUL_ROAM_RESPONSE> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -262,6 +270,7 @@ class cACTION_BACKHAUL_RESET : public BaseClass
         static eActionOp_BACKHAUL get_action_op(){
             return (eActionOp_BACKHAUL)(ACTION_BACKHAUL_RESET);
         }
+        static std::shared_ptr<cACTION_BACKHAUL_RESET> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -281,6 +290,7 @@ class cACTION_BACKHAUL_4ADDR_CONNECTED : public BaseClass
             return (eActionOp_BACKHAUL)(ACTION_BACKHAUL_4ADDR_CONNECTED);
         }
         sMacAddr& mac();
+        static std::shared_ptr<cACTION_BACKHAUL_4ADDR_CONNECTED> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -301,6 +311,7 @@ class cACTION_BACKHAUL_DL_RSSI_REPORT_NOTIFICATION : public BaseClass
             return (eActionOp_BACKHAUL)(ACTION_BACKHAUL_DL_RSSI_REPORT_NOTIFICATION);
         }
         sBackhaulRssi& params();
+        static std::shared_ptr<cACTION_BACKHAUL_DL_RSSI_REPORT_NOTIFICATION> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -321,6 +332,7 @@ class cACTION_BACKHAUL_UPDATE_STOP_ON_FAILURE_ATTEMPTS_REQUEST : public BaseClas
             return (eActionOp_BACKHAUL)(ACTION_BACKHAUL_UPDATE_STOP_ON_FAILURE_ATTEMPTS_REQUEST);
         }
         uint32_t& attempts();
+        static std::shared_ptr<cACTION_BACKHAUL_UPDATE_STOP_ON_FAILURE_ATTEMPTS_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -341,6 +353,7 @@ class cACTION_BACKHAUL_CLIENT_RX_RSSI_MEASUREMENT_REQUEST : public BaseClass
             return (eActionOp_BACKHAUL)(ACTION_BACKHAUL_CLIENT_RX_RSSI_MEASUREMENT_REQUEST);
         }
         sNodeRssiMeasurementRequest& params();
+        static std::shared_ptr<cACTION_BACKHAUL_CLIENT_RX_RSSI_MEASUREMENT_REQUEST> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -361,6 +374,7 @@ class cACTION_BACKHAUL_CLIENT_RX_RSSI_MEASUREMENT_RESPONSE : public BaseClass
             return (eActionOp_BACKHAUL)(ACTION_BACKHAUL_CLIENT_RX_RSSI_MEASUREMENT_RESPONSE);
         }
         sNodeRssiMeasurement& params();
+        static std::shared_ptr<cACTION_BACKHAUL_CLIENT_RX_RSSI_MEASUREMENT_RESPONSE> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 
@@ -381,6 +395,7 @@ class cACTION_BACKHAUL_CLIENT_RX_RSSI_MEASUREMENT_CMD_RESPONSE : public BaseClas
             return (eActionOp_BACKHAUL)(ACTION_BACKHAUL_CLIENT_RX_RSSI_MEASUREMENT_CMD_RESPONSE);
         }
         sMacAddr& mac();
+        static std::shared_ptr<cACTION_BACKHAUL_CLIENT_RX_RSSI_MEASUREMENT_CMD_RESPONSE> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 

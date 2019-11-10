@@ -42,6 +42,7 @@ class cACTION_HEADER : public BaseClass
         uint8_t& last();
         uint16_t& id();
         uint16_t& length();
+        static std::shared_ptr<cACTION_HEADER> castFrom(BaseClass& source);
         void class_swap();
         static size_t get_initial_size();
 

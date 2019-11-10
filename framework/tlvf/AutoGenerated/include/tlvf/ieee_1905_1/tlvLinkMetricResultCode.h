@@ -38,6 +38,7 @@ class tlvLinkMetricResultCode : public BaseClass
         const eTlvType& type();
         const uint16_t& length();
         eValue& value();
+        static std::shared_ptr<tlvLinkMetricResultCode> castFrom(std::shared_ptr<BaseClass> source);
         void class_swap();
         static size_t get_initial_size();
 

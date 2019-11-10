@@ -42,6 +42,7 @@ class tlvHigherLayerData : public BaseClass
         size_t payload_length() { return m_payload_idx__ * sizeof(uint8_t); }
         uint8_t* payload(size_t idx = 0);
         bool alloc_payload(size_t count = 1);
+        static std::shared_ptr<tlvHigherLayerData> castFrom(std::shared_ptr<BaseClass> source);
         void class_swap();
         static size_t get_initial_size();
 

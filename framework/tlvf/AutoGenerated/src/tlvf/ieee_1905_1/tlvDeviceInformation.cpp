@@ -81,6 +81,9 @@ bool tlvDeviceInformation::alloc_info(size_t count) {
     return true;
 }
 
+std::shared_ptr<tlvDeviceInformation> tlvDeviceInformation::castFrom(std::shared_ptr<BaseClass> source) {
+    return std::make_shared<tlvDeviceInformation>(source->getStartBuffPtr(),source->getLen()+source->getBuffRemainingBytes(),true);
+}
 void tlvDeviceInformation::class_swap()
 {
     tlvf_swap(16, reinterpret_cast<uint8_t*>(m_length));

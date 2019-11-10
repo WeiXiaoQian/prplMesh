@@ -109,6 +109,9 @@ bool tlvApRadioBasicCapabilities::add_operating_classes_info_list(std::shared_pt
     return true;
 }
 
+std::shared_ptr<tlvApRadioBasicCapabilities> tlvApRadioBasicCapabilities::castFrom(std::shared_ptr<BaseClass> source) {
+    return std::make_shared<tlvApRadioBasicCapabilities>(source->getStartBuffPtr(),source->getLen()+source->getBuffRemainingBytes(),true);
+}
 void tlvApRadioBasicCapabilities::class_swap()
 {
     tlvf_swap(16, reinterpret_cast<uint8_t*>(m_length));
@@ -235,6 +238,9 @@ bool cOperatingClassesInfo::alloc_statically_non_operable_channels_list(size_t c
     return true;
 }
 
+std::shared_ptr<cOperatingClassesInfo> cOperatingClassesInfo::castFrom(std::shared_ptr<BaseClass> source) {
+    return std::make_shared<cOperatingClassesInfo>(source->getStartBuffPtr(),source->getLen()+source->getBuffRemainingBytes(),true);
+}
 void cOperatingClassesInfo::class_swap()
 {
 }

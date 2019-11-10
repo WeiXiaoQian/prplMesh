@@ -56,6 +56,7 @@ class tlvApCapability : public BaseClass
         const eTlvTypeMap& type();
         const uint16_t& length();
         sValue& value();
+        static std::shared_ptr<tlvApCapability> castFrom(std::shared_ptr<BaseClass> source);
         void class_swap();
         static size_t get_initial_size();
 
