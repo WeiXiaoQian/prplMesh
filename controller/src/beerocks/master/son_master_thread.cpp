@@ -535,50 +535,51 @@ bool master_thread::autoconfig_wsc_add_m2_encrypted_settings(
     // Calculate length of data to encrypt
     // (= plaintext length + 64 bits HMAC aligned to 16 bytes boundary)
     // The Key Wrap Authenticator is 96 bits long
-    size_t len = (config_data.getLen() + sizeof(WSC::sWscAttrKeyWrapAuthenticator) + 15) & ~0xFU;
+    size_t plaintext_len = (config_data.getLen() + sizeof(WSC::sWscAttrKeyWrapAuthenticator) + 15) & ~0xFU;
+    unsigned char plaintext[plaintext_len] = {0};
+    std::copy_n(config_data.getStartBuffPtr(), config_data.getLen(), plaintext);
 
-    auto encrypted_settings = m2->create_encrypted_settings();
-    if (!encrypted_settings)
-        return false;
-    if (!encrypted_settings->alloc_encrypted_settings(len))
-        return false;
-    if (!m2->add_encrypted_settings(encrypted_settings))
-        return false;
-
-    auto buf = reinterpret_cast<uint8_t *>(encrypted_settings->encrypted_settings());
-    std::copy_n(config_data.getStartBuffPtr(), config_data.getLen(), buf);
-    LOG(DEBUG) << "encrypted settings buffer before encryption: " << std::endl
-               << utils::dump_buffer((uint8_t *)encrypted_settings->encrypted_settings(),
-                              len);
     WSC::sWscAttrKeyWrapAuthenticator keywrapauth;
     keywrapauth.struct_init();
     keywrapauth.struct_swap();
     uint8_t *kwa = reinterpret_cast<uint8_t *>(keywrapauth.data);
     // Add KWA which is the 1st 64 bits of HMAC of config_data using AuthKey
-    if (!mapf::encryption::kwa_compute(authkey, buf, config_data.getLen(), kwa))
+    if (!mapf::encryption::kwa_compute(authkey, plaintext, config_data.getLen(), kwa))
         return false;
 
     std::copy_n(reinterpret_cast<uint8_t *>(&keywrapauth), sizeof(keywrapauth),
-                &buf[config_data.getLen()]);
-    uint8_t *iv = reinterpret_cast<uint8_t *>(m2->encrypted_settings()->iv());
+                &plaintext[config_data.getLen()]);
+    LOG(DEBUG) << "plaintext before encryption: " << std::endl
+               << utils::dump_buffer(plaintext, plaintext_len);
 
-    if (!mapf::encryption::create_iv(iv, WSC::WSC_ENCRYPTED_SETTINGS_IV_LENGTH))
+    int ciphertext_len = plaintext_len + 16;
+    auto encrypted_settings = m2->create_encrypted_settings();
+    if (!encrypted_settings)
+        return false;
+    if (!encrypted_settings->alloc_encrypted_settings(ciphertext_len))
+        return false;
+    if (!m2->add_encrypted_settings(encrypted_settings))
         return false;
 
+    uint8_t *iv = reinterpret_cast<uint8_t *>(m2->encrypted_settings()->iv());
+    if (!mapf::encryption::create_iv(iv, WSC::WSC_ENCRYPTED_SETTINGS_IV_LENGTH))
+        return false;
     LOG(DEBUG) << "encrypted settings iv: " << std::endl
                << utils::dump_buffer((uint8_t *)iv, WSC::WSC_ENCRYPTED_SETTINGS_IV_LENGTH);
     LOG(DEBUG) << "encrypted settings key: " << std::endl
                << utils::dump_buffer((uint8_t *)keywrapkey, 16);
-    if (!mapf::encryption::aes_encrypt(keywrapkey, iv, buf, len)) {
-        LOG(DEBUG) << "aes encrypt";
+
+    auto ciphertext = reinterpret_cast<unsigned char *>(encrypted_settings->encrypted_settings());
+    if (!mapf::encryption::aes_encrypt2(plaintext, plaintext_len ,keywrapkey, iv, ciphertext, ciphertext_len)) {
+        LOG(DEBUG) << "aes encrypt2 failure";
         return false;
     }
     
     LOG(DEBUG) << "encrypted settings real length: " << encrypted_settings->getLen();
-    LOG(DEBUG) << "encrypted settings attr length: " << len;
+    LOG(DEBUG) << "encrypted settings attr length: " << ciphertext_len;
     LOG(DEBUG) << "encrypted settings buffer: " << std::endl
                << utils::dump_buffer((uint8_t *)encrypted_settings->encrypted_settings(),
-                              len);
+                              ciphertext_len);
     
     std::string ssid;
     sMacAddr bssid;

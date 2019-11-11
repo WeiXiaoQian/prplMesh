@@ -252,14 +252,14 @@ int main()
         // = plaintext length + 32 bits HMAC aligned to 16 bytes boundary
         size_t len = (sizeof(plaintext) + 8 + 15) & ~0xFU;
         uint8_t data[len] = {0}; // last 64 bytes are the KWA
-        uint8_t ciphertext[len] = {0};
-        int ciphertext_len;
+        int ciphertext_len = len + 16;
+        uint8_t ciphertext[ciphertext_len] = {0};
 
         std::fill(data, data + sizeof(plaintext), 1);
         uint8_t *kwa = &data[sizeof(plaintext)];
         check(errors, mapf::encryption::kwa_compute(authkey1, data, sizeof(plaintext), kwa),
               "KWA compute IN");
-        LOG(DEBUG) << "data before encryption: " << std::endl << dump_buffer((uint8_t *)data, len);
+        LOG(DEBUG) << "data before encryption: " << std::endl << "length: " << len << std::endl << dump_buffer((uint8_t *)data, len);
         uint8_t iv[16];
         mapf::encryption::create_iv(iv, sizeof(iv));
         LOG(DEBUG) << "iv: " << std::endl
@@ -267,7 +267,7 @@ int main()
         LOG(DEBUG) << "keywrapkey1: " << std::endl
                << dump_buffer((uint8_t *)keywrapkey1, 16);
         check(errors, mapf::encryption::aes_encrypt2(data, sizeof(data), keywrapkey1, iv, ciphertext, ciphertext_len), "AES encrypt2");
-        LOG(DEBUG) << "data after encryption: " << std::endl << dump_buffer((uint8_t *)ciphertext, ciphertext_len);
+        LOG(DEBUG) << "data after encryption: " << std::endl << "length: " << ciphertext_len << std::endl << dump_buffer((uint8_t *)ciphertext, ciphertext_len);
         uint8_t decryptedtext[ciphertext_len] = {0};
         int decryptedtext_len;
         check(errors, mapf::encryption::aes_decrypt2(ciphertext, ciphertext_len, keywrapkey2, iv, decryptedtext, decryptedtext_len),
