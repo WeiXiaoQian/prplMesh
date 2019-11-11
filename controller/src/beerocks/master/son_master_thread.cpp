@@ -535,8 +535,7 @@ bool master_thread::autoconfig_wsc_add_m2_encrypted_settings(
     // Calculate length of data to encrypt
     // (= plaintext length + 64 bits HMAC aligned to 16 bytes boundary)
     // The Key Wrap Authenticator is 96 bits long
-    //size_t plaintext_len = (config_data.getLen() + sizeof(WSC::sWscAttrKeyWrapAuthenticator) + 15) & ~0xFU;
-    size_t plaintext_len = config_data.getLen() + sizeof(WSC::sWscAttrKeyWrapAuthenticator);
+    size_t plaintext_len = (config_data.getLen() + sizeof(WSC::sWscAttrKeyWrapAuthenticator) + 15) & ~0xFU;
     unsigned char plaintext[plaintext_len] = {0};
     std::copy_n(config_data.getStartBuffPtr(), config_data.getLen(), plaintext);
 
@@ -553,7 +552,7 @@ bool master_thread::autoconfig_wsc_add_m2_encrypted_settings(
     LOG(DEBUG) << "plaintext before encryption: " << std::endl
                << utils::dump_buffer(plaintext, plaintext_len);
 
-    int ciphertext_len = (plaintext_len + 15) & ~0xFU;
+    int ciphertext_len = plaintext_len + 16;
     auto encrypted_settings = m2->create_encrypted_settings();
     if (!encrypted_settings)
         return false;
