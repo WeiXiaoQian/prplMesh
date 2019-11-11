@@ -4333,14 +4333,20 @@ bool slave_thread::autoconfig_wsc_parse_m2_encrypted_settings(
 {
     auto encrypted_settings = m2->encrypted_settings();
     uint8_t *iv             = reinterpret_cast<uint8_t *>(encrypted_settings->iv());
-    auto buf                = reinterpret_cast<uint8_t *>(encrypted_settings->encrypted_settings());
+    auto ciphertext         = reinterpret_cast<uint8_t *>(encrypted_settings->encrypted_settings());
+    int clen                = encrypted_settings->encrypted_settings_length();
+    // leave room for up to 16 bytes internal padding length - see aes_decrypt()
+    int dlen = clen + 16;
+    uint8_t decrypted[dlen];
 
     LOG(DEBUG) << "M2 Parse: aes decrypt";
-    mapf::encryption::aes_decrypt(keywrapkey, iv, buf,
-                                  encrypted_settings->encrypted_settings_length());
+    if (!mapf::encryption::aes_decrypt(keywrapkey, iv, ciphertext, clen, decrypted, dlen)) {
+        LOG(ERROR) << "aes decrypt";
+        return false;
+    }
 
-    LOG(DEBUG) << "M2 Parse: parse config_data, len = "
-               << encrypted_settings->encrypted_settings_length();
+    LOG(DEBUG) << "M2 Parse: parse config_data, len = " << dlen;
+
     // Need to convert to host byte order to get config data length,
     // which is needed for computing the KWA (1st 64 bits of HMAC)
     // However, the KWA is computed on the finalized version of the config
@@ -4350,7 +4356,7 @@ bool slave_thread::autoconfig_wsc_parse_m2_encrypted_settings(
     // cConfigData constructor, but then parsing will fail since the length
     // will be calculated wrong. TLVF does not support parsing network byte order
     // without full swap, so keep this workaround for now (another future TLVF V2 feature)
-    WSC::cConfigData config_data(buf, encrypted_settings->encrypted_settings_length(), true, true);
+    WSC::cConfigData config_data(decrypted, dlen, true, true);
 
     // get length of config_data for KWA authentication
     size_t len = config_data.getLen();
@@ -4360,7 +4366,7 @@ bool slave_thread::autoconfig_wsc_parse_m2_encrypted_settings(
 
     uint8_t kwa[WSC::WSC_AUTHENTICATOR_LENGTH];
     // Compute KWA based on decrypted settings
-    if (!mapf::encryption::kwa_compute(authkey, buf, len, kwa)) {
+    if (!mapf::encryption::kwa_compute(authkey, decrypted, len, kwa)) {
         LOG(ERROR) << "kwa compute";
         return false;
     }
@@ -4372,7 +4378,7 @@ bool slave_thread::autoconfig_wsc_parse_m2_encrypted_settings(
     // substructure of encrypted_settings, it is easier to define it separately and just append to
     // config_data.
     WSC::sWscAttrKeyWrapAuthenticator *keywrapauth =
-        reinterpret_cast<WSC::sWscAttrKeyWrapAuthenticator *>(&buf[len]);
+        reinterpret_cast<WSC::sWscAttrKeyWrapAuthenticator *>(&decrypted[len]);
     keywrapauth->struct_swap();
     if ((keywrapauth->attribute_type != WSC::ATTR_KEY_WRAP_AUTH) ||
         (keywrapauth->data_length != WSC::WSC_KEY_WRAP_AUTH_LENGTH) ||

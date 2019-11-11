@@ -223,61 +223,112 @@ bool hmac::digest(uint8_t *digest)
     return HMAC_Final(m_ctx, digest, &digest_length);
 }
 
-bool aes_encrypt(const uint8_t *key, const uint8_t *iv, uint8_t *data, uint32_t data_len)
+bool aes_encrypt(const uint8_t *key, const uint8_t *iv, uint8_t *plaintext, int plen,
+                 uint8_t *ciphertext, int &clen)
 {
     EVP_CIPHER_CTX *ctx;
+    int len;
 
-    int clen, len;
-    uint8_t buf[128];
-
+    /* Create and initialise the context */
     ctx = EVP_CIPHER_CTX_new();
     if (NULL == ctx) {
+        MAPF_ERR("Failed to create context");
         return false;
     }
+
+    /*
+     * Initialise the encryption operation.
+     * IMPORTANT - key and IV should be
+     * The same as block size, which 16 bytes since we are using 
+     * 128 bit AES (i.e. a 128 bit key). The IV size for *most* modes is
+     * the same as the block size.
+     */
     if (EVP_EncryptInit_ex(ctx, EVP_aes_128_cbc(), NULL, key, iv) != 1) {
-        return false;
-    }
-    EVP_CIPHER_CTX_set_padding(ctx, 0);
-
-    clen = data_len;
-    if (EVP_EncryptUpdate(ctx, data, &clen, data, data_len) != 1 || clen != (int)data_len) {
+        MAPF_ERR("EVP_EncryptInit_ex Failed");
+        EVP_CIPHER_CTX_free(ctx);
         return false;
     }
 
-    len = sizeof(buf);
-    if (EVP_EncryptFinal_ex(ctx, buf, &len) != 1 || len != 0) {
+    /*
+     * Provide the message to be encrypted, and obtain the encrypted output.
+     * EVP_EncryptUpdate() encrypts inl bytes from the buffer in and writes
+     * the encrypted version to out. The amount of data written depends on
+     * the block alignment of the encrypted data: as a result the amount of
+     * data written may be anything from zero bytes to
+     * (inl + cipher_block_size - 1) so out should contain sufficient room.
+     * In this case - clen has to be >= plaintext_len + 15)
+     */
+    if ((clen < plen + 15) || (EVP_EncryptUpdate(ctx, ciphertext, &len, plaintext, plen) != 1)) {
+        MAPF_ERR("EVP_EncryptUpdate Failed. clen=" << clen);
+        EVP_CIPHER_CTX_free(ctx);
         return false;
     }
+    clen = len;
+
+    if (EVP_EncryptFinal_ex(ctx, ciphertext + len, &clen) != 1) {
+        MAPF_ERR("EVP_EncryptFinal_ex Failed. clen=" << clen);
+        EVP_CIPHER_CTX_free(ctx);
+        return false;
+    }
+    clen += len;
+
+    /* Clean Up */
     EVP_CIPHER_CTX_free(ctx);
 
     return true;
 }
 
-bool aes_decrypt(const uint8_t *key, const uint8_t *iv, uint8_t *data, uint32_t data_len)
+bool aes_decrypt(const uint8_t *key, const uint8_t *iv, uint8_t *ciphertext, int clen,
+                 uint8_t *plaintext, int &plen)
 {
     EVP_CIPHER_CTX *ctx;
+    int len;
 
-    int plen, len;
-    uint8_t buf[128];
-
+    /* Create and initialise the context */
     ctx = EVP_CIPHER_CTX_new();
     if (NULL == ctx) {
+        MAPF_ERR("Failed to create context");
         return false;
     }
+
+    /*
+     * Initialise the encryption operation.
+     * IMPORTANT - key and IV should be
+     * The same as block size, which 16 bytes since we are using 
+     * 128 bit AES (i.e. a 128 bit key). The IV size for *most* modes is
+     * the same as the block size.
+     */
     if (EVP_DecryptInit_ex(ctx, EVP_aes_128_cbc(), NULL, key, iv) != 1) {
-        return false;
-    }
-    EVP_CIPHER_CTX_set_padding(ctx, 0);
-
-    plen = data_len;
-    if (EVP_DecryptUpdate(ctx, data, &plen, data, data_len) != 1 || plen != (int)data_len) {
+        MAPF_ERR("EVP_DecryptInit_ex Failed");
+        EVP_CIPHER_CTX_free(ctx);
         return false;
     }
 
-    len = sizeof(buf);
-    if (EVP_DecryptFinal_ex(ctx, buf, &len) != 1 || len != 0) {
+    /*
+     * Provide the message to be decrypted, and obtain the decrypted output.
+     * The decrypted data buffer out passed to EVP_DecryptUpdate() should have
+     * sufficient room for (inl + cipher_block_size) bytes.
+     * In this case - plen has to be >= plaintext_len + 16)
+     */
+    if ((plen < clen + 16) || EVP_DecryptUpdate(ctx, plaintext, &len, ciphertext, clen) != 1) {
+        MAPF_ERR("EVP_DecryptUpdate Failed");
+        EVP_CIPHER_CTX_free(ctx);
         return false;
     }
+    plen = len;
+
+    /*
+     * Finalise the decryption. Further plaintext bytes may be written at
+     * this stage.
+     */
+    if (EVP_DecryptFinal_ex(ctx, plaintext + plen, &len) != 1) {
+        MAPF_ERR("EVP_DecryptFinal_ex Failed");
+        EVP_CIPHER_CTX_free(ctx);
+        return false;
+    }
+    plen += len;
+
+    /* Clean Up */
     EVP_CIPHER_CTX_free(ctx);
 
     return true;

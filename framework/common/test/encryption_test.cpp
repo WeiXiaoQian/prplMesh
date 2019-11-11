@@ -25,6 +25,17 @@ static bool check(int &errors, bool check, std::string message)
     return check;
 }
 
+std::string dump_buffer(uint8_t *buffer, size_t len)
+{
+    std::ostringstream hexdump;
+    for (size_t i = 0; i < len; i += 16) {
+        for (size_t j = i; j < len && j < i + 16; j++)
+            hexdump << std::hex << std::setw(2) << std::setfill('0') << (unsigned)buffer[j] << " ";
+        hexdump << std::endl;
+    }
+    return hexdump.str();
+}
+
 int main()
 {
     mapf::Logger::Instance().LoggerInit("encryption_test");
@@ -61,27 +72,34 @@ int main()
           "keywrapkeys should be equal");
 
     {
-        uint8_t plaintext[1024];
+        uint8_t plaintext[50];
         std::fill(plaintext, plaintext + sizeof(plaintext), 1);
-        // calculate length of data to encrypt
-        // = plaintext length + 32 bits HMAC aligned to 16 bytes boundary
-        size_t len = (sizeof(plaintext) + 8 + 16) & ~0xFU;
-        uint8_t data[len]; // last 64 bytes are the KWA
-        std::fill(data, data + sizeof(plaintext), 1);
+        int plen = sizeof(plaintext) + 8; // last 64 bytes are the KWA
+        int clen = plen + 15;             // leave room for in place encryption
+        int dlen = clen + 16;
+        uint8_t data[clen];
+        std::fill(data, data + plen, 1);
+        uint8_t decrypted[dlen];
         uint8_t *kwa = &data[sizeof(plaintext)];
+
         check(errors, mapf::encryption::kwa_compute(authkey1, data, sizeof(plaintext), kwa),
               "KWA compute IN");
         uint8_t iv[128];
         mapf::encryption::create_iv(iv, sizeof(iv));
-        check(errors, mapf::encryption::aes_encrypt(keywrapkey1, iv, data, sizeof(data)),
+        LOG(DEBUG) << "plaintext: " << std::endl << dump_buffer(data, plen);
+        check(errors, mapf::encryption::aes_encrypt(keywrapkey1, iv, data, plen, data, clen),
               "AES encrypt");
-        check(errors, mapf::encryption::aes_decrypt(keywrapkey2, iv, data, sizeof(data)),
+        LOG(DEBUG) << "ciphertext: " << std::endl << dump_buffer(data, clen);
+        check(errors, mapf::encryption::aes_decrypt(keywrapkey2, iv, data, clen, decrypted, dlen),
               "AES decrypt");
-        check(errors, std::equal(data, data + sizeof(plaintext), plaintext),
+        LOG(DEBUG) << "decrypted: " << std::endl << dump_buffer(decrypted, dlen);
+        check(errors, std::equal(decrypted, decrypted + sizeof(plaintext), plaintext),
               "Decrypted cyphertext should be equal to plaintext");
-        uint8_t *kwa_in = &data[sizeof(plaintext)];
+
+        uint8_t *kwa_in = &decrypted[sizeof(plaintext)];
         uint8_t kwa_out[8];
-        check(errors, mapf::encryption::kwa_compute(authkey2, data, sizeof(plaintext), kwa_out),
+        check(errors,
+              mapf::encryption::kwa_compute(authkey2, decrypted, sizeof(plaintext), kwa_out),
               "KWA compute OUT");
         check(errors, std::equal(kwa_out, kwa_out + sizeof(kwa_out), kwa_in),
               "KWA should be equal");
