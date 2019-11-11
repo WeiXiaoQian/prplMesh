@@ -123,6 +123,8 @@ bool kwa_compute(const uint8_t *key, uint8_t *data, uint32_t data_len, uint8_t *
  */
 bool aes_encrypt(const uint8_t *key, const uint8_t *iv, uint8_t *data, uint32_t data_len);
 
+bool aes_encrypt2(unsigned char *plaintext, int plaintext_len, unsigned char *key,
+                  unsigned char *iv, unsigned char *ciphertext, int &ciphertext_len);
 /**
  * @brief AES decryption
  *
@@ -134,6 +136,9 @@ bool aes_encrypt(const uint8_t *key, const uint8_t *iv, uint8_t *data, uint32_t 
  * @return false on error
  */
 bool aes_decrypt(const uint8_t *key, const uint8_t *iv, uint8_t *data, uint32_t data_len);
+
+bool aes_decrypt2(unsigned char *ciphertext, int ciphertext_len, unsigned char *key,
+                 unsigned char *iv, unsigned char *plaintext, int &plaintext_len);
 
 /**
  * @brief Calculate WPS secret authkey and KeyWrapKey based on remote and local public keys

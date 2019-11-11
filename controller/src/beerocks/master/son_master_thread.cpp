@@ -428,6 +428,95 @@ bool master_thread::handle_cmdu_1905_autoconfiguration_search(Socket *sd,
     return son_actions::send_cmdu_to_agent(sd, cmdu_tx);
 }
 
+static bool test_autoconfig_wsc_parse_m2_encrypted_settings(
+    std::shared_ptr<ieee1905_1::tlvWscM2> m2, uint8_t authkey[32], uint8_t keywrapkey[16],
+    std::string &ssid, sMacAddr &bssid, WSC::eWscAuth &auth_type, WSC::eWscEncr &encr_type,
+    bool &backhaul, bool &fronthaul, bool &teardown)
+{
+    auto encrypted_settings = m2->encrypted_settings();
+    uint8_t *iv             = reinterpret_cast<uint8_t *>(encrypted_settings->iv());
+    uint8_t buf[encrypted_settings->encrypted_settings_length()] = {0};
+    std::copy_n(encrypted_settings->encrypted_settings(), encrypted_settings->encrypted_settings_length(), buf);
+
+    LOG(DEBUG) << "M2 Parse: aes decrypt";
+    mapf::encryption::aes_decrypt(keywrapkey, iv, buf, sizeof(buf));
+    LOG(DEBUG) << "encrypted settings buffer after decryption: " << std::endl
+               << utils::dump_buffer(buf, sizeof(buf));
+    LOG(DEBUG) << "M2 Parse: parse config_data, len = "
+               << encrypted_settings->encrypted_settings_length();
+    // Need to convert to host byte order to get config data length,
+    // which is needed for computing the KWA (1st 64 bits of HMAC)
+    // However, the KWA is computed on the finalized version of the config
+    // data, hence the class_swap.
+    // Finally, once authentication succeeds, swap back to host byte order.
+    // Theoretically, this can be avoided by not passing swap_needed=True to
+    // cConfigData constructor, but then parsing will fail since the length
+    // will be calculated wrong. TLVF does not support parsing network byte order
+    // without full swap, so keep this workaround for now (another future TLVF V2 feature)
+    WSC::cConfigData config_data(buf, encrypted_settings->encrypted_settings_length(), true, true);
+
+    // get length of config_data for KWA authentication
+    size_t len = config_data.getLen();
+
+    // Swap to network byte order for KWA HMAC calculation
+    config_data.class_swap();
+
+    uint8_t kwa[WSC::WSC_AUTHENTICATOR_LENGTH];
+    // Compute KWA based on decrypted settings
+    if (!mapf::encryption::kwa_compute(authkey, buf, len, kwa)) {
+        LOG(ERROR) << "kwa compute";
+        return false;
+    }
+
+    // Basically, the keywrap authenticator is part of the config_data (last member of the
+    // config_data to be precise).
+    // However, since we need to calculate it over the part of config_data without the keywrap
+    // authenticator, and since it is anyway going to be encrypted so config_data is not a
+    // substructure of encrypted_settings, it is easier to define it separately and just append to
+    // config_data.
+    WSC::sWscAttrKeyWrapAuthenticator *keywrapauth =
+        reinterpret_cast<WSC::sWscAttrKeyWrapAuthenticator *>(&buf[len]);
+    keywrapauth->struct_swap();
+    if ((keywrapauth->attribute_type != WSC::ATTR_KEY_WRAP_AUTH) ||
+        (keywrapauth->data_length != WSC::WSC_KEY_WRAP_AUTH_LENGTH) ||
+        !std::equal(kwa, kwa + sizeof(kwa), reinterpret_cast<uint8_t *>(keywrapauth->data))) {
+        LOG(ERROR) << "WSC KWA (Key Wrap Auth) failure" << std::endl
+                   << "type: " << std::hex << int(keywrapauth->attribute_type)
+                   << "length: " << std::hex << int(keywrapauth->data_length);
+        return false;
+    }
+
+    // Swap back to host byte order to read and use config_data
+    config_data.class_swap();
+
+    // TODO tlvf should check this
+    if (config_data.ssid_length() > WSC::WSC_MAX_SSID_LENGTH) {
+        LOG(INFO) << "SSID too long: " << config_data.ssid_length();
+        return false;
+    }
+    // TODO tlvf should do conversion to std::string
+    if (config_data.ssid_length() == 0)
+        ssid = "";
+    else
+        ssid = std::string(config_data.ssid(), config_data.ssid_length());
+    bssid            = config_data.bssid_attr().data;
+    auth_type        = config_data.authentication_type_attr().data;
+    encr_type        = config_data.encryption_type_attr().data;
+    uint8_t bss_type = config_data.multiap_attr().subelement_value;
+    
+    LOG(INFO) << "bss_type: " << std::hex << int(bss_type);
+    fronthaul = bss_type & WSC::eWscVendorExtSubelementBssType::FRONTHAUL_BSS;
+    backhaul  = bss_type & WSC::eWscVendorExtSubelementBssType::BACKHAUL_BSS;
+    teardown  = bss_type & WSC::eWscVendorExtSubelementBssType::TEARDOWN;
+    // BACKHAUL_STA bit is not expected to be set
+    if (bss_type & WSC::eWscVendorExtSubelementBssType::BACKHAUL_STA) {
+        LOG(WARNING) << "Unexpected backhaul STA bit";
+    }
+    LOG(DEBUG) << "KWA (Key Wrap Auth) success";
+
+    return true;
+}
+
 /**
  * @brief Encrypt the config data using AES and add to the WSC M2 TLV
  *        The encrypted data length is the config data length padded to 16 bytes boundary.
@@ -458,6 +547,9 @@ bool master_thread::autoconfig_wsc_add_m2_encrypted_settings(
 
     auto buf = reinterpret_cast<uint8_t *>(encrypted_settings->encrypted_settings());
     std::copy_n(config_data.getStartBuffPtr(), config_data.getLen(), buf);
+    LOG(DEBUG) << "encrypted settings buffer before encryption: " << std::endl
+               << utils::dump_buffer((uint8_t *)encrypted_settings->encrypted_settings(),
+                              len);
     WSC::sWscAttrKeyWrapAuthenticator keywrapauth;
     keywrapauth.struct_init();
     keywrapauth.struct_swap();
@@ -473,11 +565,35 @@ bool master_thread::autoconfig_wsc_add_m2_encrypted_settings(
     if (!mapf::encryption::create_iv(iv, WSC::WSC_ENCRYPTED_SETTINGS_IV_LENGTH))
         return false;
 
+    LOG(DEBUG) << "encrypted settings iv: " << std::endl
+               << utils::dump_buffer((uint8_t *)iv, WSC::WSC_ENCRYPTED_SETTINGS_IV_LENGTH);
+    LOG(DEBUG) << "encrypted settings key: " << std::endl
+               << utils::dump_buffer((uint8_t *)keywrapkey, 16);
     if (!mapf::encryption::aes_encrypt(keywrapkey, iv, buf, len)) {
         LOG(DEBUG) << "aes encrypt";
         return false;
     }
+    
+    LOG(DEBUG) << "encrypted settings real length: " << encrypted_settings->getLen();
+    LOG(DEBUG) << "encrypted settings attr length: " << len;
+    LOG(DEBUG) << "encrypted settings buffer: " << std::endl
+               << utils::dump_buffer((uint8_t *)encrypted_settings->encrypted_settings(),
+                              len);
+    
+    std::string ssid;
+    sMacAddr bssid;
+    WSC::eWscAuth authtype;
+    WSC::eWscEncr enctype;
+    bool fronthaul, backhaul, teardown;
+    test_autoconfig_wsc_parse_m2_encrypted_settings(m2, authkey, keywrapkey, ssid, bssid, authtype, enctype, backhaul, fronthaul, teardown);
+    std::string manufacturer = m2->manufacturer_str();
 
+    LOG(DEBUG) << "Controller configuration (WSC M2 Encrypted Settings)";
+    LOG(DEBUG) << "     Manufacturer: " << manufacturer << ", ssid: " << ssid
+                << ", bssid: " << network_utils::mac_to_string(bssid)
+                << ", authentication_type: " << std::hex << int(authtype)
+                << ", encryption_type: " << int(enctype) << (fronthaul ? " fronthaul" : "")
+                << (backhaul ? " backhaul" : "") << (teardown ? " teardown" : "");
     return true;
 }
 
@@ -642,6 +758,7 @@ bool master_thread::autoconfig_wsc_add_m2(std::shared_ptr<ieee1905_1::tlvWscM1> 
                    << "     authentication_type: "
                    << int(config_data.authentication_type_attr().data) << std::endl
                    << "     encryption_type: " << int(config_data.encryption_type_attr().data)
+                   <<"       SSID LENGTH: " <<int(config_data.ssid_length())
                    << std::dec << std::endl;
     } else {
         // Tear down. No need to set any parameter except the teardown bit and the MAC address.
@@ -1915,7 +2032,7 @@ bool master_thread::autoconfig_wsc_parse_radio_caps(
             non_operable_channels.push_back(*channel);
         }
         ss << " }" << std::endl;
-        LOG(DEBUG) << ss.str();
+        //LOG(DEBUG) << ss.str();
         // store operating class in the DB for this hostap
         database.add_hostap_supported_operating_class(
             radio_mac, operating_class, maximum_transmit_power_dbm, non_operable_channels);
