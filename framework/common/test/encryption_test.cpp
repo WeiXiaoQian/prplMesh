@@ -61,21 +61,26 @@ int main()
           "keywrapkeys should be equal");
 
     {
-        uint8_t plaintext[1024];
+        uint8_t plaintext[50];
         std::fill(plaintext, plaintext + sizeof(plaintext), 1);
-        // calculate length of data to encrypt
-        // = plaintext length + 32 bits HMAC aligned to 16 bytes boundary
-        size_t len = (sizeof(plaintext) + 8 + 16) & ~0xFU;
-        uint8_t data[len]; // last 64 bytes are the KWA
-        std::fill(data, data + sizeof(plaintext), 1);
+        // calculate length of data to encrypt = [plaintext | kwa]
+        // last 8 bytes are the KWA
+        int plaintextlen = sizeof(plaintext) + 8;
+        // Use the same buffer as the ciphertext output buffer
+        // for that, leave enough room for padding (16 bytes aes 128 block size)
+        int padlen    = plaintextlen - ((plaintextlen + 15) & 0xFU);
+        int cipherlen = plaintextlen + padlen;
+        uint8_t data[cipherlen];
+        std::copy_n(plaintext, plaintextlen, data);
         uint8_t *kwa = &data[sizeof(plaintext)];
         check(errors, mapf::encryption::kwa_compute(authkey1, data, sizeof(plaintext), kwa),
               "KWA compute IN");
         uint8_t iv[128];
         mapf::encryption::create_iv(iv, sizeof(iv));
-        check(errors, mapf::encryption::aes_encrypt(keywrapkey1, iv, data, sizeof(data)),
+        check(errors,
+              mapf::encryption::aes_encrypt(keywrapkey1, iv, data, plaintextlen, data, cipherlen),
               "AES encrypt");
-        check(errors, mapf::encryption::aes_decrypt(keywrapkey2, iv, data, sizeof(data)),
+        check(errors, mapf::encryption::aes_decrypt(keywrapkey2, iv, data, cipherlen),
               "AES decrypt");
         check(errors, std::equal(data, data + sizeof(plaintext), plaintext),
               "Decrypted cyphertext should be equal to plaintext");
