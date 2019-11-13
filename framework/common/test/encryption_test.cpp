@@ -70,7 +70,10 @@ int main()
         // for that, leave enough room for padding (16 bytes aes 128 block size)
         int padlen    = plaintextlen - ((plaintextlen + 15) & 0xFU);
         int cipherlen = plaintextlen + padlen;
-        uint8_t data[cipherlen];
+        // Since we use the same buffer for decryption, leave additional block size
+        // for last block correctness check done by openssl EVP_DecryptUpdate() API.
+        int datalen = cipherlen + 16;
+        uint8_t data[datalen];
         std::copy_n(plaintext, plaintextlen, data);
         uint8_t *kwa = &data[sizeof(plaintext)];
         check(errors, mapf::encryption::kwa_compute(authkey1, data, sizeof(plaintext), kwa),
@@ -80,8 +83,11 @@ int main()
         check(errors,
               mapf::encryption::aes_encrypt(keywrapkey1, iv, data, plaintextlen, data, cipherlen),
               "AES encrypt");
-        check(errors, mapf::encryption::aes_decrypt(keywrapkey2, iv, data, cipherlen),
+        check(errors,
+              mapf::encryption::aes_decrypt(keywrapkey2, iv, data, cipherlen, data, datalen),
               "AES decrypt");
+        check(errors, datalen == plaintextlen,
+              "Decrypted length should be equal to plaintext length");
         check(errors, std::equal(data, data + sizeof(plaintext), plaintext),
               "Decrypted cyphertext should be equal to plaintext");
         uint8_t *kwa_in = &data[sizeof(plaintext)];
