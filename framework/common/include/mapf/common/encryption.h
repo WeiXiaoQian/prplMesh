@@ -11,6 +11,7 @@
 #define ENCRYPTION_H_
 
 #include <cstdint>
+#include <string>
 
 extern "C" {
 /** Internal defintion from OpenSSL, avoids requiring include of openssl headers. */
@@ -155,6 +156,8 @@ bool aes_decrypt(const uint8_t *key, const uint8_t *iv, uint8_t *data, uint32_t 
 bool wps_calculate_keys(const diffie_hellman &dh, const uint8_t *remote_pubkey,
                         unsigned remote_pubkey_length, const uint8_t *m1_nonce, const uint8_t *mac,
                         const uint8_t *m2_nonce, uint8_t *authkey, uint8_t *keywrapkey);
+
+std::string dump_buffer(uint8_t *buffer, size_t len);
 
 } // namespace encryption
 } // namespace mapf
