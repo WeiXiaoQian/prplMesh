@@ -6,19 +6,19 @@
  * See LICENSE file for more details.
  */
 
-#ifndef _BWL_AP_WLAN_HAL_DUMMY_H_
-#define _BWL_AP_WLAN_HAL_DUMMY_H_
+#ifndef _BWL_AP_WLAN_HAL_NL80211_H_
+#define _BWL_AP_WLAN_HAL_NL80211_H_
 
 #include "../common/ap_wlan_hal.h"
-#include "base_wlan_hal_dummy.h"
+#include "base_wlan_hal_nl80211.h"
 
 namespace bwl {
-namespace dummy {
+namespace nl80211 {
 
 /*!
  * Hardware abstraction layer for WLAN Access Point.
  */
-class ap_wlan_hal_dummy : public base_wlan_hal_dummy, public ap_wlan_hal {
+class ap_wlan_hal_nl80211 : public base_wlan_hal_nl80211, public ap_wlan_hal {
 
     // Public methods
 public:
@@ -28,17 +28,17 @@ public:
      * @param [in] iface_name AP interface name.
      * @param [in] callback Callback for handling internal events.
      */
-    ap_wlan_hal_dummy(std::string iface_name, hal_event_cb_t callback, hal_conf_t hal_conf);
+    ap_wlan_hal_nl80211(std::string iface_name, hal_event_cb_t callback, hal_conf_t hal_conf);
 
-    virtual ~ap_wlan_hal_dummy();
+    virtual ~ap_wlan_hal_nl80211();
 
     virtual HALState attach(bool block = false) override;
     virtual bool enable() override;
     virtual bool disable() override;
     virtual bool set_start_disabled(bool enable, int vap_id = beerocks::IFACE_RADIO_ID) override;
-    virtual bool set_channel(int chan, int bw = 0, int center_channel = 0) override;
+    virtual bool set_channel(int chan, int bw, int center_channel) override;
     virtual bool sta_allow(const std::string &mac) override;
-    virtual bool sta_deny(const std::string &mac) override;
+    virtual bool sta_deny(const std::string &mac, int reject_sta) override;
     virtual bool sta_disassoc(int8_t vap_id, const std::string &mac, uint32_t reason = 0) override;
     virtual bool sta_deauth(int8_t vap_id, const std::string &mac, uint32_t reason = 0) override;
     virtual bool sta_bss_steer(const std::string &mac, const std::string &bssid, int chan,
@@ -50,8 +50,7 @@ public:
                                    uint8_t reject_error_code, uint8_t probe_snr_threshold_hi,
                                    uint8_t probe_snr_threshold_lo,
                                    uint8_t authetication_snr_threshold_hi,
-                                   uint8_t authetication_rsnr_threshold_lo) override;
-
+                                   uint8_t authetication_snr_threshold_lo) override;
     virtual bool sta_softblock_remove(const std::string &vap_name,
                                       const std::string &client_mac) override;
     virtual bool switch_channel(int chan, int bw, int vht_center_frequency) override;
@@ -73,15 +72,13 @@ public:
 
     // Protected methods:
 protected:
-    virtual bool process_dummy_event(parsed_obj_map_t &parsed_obj) override;
+    virtual bool process_nl80211_event(parsed_obj_map_t &parsed_obj) override;
 
     // Overload for AP events
     bool event_queue_push(ap_wlan_hal::Event event, std::shared_ptr<void> data = {})
     {
         return base_wlan_hal::event_queue_push(int(event), data);
     }
-
-    virtual bool set(const std::string &param, const std::string &value, int vap_id) override;
 
 private:
     // Unassociated measurement state variables
@@ -93,7 +90,7 @@ private:
     std::chrono::steady_clock::time_point m_csa_event_filtering_timestamp;
 };
 
-} // namespace dummy
+} // namespace nl80211
 } // namespace bwl
 
-#endif // _BWL_AP_WLAN_HAL_DUMMY_H_
+#endif // _BWL_AP_WLAN_HAL_NL80211_H_

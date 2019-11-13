@@ -9,6 +9,7 @@
 
 #include <mapf/common/encryption.h>
 #include <mapf/common/logger.h>
+#include <list>
 
 #include <arpa/inet.h>
 
@@ -60,28 +61,35 @@ int main()
     check(errors, std::equal(keywrapkey1, keywrapkey1 + sizeof(keywrapkey1), keywrapkey2),
           "keywrapkeys should be equal");
 
+    std::list<int> sizes = {13, 32, 50, 80, 96, 128};
+    for (auto size : sizes)
     {
-        uint8_t plaintext[1024];
+        LOG(INFO) << "Test encryption with plaintext size " << size;
+        uint8_t plaintext[size];
         std::fill(plaintext, plaintext + sizeof(plaintext), 1);
-        // calculate length of data to encrypt
-        // = plaintext length + 32 bits HMAC aligned to 16 bytes boundary
-        size_t len = (sizeof(plaintext) + 8 + 16) & ~0xFU;
-        uint8_t data[len]; // last 64 bytes are the KWA
-        std::fill(data, data + sizeof(plaintext), 1);
+        int plen = sizeof(plaintext) + 8; // last 64 bytes are the KWA
+        int clen = plen + 15;             // leave room for in place encryption
+        int dlen = clen + 16;
+        uint8_t data[clen];
+        std::fill(data, data + plen, 1);
+        uint8_t decrypted[dlen];
         uint8_t *kwa = &data[sizeof(plaintext)];
+
         check(errors, mapf::encryption::kwa_compute(authkey1, data, sizeof(plaintext), kwa),
               "KWA compute IN");
         uint8_t iv[128];
         mapf::encryption::create_iv(iv, sizeof(iv));
-        check(errors, mapf::encryption::aes_encrypt(keywrapkey1, iv, data, sizeof(data)),
+        check(errors, mapf::encryption::aes_encrypt(keywrapkey1, iv, data, plen, data, clen),
               "AES encrypt");
-        check(errors, mapf::encryption::aes_decrypt(keywrapkey2, iv, data, sizeof(data)),
+        check(errors, mapf::encryption::aes_decrypt(keywrapkey2, iv, data, clen, decrypted, dlen),
               "AES decrypt");
-        check(errors, std::equal(data, data + sizeof(plaintext), plaintext),
+        check(errors, std::equal(decrypted, decrypted + sizeof(plaintext), plaintext),
               "Decrypted cyphertext should be equal to plaintext");
-        uint8_t *kwa_in = &data[sizeof(plaintext)];
+
+        uint8_t *kwa_in = &decrypted[sizeof(plaintext)];
         uint8_t kwa_out[8];
-        check(errors, mapf::encryption::kwa_compute(authkey2, data, sizeof(plaintext), kwa_out),
+        check(errors,
+              mapf::encryption::kwa_compute(authkey2, decrypted, sizeof(plaintext), kwa_out),
               "KWA compute OUT");
         check(errors, std::equal(kwa_out, kwa_out + sizeof(kwa_out), kwa_in),
               "KWA should be equal");
