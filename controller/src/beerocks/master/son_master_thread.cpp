@@ -445,10 +445,11 @@ bool master_thread::autoconfig_wsc_add_m2_encrypted_settings(
 {
     // Step 1 - prepare the plaintext: [config_data | keywrapauth]:
     // We use the config_data buffer as the plaintext buffer for encryption.
-    // The config_data buffer has room for 8 bytes, but check it anyway
+    // The config_data buffer has room for 12 bytes for the keywrapauth (2 bytes
+    // attribute type, 2 bytes attribute length, 8 bytes data), but check it anyway
     // to be on the safe side. Then, we add keywrapauth at its end.
     uint8_t *plaintext = config_data.getStartBuffPtr();
-    int plen           = config_data.getLen() + sizeof(WSC::sWscAttrKeyWrapAuthenticator);
+    int plaintextlen   = config_data.getLen() + sizeof(WSC::sWscAttrKeyWrapAuthenticator);
     if (config_data.getBuffRemainingBytes() < sizeof(WSC::sWscAttrKeyWrapAuthenticator)) {
         LOG(ERROR) << "No room for 8 bytes keywrap auth in config_data";
         return false;
@@ -466,33 +467,30 @@ bool master_thread::autoconfig_wsc_add_m2_encrypted_settings(
     // know the encrypted length after encryption.
     // Calculate initialization vector (IV), and encrypt the plaintext using aes128 cbc.
     // leave room for up to 15 bytes internal padding length - see aes_encrypt()
-    int clen = plen + 15;
-    uint8_t ciphertext[clen];
+    int cipherlen = plaintextlen + 15;
+    uint8_t ciphertext[cipherlen];
     uint8_t iv[WSC::WSC_ENCRYPTED_SETTINGS_IV_LENGTH];
-    if (!mapf::encryption::create_iv(iv, WSC::WSC_ENCRYPTED_SETTINGS_IV_LENGTH))
-        return false;
-    LOG(DEBUG) << "iv: " << std::endl
-               << utils::dump_buffer(iv, 16) << std::endl
-               << "key: " << std::endl
-               << utils::dump_buffer(keywrapkey, 16) << std::endl
-               << "plaintext: " << std::endl
-               << utils::dump_buffer(ciphertext, plen);
-    if (!mapf::encryption::aes_encrypt(keywrapkey, iv, plaintext, plen, ciphertext, clen)) {
-        LOG(ERROR) << "aes encrypt";
+    if (!mapf::encryption::create_iv(iv, WSC::WSC_ENCRYPTED_SETTINGS_IV_LENGTH)) {
+        LOG(ERROR) << "create iv failure";
         return false;
     }
-    LOG(DEBUG) << "ciphertext: " << std::endl << utils::dump_buffer(ciphertext, clen);
+    if (!mapf::encryption::aes_encrypt(keywrapkey, iv, plaintext, plaintextlen, ciphertext,
+                                       cipherlen)) {
+        LOG(ERROR) << "aes encrypt failure";
+        return false;
+    }
+    LOG(DEBUG) << "ciphertext: " << std::endl << utils::dump_buffer(ciphertext, cipherlen);
 
     // Step 3 - Allocate encrypted settings with with the size of the output ciphertext,
     // and copy the IV and ciphertext to it.
     auto encrypted_settings = m2->create_encrypted_settings();
     if (!encrypted_settings)
         return false;
-    if (!encrypted_settings->alloc_encrypted_settings(clen))
+    if (!encrypted_settings->alloc_encrypted_settings(cipherlen))
         return false;
     if (!m2->add_encrypted_settings(encrypted_settings))
         return false;
-    std::copy_n(ciphertext, clen, encrypted_settings->encrypted_settings());
+    std::copy_n(ciphertext, cipherlen, encrypted_settings->encrypted_settings());
     std::copy_n(iv, 16, reinterpret_cast<uint8_t *>(m2->encrypted_settings()->iv()));
 
     return true;

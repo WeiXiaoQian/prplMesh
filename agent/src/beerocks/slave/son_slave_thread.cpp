@@ -4334,18 +4334,18 @@ bool slave_thread::autoconfig_wsc_parse_m2_encrypted_settings(
     auto encrypted_settings = m2->encrypted_settings();
     uint8_t *iv             = reinterpret_cast<uint8_t *>(encrypted_settings->iv());
     auto ciphertext         = reinterpret_cast<uint8_t *>(encrypted_settings->encrypted_settings());
-    int clen                = encrypted_settings->encrypted_settings_length();
+    int cipherlen           = encrypted_settings->encrypted_settings_length();
     // leave room for up to 16 bytes internal padding length - see aes_decrypt()
-    int dlen = clen + 16;
-    uint8_t decrypted[dlen];
+    int datalen = cipherlen + 16;
+    uint8_t decrypted[datalen];
 
     LOG(DEBUG) << "M2 Parse: aes decrypt";
-    if (!mapf::encryption::aes_decrypt(keywrapkey, iv, ciphertext, clen, decrypted, dlen)) {
-        LOG(ERROR) << "aes decrypt";
+    if (!mapf::encryption::aes_decrypt(keywrapkey, iv, ciphertext, cipherlen, decrypted, datalen)) {
+        LOG(ERROR) << "aes decrypt failure";
         return false;
     }
 
-    LOG(DEBUG) << "M2 Parse: parse config_data, len = " << dlen;
+    LOG(DEBUG) << "M2 Parse: parse config_data, len = " << datalen;
 
     // Need to convert to host byte order to get config data length,
     // which is needed for computing the KWA (1st 64 bits of HMAC)
@@ -4356,7 +4356,7 @@ bool slave_thread::autoconfig_wsc_parse_m2_encrypted_settings(
     // cConfigData constructor, but then parsing will fail since the length
     // will be calculated wrong. TLVF does not support parsing network byte order
     // without full swap, so keep this workaround for now (another future TLVF V2 feature)
-    WSC::cConfigData config_data(decrypted, dlen, true, true);
+    WSC::cConfigData config_data(decrypted, datalen, true, true);
 
     // get length of config_data for KWA authentication
     size_t len = config_data.getLen();

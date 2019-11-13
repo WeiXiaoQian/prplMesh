@@ -9,6 +9,7 @@
 
 #include <mapf/common/encryption.h>
 #include <mapf/common/logger.h>
+#include <list>
 
 #include <arpa/inet.h>
 
@@ -23,17 +24,6 @@ static bool check(int &errors, bool check, std::string message)
         errors++;
     }
     return check;
-}
-
-std::string dump_buffer(uint8_t *buffer, size_t len)
-{
-    std::ostringstream hexdump;
-    for (size_t i = 0; i < len; i += 16) {
-        for (size_t j = i; j < len && j < i + 16; j++)
-            hexdump << std::hex << std::setw(2) << std::setfill('0') << (unsigned)buffer[j] << " ";
-        hexdump << std::endl;
-    }
-    return hexdump.str();
 }
 
 int main()
@@ -71,8 +61,11 @@ int main()
     check(errors, std::equal(keywrapkey1, keywrapkey1 + sizeof(keywrapkey1), keywrapkey2),
           "keywrapkeys should be equal");
 
+    std::list<int> sizes = {13, 32, 50, 80, 96, 128};
+    for (auto size : sizes)
     {
-        uint8_t plaintext[50];
+        LOG(INFO) << "Test encryption with plaintext size " << size;
+        uint8_t plaintext[size];
         std::fill(plaintext, plaintext + sizeof(plaintext), 1);
         int plen = sizeof(plaintext) + 8; // last 64 bytes are the KWA
         int clen = plen + 15;             // leave room for in place encryption
@@ -86,13 +79,10 @@ int main()
               "KWA compute IN");
         uint8_t iv[128];
         mapf::encryption::create_iv(iv, sizeof(iv));
-        LOG(DEBUG) << "plaintext: " << std::endl << dump_buffer(data, plen);
         check(errors, mapf::encryption::aes_encrypt(keywrapkey1, iv, data, plen, data, clen),
               "AES encrypt");
-        LOG(DEBUG) << "ciphertext: " << std::endl << dump_buffer(data, clen);
         check(errors, mapf::encryption::aes_decrypt(keywrapkey2, iv, data, clen, decrypted, dlen),
               "AES decrypt");
-        LOG(DEBUG) << "decrypted: " << std::endl << dump_buffer(decrypted, dlen);
         check(errors, std::equal(decrypted, decrypted + sizeof(plaintext), plaintext),
               "Decrypted cyphertext should be equal to plaintext");
 

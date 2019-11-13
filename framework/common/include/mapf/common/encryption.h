@@ -112,12 +112,17 @@ bool create_iv(uint8_t *iv, unsigned iv_length);
 bool kwa_compute(const uint8_t *key, uint8_t *data, uint32_t data_len, uint8_t *kwa);
 
 /**
- * @brief Perform AES128 CBC (cipher block chaining) encryption on given plaintext
- *        and write the output encrypted data into the ciphertext buffer.
- *        plaintext and ciphertext can be the same buffer (in place encryption).
- *        Padding is handled internally, so the encrypted buffer can be up to 15
- *        bytes larger than the plaintext buffer, and therefore this function
- *        will fail if the given clen is not big enough (>= plen + 15).
+ * @brief AES128-CBC Encryption
+ * 
+ * Perform AES128 CBC (cipher block chaining) encryption on given plaintext
+ * and write the output encrypted data into the ciphertext buffer.
+ * plaintext and ciphertext can be the same buffer (in place encryption).
+ * Padding is handled internally, so the encrypted buffer can be up to 15
+ * bytes larger than the plaintext buffer, and therefore this function
+ * will fail if the given clen is not big enough (>= plen + 15).
+ * Key and IV should be the same as block size, which 16 bytes
+ * since we are using 128 bit AES (i.e. a 128 bit key).
+ * The IV size for *most* modes is the same as the block size.
  * 
  * @param[in] key 16 bytes KeyWrapKey calculated according to WSC v2.0.6 specification
  * @param[in] iv 16 bytes random initialization vector 
@@ -130,14 +135,20 @@ bool kwa_compute(const uint8_t *key, uint8_t *data, uint32_t data_len, uint8_t *
  */
 bool aes_encrypt(const uint8_t *key, const uint8_t *iv, uint8_t *plaintext, int plen,
                  uint8_t *ciphertext, int &clen);
+
 /**
- * @brief Perform AES128 CBC (cipher block chaining) decryption on given ciphertext
- *        and write the output decrypted data into the plaintext buffer.
- *        plaintext and ciphertext can be the same buffer (in place decryption).
- *        Padding is handled internally, so the decrypted buffer can be up to 16
- *        bytes larger than the plaintext buffer, and therefore this function
- *        will fail if the given plen is not big enough (>= plen + 16).
- *
+ * @brief AES128-CBC Decryption
+ * 
+ * Perform AES128 CBC (cipher block chaining) decryption on given ciphertext
+ * and write the output decrypted data into the plaintext buffer.
+ * plaintext and ciphertext can be the same buffer (in place decryption).
+ * Padding is handled internally, so the decrypted buffer can be up to 16
+ * bytes larger than the plaintext buffer, and therefore this function
+ * will fail if the given plen is not big enough (>= plen + 16).
+ * Key and IV should be the same as block size, which 16 bytes
+ * since we are using 128 bit AES (i.e. a 128 bit key).
+ * The IV size for *most* modes is the same as the block size.
+ * 
  * @param[in] key 16 byte KeyWrapKey calculated according to WSC v2.0.6 specification
  * @param[in] iv 16 bytes random initialization vector 
  * @param[in] ciphertext bytestream (data to deccrypt)
