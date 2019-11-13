@@ -7,6 +7,7 @@
  * See LICENSE file for more details.
  */
 
+#include <list>
 #include <mapf/common/encryption.h>
 #include <mapf/common/logger.h>
 
@@ -60,8 +61,10 @@ int main()
     check(errors, std::equal(keywrapkey1, keywrapkey1 + sizeof(keywrapkey1), keywrapkey2),
           "keywrapkeys should be equal");
 
-    {
-        uint8_t plaintext[50];
+    std::list<int> sizes = {13, 32, 50, 80, 96, 128};
+    for (auto size : sizes) {
+        LOG(INFO) << "Test encryption with plaintext size " << size;
+        uint8_t plaintext[size];
         std::fill(plaintext, plaintext + sizeof(plaintext), 1);
         // calculate length of data to encrypt = [plaintext | kwa]
         // last 8 bytes are the KWA
@@ -76,6 +79,7 @@ int main()
         uint8_t data[datalen];
         std::copy_n(plaintext, plaintextlen, data);
         uint8_t *kwa = &data[sizeof(plaintext)];
+
         check(errors, mapf::encryption::kwa_compute(authkey1, data, sizeof(plaintext), kwa),
               "KWA compute IN");
         uint8_t iv[128];
