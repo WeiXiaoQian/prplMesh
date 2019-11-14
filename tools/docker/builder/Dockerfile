@@ -9,6 +9,7 @@ ARG image=ubuntu:18.04
 FROM $image
 
 # Update Software repository
+ADD sources.list /etc/apt/
 RUN apt-get update && apt-get install -y \
 	curl \
 	gcc \

@@ -8,6 +8,7 @@ ARG image=ubuntu:18.04
 
 FROM $image
 
+ADD sources.list /etc/apt/
 # Update Software repository
 RUN apt-get update && apt-get install -y \
 	gdb \
